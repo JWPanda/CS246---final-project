@@ -1,11 +1,6 @@
 #include "Enchantment.h"
 
-Enchantment::Enchantment()
-{
-    //ctor
-}
-
-Enchantment::~Enchantment()
-{
-    //dtor
-}
+Enchantment(std::string name);
+        virtual ~Enchantment();
+        void Enchant(Unit& target); // set Unit pointer
+        int getCost();

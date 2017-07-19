@@ -12,7 +12,7 @@ class TriggeredAbility : public Ability
 
 
         bool isTriggered() override;
-        void checkTrigger(int i);
+        virtual void checkTrigger(int i)=0;
         void use(Unit& target) override;
         void use(Board& theBoard) override;
 
@@ -20,6 +20,12 @@ class TriggeredAbility : public Ability
 
     private:
 
+};
+
+class FireElemental : public TriggeredAbility {
+    void use(Unit& target) override;
+    void use(Board& theBoard) override;
+    std::string getDescription() override;
 };
 
 #endif // TRIGGEREDABILITY_H

@@ -7,16 +7,37 @@
 class ActiveAbility : public Ability
 {
     public:
-        ActiveAbility();
+        ActiveAbility(int cost);
         virtual ~ActiveAbility();
 
         bool isTriggered() override;
-        void use(Unit& target) override;
-        void use(Board& theBoard) override;
+        int getCost();
 
     protected:
 
     private:
+        int cost;
+};
+
+class NovicePyromancer_Ability : public ActiveAbility {
+    NovicePyromancer_Ability(int cost);
+    void use(Unit& target) override;
+    void use(Board& theBoard) override;
+    std::string getDescription() override;
+};
+
+class ApprenticeSummoner_Ability : public ActiveAbility {
+    ApprenticeSummoner_Ability(int cost);
+    void use(Unit& target) override;
+    void use(Board& theBoard) override;
+    std::string getDescription() override;
+};
+
+class MasterSummoner_Ability : public ActiveAbility {
+    MasterSummoner_Ability(int cost);
+    void use(Unit& target) override;
+    void use(Board& theBoard) override;
+    std::string getDescription() override;
 };
 
 #endif // ACTIVEABILITY_H
