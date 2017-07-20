@@ -29,3 +29,4 @@ class FireElemental : public TriggeredAbility {
 };
 
 #endif // TRIGGEREDABILITY_H
+

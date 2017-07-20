@@ -1,3 +1,4 @@
+
 #include "ActiveAbility.h"
 
 using namespace std;
@@ -39,3 +40,4 @@ void MasterSummoner_Ability::use(Board& theBoard);
 string MasterSummoner_Ability::getDescription() {
     return "Summon up to three 1/1 air elementals"
 };
+
