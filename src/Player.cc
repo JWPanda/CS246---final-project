@@ -43,5 +43,4 @@ void play (int i ) {
 }
 
 void play (int i, Unit &target) {
-    play 
 }

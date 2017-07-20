@@ -85,4 +85,3 @@ void Board::checkTrigger(int trigger) {
     activePlayer.checkTrigger(trigger);
     nonActivePlayer.checkTrigger(trigger);
 }
-

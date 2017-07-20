@@ -5,11 +5,13 @@
 #include "Unit.h"
 
 
+
 class Player
 {
     public:
         Player(std::string Name, std::ifstream & deck);
         ~Player(); // stwill need to destroy deck/hand/etc
+
         // Game commands
         void draw();
         void attack(int m1);
