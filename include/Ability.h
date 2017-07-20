@@ -5,18 +5,18 @@
 class Ability
 {
     public:
-        Ability(std::string name);
+        Ability(int cost);
         virtual ~Ability();
 
         virtual bool isTriggered() =0;
 
         virtual std::string getDescription()=0;
 
-        virtual void use(Unit& target) =0;
-        virtual void use(Board& theBoard) =0;
-
+        virtual void use(Board& theBoard, int target=0) =0;
+        int getCost();
     protected:
     private:
+        int cost
 };
 
 #endif // ABILITY_H
