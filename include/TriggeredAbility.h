@@ -59,4 +59,3 @@ struct Standstill_Ability : public TriggeredAbility {
 };
 
 #endif // TRIGGEREDABILITY_H
-
