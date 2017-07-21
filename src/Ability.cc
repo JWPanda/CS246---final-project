@@ -1,11 +1,8 @@
 #include "Ability.h"
 
-Ability::Ability()
-{
-    //ctor
-}
-
 Ability::~Ability()
 {
     //dtor
 }
+
+Ability::Ability(int cost) : cost{cost} {}

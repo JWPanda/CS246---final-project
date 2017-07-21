@@ -16,13 +16,14 @@ class Card
         // Ability Implementation
         static Ability * getAbility(std::string ability);
         static void addAbility(std::string ability);
+        static void initialize_Abilities();
     protected:
         Ability * ability;
     private:
         std::string Name;
         Board* theBoard;
         //Ability Implementation
-        static std::vector<Ability> listOfAbilities;
+        static std::vector<shared_ptr<Ability>> listOfAbilities;
 
 
         int cost;
