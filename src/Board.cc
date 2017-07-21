@@ -82,6 +82,15 @@ void Board::checkTrigger(int trigger) {
     // 2 = end of turn
     // 3 = minion is played
     // 4 = minion dies
-    activePlayer.checkTrigger(trigger);
-    nonActivePlayer.checkTrigger(trigger);
+    if (trigger == 1 || trigger == 2) {
+        activePlayer.checkTrigger(trigger)
+    }
+    else {
+        activePlayer.checkTrigger(trigger);
+        nonActivePlayer.checkTrigger(trigger);
+    }
+}
+
+Player* Board::getActivePlayer() {
+    return activePlayer;
 }
