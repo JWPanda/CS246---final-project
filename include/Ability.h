@@ -20,3 +20,4 @@ class Ability
 };
 
 #endif // ABILITY_H
+

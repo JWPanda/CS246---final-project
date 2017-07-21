@@ -45,3 +45,4 @@ class MasterSummoner : public Minion {
 
 
 #endif // MINION_H
+
