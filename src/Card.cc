@@ -1,3 +1,4 @@
+
 #include "Card.h"
 
 Card::Card(Ability *ability, string Name, Board *theBoard, vector<Ability> listOfAbilities, int cost, int type): ability{nullptr} Name{Name}, theBoard{theBoard}, cost{cost}, type{type} {}
