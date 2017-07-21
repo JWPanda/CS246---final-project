@@ -19,7 +19,7 @@ void use(int m1, Board &theBoard) {
 }
 
 void use(int m1, Unit &target) {
-    hand[m1].use(target); 
+    hand[m1].use(target);
 }
 
 void inspect(int i) {
