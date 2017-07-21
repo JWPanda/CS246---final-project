@@ -15,11 +15,21 @@ void attack(int m1 Unit &target) {
 }
 
 void use(int m1, Board &theBoard) {
-    hand[m1].use(theBoard);
+    int cost = field[m1].getCost();
+    if (cost > mana) throw;
+    else {
+        mana -= cost;
+        field.use(m1, theBoard);
+    }
 }
 
 void use(int m1, Unit &target) {
-    hand[m1].use(target); 
+   int cost = field[m1].getCost();
+   if (cost > mana) throw;
+   else {
+       mana -= cost;
+       field.use(m1, theBoard);
+   }
 }
 
 void inspect(int i) {
@@ -32,15 +42,26 @@ void newTurn() {
 }
 
 void checkTrigger(int trigger) {
-    for (int i = 0 ; i < 5; ++i) {
+    for (int i = 0 ; i < board.size(); ++i) {
         field[i].checkTrigger(trigger);
     }
     ritual.checkTrigger(trigger);
 }
 
 void play (int i ) {
-    hand[i].play();
+    int cost = hand[i].getCost();
+    if (cost > mana) throw;
+    else {
+        mana -= cost;
+        hand[i].play();
+    }
 }
 
 void play (int i, Unit &target) {
+    int cost = hand[i].getCost();
+    if (cost > mana)  throw;
+    else {
+        mana-= cost;
+        hand[i].play(i, target);
+    }
 }

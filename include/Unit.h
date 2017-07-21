@@ -16,7 +16,6 @@ class Unit : public Card
         void getHit(int attack);
         virtual die(std::vector<Card*> location)=0;
 
-        int getAbilityCost();
         use(Face& player);
         use(Face& player, Unit& target);
 
@@ -25,4 +24,3 @@ class Unit : public Card
 };
 
 #endif // UNIT_H
-

@@ -2,20 +2,7 @@
 
 using namespace std;
 
-Unit::Unit()
-{
-    //ctor
-}
-
-Unit::~Unit()
-{
-    //dtor
-}
-
-// ctor
-Unit::Unit(string Name) {
-
-}
+Unit::~Unit() {}
 
 // ctor does card need a name field?
 Unit(int cost,int Attack, int Defense)
@@ -49,6 +36,7 @@ int Unit::getAbilityCost() {
 Unit::use(Face& player) {
     ability.use(player)
 }
+
 Unit::use(Face& player, Unit& target) {
     ability.use(player, target);
 }
