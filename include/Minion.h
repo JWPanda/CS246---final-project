@@ -43,6 +43,8 @@ class MasterSummoner : public Minion {
     MasterSummoner();
 };
 
-
+class Troll() : public Minion {
+    Troll();
+};
 #endif // MINION_H
 

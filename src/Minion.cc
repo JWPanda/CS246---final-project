@@ -27,21 +27,25 @@ AirElemental::AirElemental() : Minion{0,1,1} {}
 EarthElemental::EarthElemental() : Minion{3,4,4} {}
 
 FireElemental::FireElemental() : Minion{2,2,2} {
-    // add ability here
+    addAbility("FireElemental_Ability");
 }
 
 PotionSeller::PotionSeller() : Minion{2,1,3} {
-    // add ability here
+    addAbility("PotionSeller_Ability");
 }
 
 NovicePyromancer::NovicePyromancer() : Minion{1,0,1} {
-    // add ability here
+    addAbility("NovicePyromancer_Ability");
 }
 
 ApprenticeSummoner::ApprenticeSummoner() : Minion{1,1,1} {
-    // add ability here
+    addAbility("ApprenticeSummoner_Ability");
 }
 
 MasterSummoner::MasterSummoner() : Minion{3,2,3} {
-    // add ability here
+    addAbility("MasterSummoner_Ability");
+}
+
+Troll::Troll() : Minion{2,2,3} {
+    addAbility("Troll_Ability");
 }

@@ -7,14 +7,11 @@
 class TriggeredAbility : public Ability
 {
     public:
-        TriggeredAbility();
+        TriggeredAbility(int cost);
         ~TriggeredAbility();
 
 
         bool isTriggered() override;
-        virtual void checkTrigger(int i)=0;
-        void use(Unit& target) override;
-        void use(Board& theBoard) override;
 
     protected:
 
@@ -22,9 +19,18 @@ class TriggeredAbility : public Ability
 
 };
 
-class FireElemental : public TriggeredAbility {
-    void use(Unit& target) override;
-    void use(Board& theBoard) override;
+class FireElemental_Ability : public TriggeredAbility {
+    void use(Board& theBoard, int p = 0, int t =0) override;
+    std::string getDescription() override;
+};
+
+class PotionSeller_Ability : public TriggeredAbility {
+    void use(Board& theBoard, int p = 0, int t =0) override;
+    std::string getDescription() override;
+};
+
+class ManEater_Ability : public TriggeredAbility {
+    void use(Board& theBoard, int p = 0, int t =0) override;
     std::string getDescription() override;
 };
 

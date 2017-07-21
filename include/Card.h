@@ -7,23 +7,21 @@ class Card
     public:
         Card(std::string cardName);
         virtual ~Card();
-        virtual use(Face& player) =0;
-        virtual use(Face& player, Unit& target)=0;
+        void use(Board& theBoard, int p =0, int t = 0);
         virtual std::string getName(); // use for graphics
         void notifyBoard();
         int getCost();
 
         // Ability Implementation
-        static Ability * getAbility(std::string ability);
-        static void addAbility(std::string ability);
         static void initialize_Abilities();
+        void addAbility(std::string abilityName); // changes ability of the card
     protected:
-        Ability * ability;
+        std::shared_ptr<Ability *> ability;
     private:
         std::string Name;
         Board* theBoard;
         //Ability Implementation
-        static std::vector<shared_ptr<Ability>> listOfAbilities;
+        static std::map<std::string,shared_ptr<Ability>> listOfAbilities;
 
 
         int cost;
