@@ -20,13 +20,15 @@ class Board
         void drawBoard();  // Iggy figure this out include other shit if needed
         void inspect(int m1);
         void checkTrigger(int trigger);
+        void getActivePlayer();
+        friend class TextDisplay;
 
     private:
-        Player* p1;
-        Player* p2;
         Player* activePlayer;
         Player* nonActivePlayer;
-
+    protected: 
+        Player* p1;
+        Player* p2;
 };
 
 #endif // BOARD_H
