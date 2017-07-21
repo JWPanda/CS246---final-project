@@ -91,3 +91,6 @@ void Board::checkTrigger(int trigger) {
     }
 }
 
+Player* Board::getActivePlayer() {
+    return activePlayer;
+}
