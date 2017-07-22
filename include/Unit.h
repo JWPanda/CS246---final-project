@@ -4,13 +4,15 @@
 #include <Card.h>
 
 
-class Unit
+class Unit : public Card
 {
     public:
-        Unit(int Attack, int Defense, Player* player);
+        Unit(int cost,int Attack, int Defense, Player* player);
         virtual ~Unit();
-        int getAttack();
-        int getDefense();
+
+        int getAttack() override;
+        int getDefense() override;
+
         void attack(Unit& target);
         void getHit(int attack);
         virtual die()=0;
@@ -18,7 +20,6 @@ class Unit
 
     protected:
         int Attack, Defense, BaseAttack, BaseDefense;
-        Player * player;
 };
 
 #endif // UNIT_H

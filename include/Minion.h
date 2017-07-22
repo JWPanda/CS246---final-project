@@ -1,19 +1,17 @@
 #ifndef MINION_H
 #define MINION_H
 
-#include <Unit.h>
+#include "Unit.h"
 
 
-class Minion : public Unit, public Card
+class Minion : public Unit
 {
     public:
-        Minion(int cost, int Attack, int Defense);
+        Minion(int cost, int Attack, int Defense, Player * player);
         virtual ~Minion();
         void die();
         void reset();
 
-        int getAttack() override;
-        int getDefense() override;
         int getType() override;
 
     private:

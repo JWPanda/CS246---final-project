@@ -1,11 +1,7 @@
 #include "Card.h"
 
-using namespace std;
 
-Card::Card()
-{
-    //ctor
-}
+using namespace std;
 
 Card::~Card()
 {
@@ -13,7 +9,6 @@ Card::~Card()
 }
 
 Card::Card(int cost) : cost{cost} {}
-
 
 void Card::use(Board& theBoard, int p, int t) {
     // if (no ability) throw exception
@@ -38,7 +33,7 @@ bool Card::isTriggered() {
     else return false;
 }
 
-std::string Card::getDescription() {
+string Card::getDescription() {
     return ability->getDescription();
 }
 
