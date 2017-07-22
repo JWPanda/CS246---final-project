@@ -1,7 +1,7 @@
 #ifndef FACE_H
 #define FACE_H
 
-#include <Unit.h>
+#include "Unit.h"
 
 
 class Face : public Unit
@@ -14,6 +14,7 @@ class Face : public Unit
         void incMana();
         int getCurrentMana();
         void spendMana(int cost);
+        std::string getName() override;
     protected:
 
     private:

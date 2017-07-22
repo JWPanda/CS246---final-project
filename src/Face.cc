@@ -2,19 +2,17 @@
 
 using namespace std;
 
-Face::Face()
-{
-    //ctor
-}
-
 Face::~Face()
 {
     //dtor
 }
 
-
 Face::Face(string Name, Player* player)
  : Unit{0,30,player}, Name{Name}, mana_cur{3}, mana_cap{3} {}
+
+ string Face::getName() {
+    return name;
+}
 
 void Face::refillMana() {
     mana_cur = mana_cap;

@@ -12,6 +12,7 @@ bool ActiveAbility::isTriggered() { return false };
 
 
 
+// Minion Abilities
 // Novice Pyromancer
 NovicePyromancer_Ability::NovicePyromancer_Ability()
  : ActiveAbility{1} {};
@@ -56,3 +57,6 @@ void MasterSummoner_Ability::use(Board& theBoard, int t, int p) {
 string MasterSummoner_Ability::getDescription() {
     return "Summon up to three 1/1 air elementals";
 };
+
+
+// Spell Abilities

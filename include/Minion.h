@@ -52,7 +52,7 @@ struct MasterSummoner : public Minion {
     std::string getName() override;
 };
 
-struct Troll() : public Minion {
+struct Troll : public Minion {
     Troll(Player * player);
     std::string getName() override;
 };

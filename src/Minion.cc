@@ -1,5 +1,6 @@
 #include "Minion.h"
 
+using namespace std;
 
 Minion::~Minion()
 {
@@ -14,8 +15,8 @@ int Minion::getType() {return 1;}
 
  // reset minion's attack and defense to base values
 void Minion::reset() {
-    attack = BaseAttack;
-    defense = BaseDefense;
+    Attack = BaseAttack;
+    Defense = BaseDefense;
 }
 
 // in order to move, we must also know both the current location and location dying to
@@ -25,7 +26,7 @@ void Minion::die() {
     reset();
 
     // move to next field
-    player->die(this);
+    //player->die(this);
 }
 
 // Minion Sub classes below

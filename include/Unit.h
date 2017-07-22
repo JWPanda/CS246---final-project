@@ -1,7 +1,7 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-#include <Card.h>
+#include "Card.h"
 
 
 class Unit : public Card
@@ -15,7 +15,8 @@ class Unit : public Card
 
         void attack(Unit& target);
         void getHit(int attack);
-        virtual die()=0;
+        void reduceAttack(int i);
+        virtual void die()=0;
         void isDead();
 
     protected:

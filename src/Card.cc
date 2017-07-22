@@ -8,7 +8,7 @@ Card::~Card()
     //dtor
 }
 
-Card::Card(int cost) : cost{cost} {}
+Card::Card(int cost, Player* player) : cost{cost}, player{player} {}
 
 void Card::use(Board& theBoard, int p, int t) {
     // if (no ability) throw exception
@@ -18,6 +18,7 @@ void Card::use(Board& theBoard, int p, int t) {
     ability->use(theBoard,p,t)
 }
 
+void Card::attack(Unit& target) {}
 
 bool Card::hasAbility() {
     if(ability) return true;
@@ -58,3 +59,9 @@ static void Card::initialize_Abilities() {
 
     // Ritual Abilities
 }
+
+
+ // Enchantment Implementation
+string Card::getEnchantmentDescription() {return "";}
+int Card::getEnchantmentAttack() {return -1;}
+int Card::getEnchantmentDefense() {return -1;};
