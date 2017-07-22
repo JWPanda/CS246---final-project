@@ -6,46 +6,65 @@ Minion::~Minion()
     //dtor
 }
 
-Minion::Minion(int cost, int BaseAttack, int BaseDefense)
- : Unit{cost, BaseAttack, BaseDefense},
-   BaseAttack{BaseAttack}, BaseDefense{BaseDefense} {}
+Minion::Minion(int cost, int Attack, int Defense, Player * player)
+ : Card{cost}, Unit{Attack,Defense,player} {}
+
+ // reset minion's attack and defense to base values
+void Minion::reset() {
+    attack = BaseAttack;
+    defense = BaseDefense;
+}
 
 // in order to move, we must also know both the current location and location dying to
 // must reset to base stats
-Unit::die(std::vector<Card*> location) {
+void Minion::die() {
     // reset to initial values
-    attack = BaseAttack;
-    Defense = BaseDefense;
+    reset();
 
     // move to next field
+    player->die(this);
 }
 
 // Minion Sub classes below
 
-AirElemental::AirElemental() : Minion{0,1,1} {}
+AirElemental::AirElemental(Player * player) : Minion{0,1,1,player} {}
+string AirElemental::getName() { return "Air Elemental"; }
 
-EarthElemental::EarthElemental() : Minion{3,4,4} {}
+EarthElemental::EarthElemental(Player * player) : Minion{3,4,4,player} {}
+string EarthElemental::getName() { return "Earth Elemental"; }
 
-FireElemental::FireElemental() : Minion{2,2,2} {
+
+FireElemental::FireElemental(Player * player) : Minion{2,2,2,player} {
     addAbility("FireElemental_Ability");
 }
+string FireElemental::getName() { return "Fire Elemental"; }
 
-PotionSeller::PotionSeller() : Minion{2,1,3} {
+
+PotionSeller::PotionSeller(Player * player) : Minion{2,1,3,player} {
     addAbility("PotionSeller_Ability");
 }
+string PotionSeller::getName() { return "Potion Seller"; }
 
-NovicePyromancer::NovicePyromancer() : Minion{1,0,1} {
+
+NovicePyromancer::NovicePyromancer(Player * player) : Minion{1,0,1,player} {
     addAbility("NovicePyromancer_Ability");
 }
+string NovicePyromancer::getName() { return "Novice Pyromancer"; }
 
-ApprenticeSummoner::ApprenticeSummoner() : Minion{1,1,1} {
+
+ApprenticeSummoner::ApprenticeSummoner(Player * player) : Minion{1,1,1,player} {
     addAbility("ApprenticeSummoner_Ability");
 }
+string ApprenticeSummoner::getName() { return "Apprentice Summoner"; }
 
-MasterSummoner::MasterSummoner() : Minion{3,2,3} {
+
+MasterSummoner::MasterSummoner(Player * player) : Minion{3,2,3,player} {
     addAbility("MasterSummoner_Ability");
 }
+string MasterSummoner::getName() { return "Master Summoner"; }
 
-Troll::Troll() : Minion{2,2,3} {
+
+Troll::Troll(Player * player) : Minion{2,2,3,player} {
     addAbility("Troll_Ability");
 }
+string Troll::getName() { return "Troll"; }

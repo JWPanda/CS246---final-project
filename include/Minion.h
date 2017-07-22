@@ -4,47 +4,55 @@
 #include <Unit.h>
 
 
-class Minion : public Unit
+class Minion : public Unit, public Card
 {
     public:
-        Minion(int BaseAttack, int BaseDefense);
+        Minion(int cost, int Attack, int Defense);
         virtual ~Minion();
-        die(std::vector<Card*> location);
+        void die();
+        void reset();
 
     private:
-        int BaseAttack, BaseDefense;
 };
 
 class AirElemental : public Minion {
-    AirElemental();
+    AirElemental(Player * player);
+    std::string getName() override;
 };
 
 class EarthElemental : public Minion {
-    EarthElemental();
+    EarthElemental(Player * player);
+    std::string getName() override;
 };
 
 class FireElemental : public Minion {
-    FireElemental();
+    FireElemental(Player * player);
+    std::string getName() override;
 };
 
 class PotionSeller : public Minion {
-    PotionSeller();
+    PotionSeller(Player * player);
+    std::string getName() override;
 };
 
 class NovicePyromancer : public Minion {
-    NovicePyromancer();
+    NovicePyromancer(Player * player);
+    std::string getName() override;
 };
 
 class ApprenticeSummoner : public Minion {
-    ApprenticeSummoner();
+    ApprenticeSummoner(Player * player);
+    std::string getName() override;
 };
 
 class MasterSummoner : public Minion {
-    MasterSummoner();
+    MasterSummoner(Player * player);
+    std::string getName() override;
 };
 
 class Troll() : public Minion {
-    Troll();
+    Troll(Player * player);
+    std::string getName() override;
 };
 #endif // MINION_H
 

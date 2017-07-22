@@ -5,10 +5,10 @@
 class Card
 {
     public:
-        Card(std::string cardName);
+        Card(int cost);
         virtual ~Card();
         void use(Board& theBoard, int p =0, int t = 0);
-        virtual std::string getName(); // use for graphics
+        virtual std::string getName()=0; // use for graphics
         void notifyBoard();
         int getCost();
 
@@ -18,11 +18,9 @@ class Card
     protected:
         std::shared_ptr<Ability *> ability;
     private:
-        std::string Name;
         Board* theBoard;
         //Ability Implementation
         static std::map<std::string,shared_ptr<Ability>> listOfAbilities;
-
 
         int cost;
 };

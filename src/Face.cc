@@ -1,5 +1,7 @@
 #include "Face.h"
 
+using namespace std;
+
 Face::Face()
 {
     //ctor
@@ -8,4 +10,20 @@ Face::Face()
 Face::~Face()
 {
     //dtor
+}
+
+
+Face::Face(string Name, Player* player)
+ : Unit{0,30,player}, Name{Name}, mana_cur{3}, mana_cap{3} {}
+
+void Face::refillMana() {
+    mana_cur = mana_cap;
+}
+
+void Face::incMana() {
+    ++mana_cap;
+}
+
+void Face::die() {
+    // let player know that you are dead. game over
 }

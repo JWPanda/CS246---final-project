@@ -4,24 +4,21 @@
 #include <Card.h>
 
 
-class Unit : public Card
+class Unit
 {
     public:
-        Unit(std::string Name);
-        Unit(int cost,int Attack, int Defense);
+        Unit(int Attack, int Defense, Player* player);
         virtual ~Unit();
         int getAttack();
         int getDefense();
         void attack(Unit& target);
         void getHit(int attack);
-        virtual die(std::vector<Card*> location)=0;
-
-        int getAbilityCost();
-        use(Face& player);
-        use(Face& player, Unit& target);
+        virtual die()=0;
+        void isDead();
 
     protected:
-        int Attack, Defense;
+        int Attack, Defense, BaseAttack, BaseDefense;
+        Player * player;
 };
 
 #endif // UNIT_H

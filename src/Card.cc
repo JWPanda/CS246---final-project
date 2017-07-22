@@ -12,6 +12,8 @@ Card::~Card()
     //dtor
 }
 
+Card::Card(int cost) : cost{cost} {}
+
 
 void Card::use(Board& theBoard, int p =0, int t = 0) {
     // if (no ability) throw exception
