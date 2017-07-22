@@ -11,9 +11,9 @@ Unit::~Unit()
 // ctor
 
 // ctor does card need a name field?
-Unit(int cost, int Attack, int Defense, Player* player)
+Unit::Unit(int cost, int Attack, int Defense, Player* player)
  : Card{cost, player}, Attack{Attack}, Defense{Defense},
-   BaseAttack{Attack}, BaseDefense{Defense}, {}
+   BaseAttack{Attack}, BaseDefense{Defense} {}
 
 
 int Unit::getAttack() { return Attack; }

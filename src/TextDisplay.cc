@@ -1,4 +1,4 @@
-#include "textdisplay.h"
+#include "TextDisplay.h"
 #include <string>
 
 TextDisplay::TextDisplay(Board *b) : board{b} {}
@@ -21,7 +21,7 @@ void TextDisplay::displayCard()
 
 void TextDisplay::displayHand()
 {
-	Player* p = board.getActivePlayer();
+	Player* p = board->getActivePlayer();
 	vector<Card*> hand = p->getHand();
 	vector<card_template_t> hand_output; // Output of each card in hand
 	for (Card* c : hand) // Make templates for cards

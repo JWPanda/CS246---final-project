@@ -15,7 +15,7 @@ class Unit : public Card
 
         void attack(Unit& target);
         void getHit(int attack);
-        virtual die()=0;
+        virtual void die()=0;
         void isDead();
 
     protected:

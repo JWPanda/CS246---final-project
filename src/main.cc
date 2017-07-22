@@ -28,17 +28,18 @@ void showCommandLineHelp()
 									"\n\t\t-testing -- Enter testing mode" <<
 									"\n\t\t-init <file> -- Enter a series of commands for the beginning of the game" <<
 									"\n\t\t-deck1 <file> -- Specify a deck file for Player 1" <<
-									"\n\t\t-deck2 <file> -- Specify a deck file for Player 2" <<
+									"\n\t\t-deck2 <file> -- Specify a deck file for Player 2" << endl;
 }
 
-void parseCommand(TextDisplay display, Board &board, stringstream ss)
+bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 {
+    stringstream ss{input};
 	string command;
 	ss >> command;
 	if (command == "help")
 	{
 		// Help command
-		showHelp();
+		showMainHelp();
 	}
 	else if (command == "end")
 	{
@@ -46,7 +47,7 @@ void parseCommand(TextDisplay display, Board &board, stringstream ss)
 	}
 	else if (command == "quit")
 	{
-		break;
+		return true;
 	}
 	else if (command == "draw")
 	{
@@ -125,8 +126,8 @@ void parseCommand(TextDisplay display, Board &board, stringstream ss)
 	{
 		// Inspect minion
 		cout << "no" << endl;
-		return;
-		display.inspect(i-1);
+		return false;
+		//display.inspect(i-1);
 	}
 	else if (command == "hand")
 	{
@@ -142,6 +143,7 @@ void parseCommand(TextDisplay display, Board &board, stringstream ss)
 	{
 		cout << "SUCK MY DICK" << endl;
 	}
+    return true;
 }
 
 int main(int argc, char* argv[])
@@ -167,7 +169,7 @@ int main(int argc, char* argv[])
 					if (!initStream.is_open())
 					{
 						cout << "Could not open file " << fileName << " for pregame input. Exiting..." << endl;
-						return -1
+						return -1;
 					}
     			}
     			else throw string(argv[i]);
@@ -217,15 +219,15 @@ int main(int argc, char* argv[])
 	cin >> p2Name;
 	Board board{p1Name, p2Name, deckStream1, deckStream2};
 	TextDisplay display{&board};
-	Card.initializeAbilities();
+    Card::initializeAbilities();
 
 	if (initStream.is_open())
 	{
 		string input;
 		while(getline(initStream, input))
 		{
-			stringstream ss{input};
-			parseCommands(display, board, ss);
+			istringstream ss{input};
+			if (parseCommand(display, board, input, testing)) return 0;
 		}
 	}
 
@@ -235,12 +237,12 @@ int main(int argc, char* argv[])
 		stringstream ss{input};
 		try
 		{
-			parseCommands(display, board, ss);
+			if (parseCommand(display, board, input, testing)) return 0;
 		}
 		catch (string command)
 		{
 			cout << "That is not how you use the " << command << "command." << endl;
-			showHelp();
+			showCommandLineHelp();
 		}
 	}
 	return 0;
