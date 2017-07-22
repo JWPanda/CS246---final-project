@@ -7,21 +7,19 @@
 class Unit : public Card
 {
     public:
-        Unit(std::string Name);
-        Unit(int cost,int Attack, int Defense);
+        Unit(int cost,int Attack, int Defense, Player* player);
         virtual ~Unit();
-        int getAttack();
-        int getDefense();
+
+        int getAttack() override;
+        int getDefense() override;
+
         void attack(Unit& target);
         void getHit(int attack);
-        virtual die(std::vector<Card*> location)=0;
-
-        int getAbilityCost();
-        use(Face& player);
-        use(Face& player, Unit& target);
+        virtual die()=0;
+        void isDead();
 
     protected:
-        int Attack, Defense;
+        int Attack, Defense, BaseAttack, BaseDefense;
 };
 
 #endif // UNIT_H

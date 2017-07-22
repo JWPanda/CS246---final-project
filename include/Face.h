@@ -7,21 +7,20 @@
 class Face : public Unit
 {
     public:
-        Face();
+        Face(std::string name, Player* player);
         virtual ~Face();
-        die(std::vector <Card*> location);
+        void die();
         void refillMana();
         void incMana();
-
-        int getAbilityCost() override;
-        use(Face& player) override;
-        use(Face& player, Unit& target) override;
-
+        int getCurrentMana();
+        void spendMana(int cost);
     protected:
 
     private:
+        std::string name;
         int mana_cur;
         int mana_cap;
+        Player* player;
 };
 
 #endif // FACE_H

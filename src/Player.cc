@@ -26,6 +26,18 @@ void attack(int m1 ,Unit &target) {
     field[m1].attack(target);
 }
 
+<<<<<<< HEAD
+void use(int m1, Board &theBoard) {
+    hand[m1].use(theBoard);
+}
+
+void use(int m1, Unit &target) {
+    hand[m1].use(target);
+}
+
+void inspect(int i) {
+    // something with display... not sure what you want to do here iggy
+    
 void use(Board &theBoard, int i , int p, int t) {
     if (!(field[i].hasAbility()) throw;
     int curMana = Face.getCurrentMana();

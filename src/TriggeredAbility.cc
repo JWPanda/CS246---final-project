@@ -2,10 +2,6 @@
 
 using namespace std;
 
-TriggeredAbility::TriggeredAbility()
-{
-    //ctor
-}
 
 TriggeredAbility::~TriggeredAbility()
 {
@@ -17,28 +13,88 @@ TriggeredAbility::TriggeredAbility(int cost) : Ability{cost} {}
 bool TriggeredAbility::isTriggered() { return true; }
 
 
+
 // Triggered Ability Sub classes below
 
+// Minion Triggered Abilities
 // Fire Elemental
 
-FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {};
+FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
 
-void FireElemental_Ability::use(Board& theBoard, int i) {
-    if (i == 69) { // trigger on play minion
+void FireElemental_Ability::use(Board& theBoard, int p, int t) {
+    if (p == 69) { // trigger on play minion
         // go to the most recent minion on enemy field and make it take damage
     }
 }
 std::string FireElemental_Ability::getDescription() {
-    return "Whenever an opponent's minion enteres play, deal 1 damage to it"
-};
+    return "Whenever an opponent's minion enters play, deal 1 damage to it";
+}
 
 // Potion Seller
-void PotionSeller_Ability::use(Board& theBoard, int i) {
-    if (i == 69) { // trigger on end of YOUR turn
+
+PotionSeller_Ability::PotionSeller_Ability() : TriggeredAbility(0) {}
+
+void PotionSeller_Ability::use(Board& theBoard, int p, int t) {
+    if (p == 69) { // trigger on end of YOUR turn
         // go through each minion on YOUR board and give it +0/+1
     }
 }
 
 string PotionSeller_Ability::getDescription() {
-    return "At the end of your turn, all minions gain +0/+1."
+    return "At the end of your turn, all your minions gain +0/+1.";
+}
+
+// Troll Ability
+
+Troll_Ability::Troll_Ability() : TriggeredAbility(0) {}
+
+void Troll_Ability::use(Board& theBoard, int p, int t) {
+    if (p == 69) { // trigger on end death of minion
+        // gives all minions on YOUR board +1/+0
+    }
+}
+
+string Troll_Ability::getDescription() {
+    return "When a minion dies, all your minions gain +1/+0";
+}
+
+// Ritual Triggered Abilities
+// DarkRitual Ability
+
+DarkRitual_Ability::DarkRitual_Ability() : TriggeredAbility(1) {}
+
+void DarkRitual_Ability::use(Board& theBoard, int p, int t) {
+    if (p == 69) { // trigger on end death of minion
+        // gives all minions on YOUR board +1/+0
+    }
+}
+
+string DarkRitual_Ability::getDescription() {
+    return "At the start of your turn, gain 1 magic";
+}
+
+// AuraOfPower
+AuraOfPower_Ability::AuraOfPower_Ability() : TriggeredAbility(1) {}
+
+void AuraOfPower_Ability::use(Board& theBoard, int p, int t) {
+    if (p == 69) { // trigger on end death of minion
+        // gives all minions on YOUR board +1/+0
+    }
+}
+
+string AuraOfPower_Ability::getDescription() {
+    return "Whenever a minion enters play under your control, it gains +1/+1";
+}
+
+// Standstill
+Standstill_Ability::Standstill_Ability() : TriggeredAbility(2) {}
+
+void Standstill_Ability::use(Board& theBoard, int p, int t) {
+    if (p == 69) { // trigger on end death of minion
+        // gives all minions on YOUR board +1/+0
+    }
+}
+
+string Standstill_Ability::getDescription() {
+    return "Whenever a minion enters play, destroy it";
 }
