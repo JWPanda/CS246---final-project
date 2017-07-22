@@ -14,6 +14,7 @@ class TextDisplay : public Observer
 	enum CardTypes { MINION, SPELL, RITUAL, ENCHANTMENT };
 	card_template_t getCardTemplate(Card* c);
 public:
+	TextDisplay(Board *b);
 	void notify();
 	void displayBoard();
 	void displayCard(const Card& c);

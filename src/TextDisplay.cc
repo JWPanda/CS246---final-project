@@ -1,6 +1,8 @@
 #include "textdisplay.h"
 #include <string>
 
+TextDisplay::TextDisplay(Board *b) : board{b} {}
+
 void TextDisplay::notify()
 {
 	this->displayBoard();
