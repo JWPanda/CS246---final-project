@@ -15,11 +15,25 @@ Card::~Card()
 Card::Card(int cost) : cost{cost} {}
 
 
-void Card::use(Board& theBoard, int p =0, int t = 0) {
+void Card::use(Board& theBoard, int p =-1, int t = -1) {
     // if (no ability) throw exception
 
     // use ability
     // ability->use(theBoard, p, t);
+    ability->use(theBoard,p,t)
+}
+
+bool Card::hasAbility() {
+    if(ability) return true;
+    else return false;
+}
+
+int Card::getAbilityCost() {
+    return ability->getCost();
+}
+
+std::string Card::getDescription() {
+    return ability->getDescription();
 }
 
 

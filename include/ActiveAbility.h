@@ -20,22 +20,19 @@ class ActiveAbility : public Ability
 
 class NovicePyromancer_Ability : public ActiveAbility {
     NovicePyromancer_Ability();
-    void use(Unit& target) override;
-    void use(Board& theBoard) override;
+    void use(Board& theBoard, int t, int p) override;
     std::string getDescription() override;
 };
 
 class ApprenticeSummoner_Ability : public ActiveAbility {
     ApprenticeSummoner_Ability();
-    void use(Unit& target) override;
-    void use(Board& theBoard) override;
+    void use(Board& theBoard, int t, int p) override;
     std::string getDescription() override;
 };
 
 class MasterSummoner_Ability : public ActiveAbility {
     MasterSummoner_Ability();
-    void use(Unit& target) override;
-    void use(Board& theBoard) override;
+    void use(Board& theBoard, int t, int p) override;
     std::string getDescription() override;
 };
 

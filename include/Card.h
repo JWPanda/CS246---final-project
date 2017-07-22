@@ -15,6 +15,10 @@ class Card
         // Ability Implementation
         static void initialize_Abilities();
         void addAbility(std::string abilityName); // changes ability of the card
+        bool hasAbility();
+        int getAbilityCost();
+        std::string getDescription();
+
     protected:
         std::shared_ptr<Ability *> ability;
     private:
