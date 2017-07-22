@@ -1,7 +1,7 @@
 CXX=g++
 CXXFLAGS=-std=c++14 -Wall -Werror=vla -g -Iinclude/
 EXEC=sorcery
-OBJECTS=source/main.o source/ascii_graphics.o source/Subject.o source/TextDisplay.o source/Board.o source/
+OBJECTS=src/main.o src/ascii_graphics.o src/Subject.o src/TextDisplay.o src/Board.o src/Player.o src/Card.o src/Unit.o src/Face.o src/Minion.o
 DEPENDS=${OBJECTS .o=.d}
 
 $(EXEC): $(OBJECTS)
