@@ -2,10 +2,6 @@
 
 using namespace std;
 
-Unit::Unit()
-{
-    //ctor
-}
 
 Unit::~Unit()
 {
@@ -15,10 +11,9 @@ Unit::~Unit()
 // ctor
 
 // ctor does card need a name field?
-Unit(int Attack, int Defense, Player* player)
- : Attack{Attack}, Defense{Defense},
-   BaseAttack{Attack}, BaseDefense{Defense},
-   player{player} {}
+Unit(int cost, int Attack, int Defense, Player* player)
+ : Card{cost, player}, Attack{Attack}, Defense{Defense},
+   BaseAttack{Attack}, BaseDefense{Defense}, {}
 
 
 int Unit::getAttack() { return Attack; }
