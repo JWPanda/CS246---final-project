@@ -1,7 +1,7 @@
 #ifndef ACTIVEABILITY_H
 #define ACTIVEABILITY_H
 
-#include <Ability.h>
+#include "Ability.h"
 
 
 class ActiveAbility : public Ability
