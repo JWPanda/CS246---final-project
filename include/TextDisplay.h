@@ -14,10 +14,11 @@ class TextDisplay : public Observer
 	enum CardTypes { MINION, SPELL, RITUAL, ENCHANTMENT };
 	card_template_t getCardTemplate(Card* c);
 public:
+	TextDisplay(Board *b);
 	void notify();
 	void displayBoard();
-	void displayCard(const Card& c);
-	void displayHand(const vector<Card*>& v);
+	void displayCard();
+	void displayHand();
 	// void displayMinionNoAbility(std::string name,int cost,int attack,int defence);
 	// void displayMinionTriggeredAbility(std::string name,int cost,int attack,int defence, std::string trigger_desc);
 	// void displayMinionActivatedAbility(std::string name,int cost,int attack,int defence, int ability_cost, std::string ability_desc);

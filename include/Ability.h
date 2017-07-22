@@ -1,8 +1,7 @@
 #ifndef ABILITY_H
 #define ABILITY_H
 
-#include <string>
-
+//predefined class:
 class Board;
 
 class Ability
@@ -19,7 +18,7 @@ class Ability
         int getCost();
     protected:
     private:
-        int cost
+        int cost;
 };
 
 #endif // ABILITY_H

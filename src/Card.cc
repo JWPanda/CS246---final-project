@@ -42,7 +42,7 @@ void Card::addAbility(string name) {
     ability = listOfAbilities[name];
 }
 
-static void Card::initialize_Abilities() {
+static void Card::initializeAbilities() {
 
     // Active Minion Abilities
     listOfAbilities["NovicePyromancer_Ability"] = make_shared<Ability>(NovicePyromancer_Ability());

@@ -2,10 +2,6 @@
 
 using namespace std;
 
-Face::Face()
-{
-    //ctor
-}
 
 Face::~Face()
 {
@@ -14,7 +10,7 @@ Face::~Face()
 
 
 Face::Face(string Name, Player* player)
- : Unit{0,30,player}, Name{Name}, mana_cur{3}, mana_cap{3} {}
+ : Unit{0,0,30,player}, name{name}, mana_cur{3}, mana_cap{3} {}
 
 void Face::refillMana() {
     mana_cur = mana_cap;
@@ -30,4 +26,8 @@ void Face::spendMana(int cost) { mana_cur -= cost;}
 
 void Face::die() {
     // let player know that you are dead. game over
+}
+
+string Face::getName() {
+    return name;
 }

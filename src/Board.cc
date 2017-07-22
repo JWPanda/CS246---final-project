@@ -1,7 +1,7 @@
 #include "Board.h"
 using namespace std;
 
-Board::Board(Player p1, Player p2, Player *activePlayer, Player *nonActivePlayer) : p1{p1}, p2{p2}, activePlayer{nullptr}, nonActivePlayer{nullptr} {}
+Board::Board(string name1, string name2, ifstream &deck1, ifstream &deck2) : p1{name1,deck1}, p2{name2, deck2}, activePlayer{nullptr}, nonActivePlayer{nullptr} {}
 
 Board::~Board() {
     delete activePlayer;
