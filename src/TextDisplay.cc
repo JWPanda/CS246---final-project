@@ -33,7 +33,7 @@ void TextDisplay::displayHand()
 	{
 		for (auto card : hand_output)
 		{
-			cout << hand_output[i];
+			cout << card[i];
 		}
 		cout << endl;
 	}
@@ -46,7 +46,8 @@ void TextDisplay::displayBoard()
 	cout << endl;
 	
 	// Player 1 Deck Player and Graveyard
-	Card& grave = board->p1->getGraveyard(); // Get grave
+	Card& grave = board->p1.getGraveyard(); // Get grave
+	card_template_t graveOutput;
 	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
 	{
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN
@@ -54,17 +55,23 @@ void TextDisplay::displayBoard()
 			 << CARD_TEMPLATE_EMPTY[i]
 			 << PLAYER_1_TEMPLATE[i]
 			 << CARD_TEMPLATE_EMPTY[i]
-			 << grave[i]
+			 << CARD_TEMPLATE_BORDER[i]
 			 << EXTERNAL_BORDER_CHAR_UP_DOWN
 			 << endl;
 	}
 
 	// Player 1 Field
-	vector<Card*> field = board->p1->getField(); // Get hand
+	vector<Card*> field1 = board->p1.getField(); // Get hand
+	vector<card_template_t> field_output1; // Output of each card in field
+	for (Card* c : field1) // Make templates for cards
+	{
+		card_template_t card = getCardTemplate(c);
+		field_output1.push_back(card);
+	}
 	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
 	{
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
-		for (auto minion : field)
+		for (auto minion : field_output1)
 		{
 			cout << minion[i];
 		}
@@ -75,11 +82,17 @@ void TextDisplay::displayBoard()
 	for (string s : CENTRE_GRAPHIC) cout << s << endl; // Centre Graphic
 
 	// Player 2 Field
-	vector<Card*> field = board->p2->getField(); // Get hand
+	vector<Card*> field2 = board->p2.getField(); // Get hand
+	vector<card_template_t> field_output2; // Output of each card in field
+	for (Card* c : field2) // Make templates for cards
+	{
+		card_template_t card = getCardTemplate(c);
+		field_output2.push_back(card);
+	}
 	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
 	{
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
-		for (auto minion : field)
+		for (auto minion : field_output2)
 		{
 			cout << minion[i];
 		}
@@ -88,7 +101,7 @@ void TextDisplay::displayBoard()
 	}
 
 	// Player 2 Deck Player and Graveyard
-	Card& grave = board->p2->getGraveyard(); // Get grave
+	Card& grave2 = board->p2.getGraveyard(); // Get grave
 	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
 	{
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN
@@ -96,7 +109,7 @@ void TextDisplay::displayBoard()
 			 << CARD_TEMPLATE_EMPTY[i]
 			 << PLAYER_1_TEMPLATE[i]
 			 << CARD_TEMPLATE_EMPTY[i]
-			 << grave[i]
+			 << CARD_TEMPLATE_BORDER[i]
 			 << EXTERNAL_BORDER_CHAR_UP_DOWN
 			 << endl;
 	}
