@@ -1,11 +1,9 @@
 #include "Board.h"
 using namespace std;
 
-Board::Board(Player* p1, Player *p2, Player *activePlayer, Player *nonActivePlayer) : p1{p1}, p2{p2}, activePlayer{nullptr}, nonActivePlayer{nullptr} {}
+Board::Board(Player p1, Player p2, Player *activePlayer, Player *nonActivePlayer) : p1{p1}, p2{p2}, activePlayer{nullptr}, nonActivePlayer{nullptr} {}
 
 Board::~Board() {
-    delete p1;
-    delete p2;
     delete activePlayer;
     delete nonActivePlayer;
 }
@@ -22,12 +20,11 @@ void Board::changeTurn () {
         nonActivePlayer = p2;
     }
     activePlayer.newTurn(); // initiates new turn for active player
-    checkTrigger(1); // check new turn trigger for active player
+    checkTrigger(1); // check new turn trigddger for active player
 }
 
 void Board::play (int i) {
     activePlayer.play(i); 
-    checkTrigger(3); // trigger check for playing a minion
 }
 
 void Board::play (int i, int p, int t) {
@@ -35,18 +32,11 @@ void Board::play (int i, int p, int t) {
     // p = the owner of the target ie: p1 or p2
     // t = the location of the target on the player's field
     
-    // case where the target is on player 1's field
-    if (p == 1) { 
-        activePlayer.play(i, p1.field[t]);
-    }
-    // case where the target is on player 2's field
-    if (p == 2) {
-        activePlayer.play(i, p2.field[t]);
-    }
+    activePlayer.play(this, i , p ,t);
 }
 
 void Board::use (int i) {
-    activePlayer.use(i);
+    activePlayer.use(this, i);
 }
 
 void Board::use (int i, int p, int t) {
@@ -54,27 +44,23 @@ void Board::use (int i, int p, int t) {
     // p = the owner of the target ie: p1 or p2
     // t = the location of the target on the player's field
     
-    // case where the target is on player 1's field
-    if (p == 1) {
-        activePlayer.use(i, p1.field[t]) 
-    }
-    // case where the target is on player 2's field
-    if (p == 2) {
-        activePlayer.use(i, p2.field[t]) 
-    }
+    activePlayer.use(this, i, p, t)  
 }
 
-void Board::attack (int m1, int m2 = -1) {
+void Board::attack (int m1, int m2) {
     if (m2 != -1) { //  attack an enemy minon
-        Card& target = nonActivePlayer.field[m2]; // not sure if i can pass a card reference here
+        Unit &target = *nonActivePlayer.field[m2]; // not sure if i can pass a card reference here
         activePlayer.attack(m1, target);
     } else { // attack the enemy face
     activePlayer.attack(m1, nonActivePlayer.face);
     }
 }
 
-void Board::inspect(int m1) {
-    activePlayer.inspect(m1);
+Card &getMinion (int i , int player) {
+    if (player = 0) Card &target = actvePlayer.field[i];
+    else if (player = 1) Card &target = p1.field[i];
+    else if (player = 2) Card &target = p2.field[i];
+    return target;
 }
 
 void Board::checkTrigger(int trigger) {
@@ -83,7 +69,7 @@ void Board::checkTrigger(int trigger) {
     // 3 = minion is played
     // 4 = minion dies
     if (trigger == 1 || trigger == 2) {
-        activePlayer.checkTrigger(trigger)
+        activePlayer.checkTrigger(this, trigger)
     }
     else {
         activePlayer.checkTrigger(trigger);
