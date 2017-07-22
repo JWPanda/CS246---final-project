@@ -19,17 +19,41 @@ class TriggeredAbility : public Ability
 
 };
 
-class FireElemental_Ability : public TriggeredAbility {
+// Minion Triggered Abilities
+struct FireElemental_Ability : public TriggeredAbility {
+    FireElemental_Ability();
     void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
 
-class PotionSeller_Ability : public TriggeredAbility {
+struct PotionSeller_Ability : public TriggeredAbility {
+    PotionSeller_Ability();
     void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
 
-class ManEater_Ability : public TriggeredAbility {
+struct ManEater_Ability : public TriggeredAbility {
+    ManEater_Ability();
+    void use(Board& theBoard, int p, int t) override;
+    std::string getDescription() override;
+};
+
+// Ritual Triggered Abilities
+
+struct DarkRitual_Ability : public TriggeredAbility {
+    DarkRitual_Ability();
+    void use(Board& theBoard, int p, int t) override;
+    std::string getDescription() override;
+};
+
+struct AuraOfPower_Ability : public TriggeredAbility {
+    AuraOfPower_Ability();
+    void use(Board& theBoard, int p, int t) override;
+    std::string getDescription() override;
+};
+
+struct Standstill_Ability : public TriggeredAbility {
+    Standstill_Ability();
     void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
