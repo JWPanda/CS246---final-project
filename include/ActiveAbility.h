@@ -18,19 +18,28 @@ class ActiveAbility : public Ability
     private:
 };
 
-class NovicePyromancer_Ability : public ActiveAbility {
-    NovicePyromancer_Ability();
+
+// Minion Abilities
+struct Banish_Ability : public ActiveAbility {
+    Banis_Ability();
     void use(Board& theBoard, int t, int p) override;
     std::string getDescription() override;
 };
 
-class ApprenticeSummoner_Ability : public ActiveAbility {
+struct Unsummon_Ability : public ActiveAbility {
     ApprenticeSummoner_Ability();
     void use(Board& theBoard, int t, int p) override;
     std::string getDescription() override;
 };
 
-class MasterSummoner_Ability : public ActiveAbility {
+struct MasterSummoner_Ability : public ActiveAbility {
+    MasterSummoner_Ability();
+    void use(Board& theBoard, int t, int p) override;
+    std::string getDescription() override;
+};
+
+// Spell Abilities
+struct MasterSummoner_Ability : public ActiveAbility {
     MasterSummoner_Ability();
     void use(Board& theBoard, int t, int p) override;
     std::string getDescription() override;
