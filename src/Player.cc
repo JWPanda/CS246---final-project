@@ -37,7 +37,7 @@ void use(int m1, Unit &target) {
 
 void inspect(int i) {
     // something with display... not sure what you want to do here iggy
-=======
+    
 void use(Board &theBoard, int i , int p, int t) {
     if (!(field[i].hasAbility()) throw;
     int curMana = Face.getCurrentMana();
@@ -47,7 +47,6 @@ void use(Board &theBoard, int i , int p, int t) {
        field[i].use(theBoard, p , t);
        Face.spendMana(cost);
    }
->>>>>>> 818b437e2db06043d38b2da008969ed3efd086ea
 }
 
 void newTurn() {
