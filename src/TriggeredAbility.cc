@@ -29,7 +29,7 @@ void FireElemental_Ability::use(Board& theBoard, int p, int t) {
     }
 }
 std::string FireElemental_Ability::getDescription() {
-    return "Whenever an opponent's minion enteres play, deal 1 damage to it"
+    return "Whenever an opponent's minion enters play, deal 1 damage to it"
 }
 
 // Potion Seller

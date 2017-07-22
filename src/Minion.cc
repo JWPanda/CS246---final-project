@@ -9,6 +9,10 @@ Minion::~Minion()
 Minion::Minion(int cost, int Attack, int Defense, Player * player)
  : Card{cost}, Unit{Attack,Defense,player} {}
 
+int Minion::getAttack() { return Attack;}
+int Minion::getDefense() {return Defense;}
+int Minion::getType() {return 1;}
+
  // reset minion's attack and defense to base values
 void Minion::reset() {
     attack = BaseAttack;

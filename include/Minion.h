@@ -12,6 +12,10 @@ class Minion : public Unit, public Card
         void die();
         void reset();
 
+        int getAttack() override;
+        int getDefense() override;
+        int getType() override;
+
     private:
 };
 

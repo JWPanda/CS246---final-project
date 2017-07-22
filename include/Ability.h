@@ -12,7 +12,7 @@ class Ability
 
         virtual std::string getDescription()=0;
 
-        virtual void use(Board& theBoard, int p, int t) =0;
+        virtual void use(Board& theBoard, int p =-1, int t =-1) =0;
         int getCost();
     protected:
     private:

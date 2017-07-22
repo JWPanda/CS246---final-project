@@ -17,7 +17,11 @@ class Card
         void addAbility(std::string abilityName); // changes ability of the card
         bool hasAbility();
         int getAbilityCost();
+        bool isTriggered();
         std::string getDescription();
+
+        virtual int getAttack()=0;
+        virtual int getDefense()=0;
 
     protected:
         std::shared_ptr<Ability *> ability;

@@ -23,6 +23,7 @@ void Card::use(Board& theBoard, int p, int t) {
     ability->use(theBoard,p,t)
 }
 
+
 bool Card::hasAbility() {
     if(ability) return true;
     else return false;
@@ -30,6 +31,11 @@ bool Card::hasAbility() {
 
 int Card::getAbilityCost() {
     return ability->getCost();
+}
+
+bool Card::isTriggered() {
+    if (hasAbility()) return ability->isTriggered();
+    else return false;
 }
 
 std::string Card::getDescription() {
