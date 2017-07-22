@@ -1,7 +1,8 @@
 #ifndef ABILITY_H
 #define ABILITY_H
 
-//predefined class:
+#include <string>
+
 class Board;
 
 class Ability

@@ -15,6 +15,7 @@ class Face : public Unit
         int getCurrentMana();
         void spendMana(int cost);
         std::string getName() override;
+        int getType() override;
     protected:
 
     private:
