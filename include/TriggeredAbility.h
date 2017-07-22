@@ -20,17 +20,17 @@ class TriggeredAbility : public Ability
 };
 
 class FireElemental_Ability : public TriggeredAbility {
-    void use(Board& theBoard, int p = 0, int t =0) override;
+    void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
 
 class PotionSeller_Ability : public TriggeredAbility {
-    void use(Board& theBoard, int p = 0, int t =0) override;
+    void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
 
 class ManEater_Ability : public TriggeredAbility {
-    void use(Board& theBoard, int p = 0, int t =0) override;
+    void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
 

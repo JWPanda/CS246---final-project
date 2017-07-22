@@ -12,7 +12,8 @@ class Face : public Unit
         void die();
         void refillMana();
         void incMana();
-
+        int getCurrentMana();
+        void spendMana(int cost);
     protected:
 
     private:

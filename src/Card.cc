@@ -15,7 +15,7 @@ Card::~Card()
 Card::Card(int cost) : cost{cost} {}
 
 
-void Card::use(Board& theBoard, int p =-1, int t = -1) {
+void Card::use(Board& theBoard, int p, int t) {
     // if (no ability) throw exception
 
     // use ability

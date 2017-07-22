@@ -24,6 +24,10 @@ void Face::incMana() {
     ++mana_cap;
 }
 
+int Face::getCurrentMana() { return mana_cur;}
+
+void Face::spendMana(int cost) { mana_cur -= cost;}
+
 void Face::die() {
     // let player know that you are dead. game over
 }
