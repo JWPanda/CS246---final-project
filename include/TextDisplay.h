@@ -31,4 +31,8 @@ public:
 	// void displayWeapon(std::string name,int cost,std::string attack,std::string defence);
 };
 
+<<<<<<< HEAD
 #endif // TEXT_DISPLAY_H
+=======
+#endif // TEXT_DISPLAY_H
+>>>>>>> initial commit for Iggy
