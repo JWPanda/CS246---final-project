@@ -1,7 +1,7 @@
 #ifndef TRIGGEREDABILITY_H
 #define TRIGGEREDABILITY_H
-
-#include "Ability.h"
+#include <string>
+#include <Ability.h>
 
 
 class TriggeredAbility : public Ability

@@ -8,6 +8,7 @@
 #include "TriggeredAbility.h"
 #include "Ability.h"
 
+
 class Board;
 class Player;
 
@@ -22,7 +23,7 @@ class Card
         int getCost();
 
         // Ability Implementation
-        static void initialize_Abilities();
+        static void initializeAbilities();
         void addAbility(std::string abilityName); // changes ability of the card
         virtual bool hasAbility();
         virtual int getAbilityCost();
@@ -40,12 +41,12 @@ class Card
         virtual int getType()=0;
 
     protected:
-        std::shared_ptr<Ability *> ability;
+        std::shared_ptr<Ability> ability;
         Player * player;
     private:
         Board* theBoard;
         //Ability Implementation
-        static std::map<std::string,std::shared_ptr<Ability*>> listOfAbilities;
+        static std::map<std::string, std::shared_ptr<Ability>> listOfAbilities;
 
         int cost;
 };

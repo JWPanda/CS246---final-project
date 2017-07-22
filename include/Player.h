@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "Unit.h"
+#include "Face.h"
 #include <fstream>
 #include <utility>
 #include <vector>
@@ -28,7 +29,6 @@ class Player
         std::vector<Card*> & getField(); // use for graphics
         Card& getGraveyard(); // use for graphics, top card on graveyard
         Card& getRitual(); // use for graphics
-        vector<Card *> getHand();
         Face& getFace(); // use for graphics
         int getMana();
     private:

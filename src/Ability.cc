@@ -6,5 +6,3 @@ Ability::~Ability()
 }
 
 Ability::Ability(int cost) : cost{cost} {}
-
-Ability::getCost() { return cost;}

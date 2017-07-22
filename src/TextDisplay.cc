@@ -1,5 +1,7 @@
-#include "textdisplay.h"
+#include "TextDisplay.h"
 #include <string>
+
+TextDisplay::TextDisplay(Board *b) : board{b} {}
 
 void TextDisplay::notify()
 {
@@ -12,6 +14,27 @@ card_template_t TextDisplay::getCardTemplate(Card* c)
 	// else if (c->getType() == )
 }
 
+void TextDisplay::printField(vector<Card*> field)
+{
+	// Player 1 Field
+	vector<card_template_t> field_output; // Output of each card in field
+	for (Card* c : field) // Make templates for cards
+	{
+		card_template_t card = getCardTemplate(c);
+		field_output.push_back(card);
+	}
+	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
+	{
+		cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
+		for (auto minion : field_output)
+		{
+			cout << minion[i];
+		}
+		cout << EXTERNAL_BORDER_CHAR_UP_DOWN
+			 << endl;
+	}
+}
+
 void TextDisplay::displayCard()
 {
 	return;
@@ -19,7 +42,7 @@ void TextDisplay::displayCard()
 
 void TextDisplay::displayHand()
 {
-	Player* p = board.getActivePlayer();
+	Player* p = board->getActivePlayer();
 	vector<Card*> hand = p->getHand();
 	vector<card_template_t> hand_output; // Output of each card in hand
 	for (Card* c : hand) // Make templates for cards
@@ -31,7 +54,7 @@ void TextDisplay::displayHand()
 	{
 		for (auto card : hand_output)
 		{
-			cout << hand_output[i];
+			cout << card[i];
 		}
 		cout << endl;
 	}
@@ -44,57 +67,52 @@ void TextDisplay::displayBoard()
 	cout << endl;
 	
 	// Player 1 Deck Player and Graveyard
-	Card& grave = board->p1->getGraveyard(); // Get grave
+	Card* grave1 = board->p1.getGraveyard(); // Get grave
+	// Card* ritual1 = board->p1.getRitual(); // Get ritual
+	Face* face1 = board->p1.getFace(); // Get face
+	card_template_t grave1_output;
+	if (grave1) grave1_output = getCardTemplate(grave1);
+	card_template_t ritual1_output;
+	// if (ritual1) ritual1_output = display_ritual()
+	card_template_t player1_output = display_player_card(1, face1->getName(), face1->getDefense(), face1->getCurrentMana());
 	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
 	{
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN
 			 << CARD_TEMPLATE_BORDER[i]
 			 << CARD_TEMPLATE_EMPTY[i]
-			 << PLAYER_1_TEMPLATE[i]
+			 << player1_output[i]
 			 << CARD_TEMPLATE_EMPTY[i]
-			 << grave[i]
+			 << ((grave1) ? grave1_output[i] : CARD_TEMPLATE_BORDER[i])
 			 << EXTERNAL_BORDER_CHAR_UP_DOWN
 			 << endl;
 	}
 
-	// Player 1 Field
-	vector<Card*> field = board->p1->getField(); // Get hand
-	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
-	{
-		cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
-		for (auto minion : field)
-		{
-			cout << minion[i];
-		}
-		cout << EXTERNAL_BORDER_CHAR_UP_DOWN
-			 << endl;
-	}
+	vector<Card*> field = board->p1.getField(); // Get field
+	printField(field);
 
 	for (string s : CENTRE_GRAPHIC) cout << s << endl; // Centre Graphic
 
 	// Player 2 Field
-	vector<Card*> field = board->p2->getField(); // Get hand
-	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
-	{
-		cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
-		for (auto minion : field)
-		{
-			cout << minion[i];
-		}
-		cout << EXTERNAL_BORDER_CHAR_UP_DOWN
-			 << endl;
-	}
+	vector<Card*> field2 = board->p2.getField(); // Get field
+	printField(field);
 
-	// Player 2 Deck Player and Graveyard
-	Card& grave = board->p2->getGraveyard(); // Get grave
+	// Player 1 Deck Player and Graveyard
+	Card* grave2 = board->p2.getGraveyard(); // Get grave
+	// Card* ritual2 = board->p2.getRitual(); // Get ritual
+	Face* face2 = board->p2.getFace(); // Get face
+	card_template_t grave2_output;
+	if (grave2) grave2_output = getCardTemplate(grave2);
+	card_template_t ritual2_output;
+	// if (ritual2) ritual2_output = display_ritual()
+	card_template_t player2_output = display_player_card(1, face2->getName(), face2->getDefense(), face2->getCurrentMana());
 	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
 	{
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN
 			 << CARD_TEMPLATE_BORDER[i]
 			 << CARD_TEMPLATE_EMPTY[i]
-			 << PLAYER_1_TEMPLATE[i]
+			 << player2_output[i]
 			 << CARD_TEMPLATE_EMPTY[i]
-			 << grave[i]
+			 << ((grave2) ? grave2_output[i] : CARD_TEMPLATE_BORDER[i])
 			 << EXTERNAL_BORDER_CHAR_UP_DOWN
 			 << endl;
 	}
