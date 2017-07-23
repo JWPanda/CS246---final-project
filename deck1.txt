@@ -1,4 +1,10 @@
 Air Elemental
+<<<<<<< HEAD
 Earth Elemental
 Fire Elemental
 Air Elemental
+=======
+Air Elemental
+Air Elemental
+Air Elemental
+>>>>>>> Add new files
