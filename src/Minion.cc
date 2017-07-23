@@ -13,10 +13,6 @@ Minion::Minion(int cost, int Attack, int Defense, Player * player)
 
 int Minion::getType() {return 1;}
 
-void Minion::play(Board* theBoard, int i, int p, int t) {
-    player->moveToBoard(i);
-}
-
  // reset minion's attack and defense to base values
 void Minion::reset() {
     Attack = BaseAttack;

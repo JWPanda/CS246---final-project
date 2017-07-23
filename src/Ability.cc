@@ -2,7 +2,6 @@
 
 Ability::Ability(int cost) : cost{cost} {}
 
+Ability::~Ability() {}
 
-Ability::Ability(int cost) : cost{cost} {}
-
-int Ability::getCost() { return cost};
+int Ability::getCost () {return cost;}

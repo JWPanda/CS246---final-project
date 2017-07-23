@@ -32,7 +32,6 @@ class Card
         int getAbilityCost();
         void addAbility(std::string abilityName); // changes ability of the card
 
-
         //Accessors:
         int getCost();
         bool isTriggered();
@@ -42,12 +41,10 @@ class Card
         virtual int getDefense();
 
 
-
         // Enchantment Implementation
         virtual std::string getEnchantmentDescription();
         virtual int getEnchantmentAttack();
         virtual int getEnchantmentDefense();
-        virtual std::string getEnchantmentName();
 
 
     protected:
