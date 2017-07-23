@@ -23,7 +23,7 @@ void Face::die() {
     // let player know that you are dead. game over
 }
 
-int getType() {
+int Face::getType() {
   return -1;
 }
 

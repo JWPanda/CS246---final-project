@@ -10,7 +10,7 @@ Board::~Board() {
 
 void Board::changeTurn () {
     // checks end turn trigger for active player which only occurs if it is not the first turn.
-    if (activePlayer != nullptr) //TODO checkTrigger(2);
+    //if (activePlayer != nullptr) //TODO checkTrigger(2);
     if (activePlayer == nullptr || activePlayer == &p1) {// turn change for p1 or turn 2
         activePlayer = &p2;
         nonActivePlayer = &p1;
@@ -74,21 +74,27 @@ void Board::attack (int m1, int m2) {
     }
 }*/
 
-<<<<<<< HEAD
 Card & Board::getMinion (int i , int player) {
     if (player == 0) {
       Card &target = *activePlayer->getField()[i];
       return target;
-=======
+    } else if (player == 1) {
+      Card &target = *p1.getField()[i];
+      return target;
+    }
+    else if (player == 2) {
+      Card &target = *p2.getField()[i];
+      return target;
+    }
+}
 //TODO fix this here
-void Board::checkTrigger(int trigger) {
+/*void Board::checkTrigger(int trigger) {
     // 1 = beginning of turn
     // 2 = end of turn
     // 3 = minion is played
     // 4 = minion dies
     if (trigger == 1 || trigger == 2) {
         activePlayer.checkTrigger(this, trigger)
->>>>>>> 9718b3f827632b0dba8bd4124f7b1631b6d0d88a
     }
     else if (player == 1){
       Card &target = *p1.getField()[i];
@@ -99,6 +105,7 @@ void Board::checkTrigger(int trigger) {
       return target;
     }
 }
+*/
 
 Player* Board::getActivePlayer() {
   return activePlayer;

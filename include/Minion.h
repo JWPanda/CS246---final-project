@@ -2,6 +2,7 @@
 #define MINION_H
 
 #include "Unit.h"
+#include <string>
 
 
 class Minion : public Unit

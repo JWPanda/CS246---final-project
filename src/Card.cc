@@ -39,11 +39,16 @@ bool Card::hasAbility() {
 }
 
 int Card::getAbilityCost() {
-    return ability->getCost();
+    //return ability->getCost();
+    return 0;
 }
 
 void Card::addAbility(string name) {
-    ability = listOfAbilities[name];
+    //ability = listOfAbilities[name];
+}
+
+int Card::getCost() {
+  return cost;
 }
 
 /*
@@ -57,10 +62,10 @@ string Card::getDescription() {
     return ability->getDescription();
 }
 
-int getAttack() {
+int Card::getAttack() {
   return -1;
 }
 
-int getDefense() {
+int Card::getDefense() {
   return -1;
 }
