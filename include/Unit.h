@@ -1,7 +1,7 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-#include "Card.h"
+#include <Card.h>
 
 
 class Unit : public Card
@@ -13,7 +13,7 @@ class Unit : public Card
         int getAttack() override;
         int getDefense() override;
 
-        void attack(Unit& target) override;
+        void attack(Unit& target);
         void getHit(int attack);
         virtual void die()=0;
         void isDead();

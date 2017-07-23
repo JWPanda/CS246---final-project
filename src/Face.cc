@@ -28,10 +28,6 @@ void Face::die() {
     // let player know that you are dead. game over
 }
 
-int getType() {
-    return 5;
-}
-
 string Face::getName() {
     return name;
 }

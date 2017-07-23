@@ -1,65 +1,77 @@
 #include "Player.h"
 using namespace std;
 
-Player::Player(string Name, ifstream &deck): myFace{Name, this} {
+Player::Player(String Name, ifstream &deck): player{Name} {
     string s; 
-    while (deck>>s) {
+    while (ifstream>>s) {
         if (s == "Air Elemental") {
-            myDeck.emplace_back(new AirElemental(this));
+            deck.emplace_back(new AirElemental(this));
         }   
     }
     for (int i = 0; i < 5; ++i)  {
-        if(myDeck.size() == 0) break;
+        if(deck.size() == 0) break;
         draw();
     }
 }
 
 Player::~Player() {}
 
-void Player::draw() {
-    if (myHand.size() == 5) throw;
-    myHand.emplace_back(myDeck[1]);
-    myDeck.erase(myDeck.begin());
+void draw() {
+    if (hand.size() == 5) throw;
+    hand.emplace_back(deck[1]);
+    deck.erase(myvector.begin());
 }
 
-void Player::attack(int m1 ,Unit &target) {
-    myField[m1]->attack(target);
+void attack(int m1 ,Unit &target) {
+    field[m1].attack(target);
 }
 
-void Player::use(Board &theBoard, int i , int p, int t) {
-    if (!(myField[i]->hasAbility())) throw;
-    int curMana = myFace.getCurrentMana();
-    int cost = myField[i]->getAbilityCost();
+<<<<<<< HEAD
+void use(int m1, Board &theBoard) {
+    hand[m1].use(theBoard);
+}
+
+void use(int m1, Unit &target) {
+    hand[m1].use(target);
+}
+
+void inspect(int i) {
+    // something with display... not sure what you want to do here iggy
+    
+void use(Board &theBoard, int i , int p, int t) {
+    if (!(field[i].hasAbility()) throw;
+    int curMana = Face.getCurrentMana();
+    int cost = field[i].getAbilityCost();
     if (cost > curMana) throw;
     else {
-       myField[i]->use(theBoard, p , t);
-       myFace.spendMana(cost);
+       field[i].use(theBoard, p , t);
+       Face.spendMana(cost);
    }
 }
 
-void Player::newTurn() {
+void newTurn() {
     draw();
-    myFace.incMana();
-    myFace.refillMana();
+    Face.incMana();
+    Face.refillMana();
 }
 
-//void Player::checkTrigger(int trigger) { TODO
-//    for (int i = 0 ; i < myField.size(); ++i) {
-//        if (myField[i]->isTriggered()); // use the card some how
-//    }
+void checkTrigger(int trigger) {
+    for (int i = 0 ; i < board.size(); ++i) {
+        if (field[i].isTriggered) // use the card some how
+    }
     //ritual.use(trigger);
-//}
+}
 
-void Player::play (int i) {
-    if (i + 1 > myHand.size()) throw; 
-    if (myField.size() == 5) throw;
-    int cost = myHand[i]->getCost();
-        int curMana = myFace.getCurrentMana();
+void play (int i ) {
+    if (i + 1 > hand.size()) throw; 
+    if (field.size() = 5) throw;
+    int cost = hand[i].getCost();
+    int curMana = Face.getCurrentMana();
     if (cost > curMana) throw;
     else {
-        if (myHand[i]->getType() == 1) {
-            myField.emplace_back(myHand[i]);
-            myHand.erase(myHand.begin());//*********** TODO fix this
+        if (hand[i].getType() == 1) {
+            field.emplace_back(hand[i]);
+            hand.erase(i);
         }
         //else if (hand[i].getType() == 2) {
         //    hand[i].use(stuff here);
@@ -71,18 +83,18 @@ void Player::play (int i) {
         //    hand.erase(i);
         //}
         //else if do enchantment here !!!!!!!
-        myFace.spendMana(cost);
+        Face.spendMana(cost);
     }
 }
 
-void Player::play (int i, Unit &target) {
-    if (i + 1 > myHand.size()) throw;
-    if (myField.size() == 5) throw;
-    int cost = myHand[i]->getCost();
-    int curMana = myFace.getCurrentMana();
+void play (int i, Unit &target) {
+    if (i + 1 > hand.size()) throw;
+    if (field.size() = 5) throw;
+    int cost = hand[i].getCost();
+    int curMana = Face.getCurrentMana();
     if (cost > curMana)  throw;
     //else {
     //   hand[i].play(i, target);
     //}
-    myFace.spendMana(cost);
+    Face.spendMana();
 }

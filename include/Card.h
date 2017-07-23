@@ -6,9 +6,8 @@
 #include <memory>
 #include "ActiveAbility.h"
 #include "TriggeredAbility.h"
-#include "Ability.h"
+
 class Board;
-class Unit;
 class Player;
 
 class Card
@@ -18,7 +17,6 @@ class Card
         virtual ~Card();
         void use(Board& theBoard, int p =0, int t = 0);
         virtual std::string getName()=0; // use for graphics
-        virtual void attack (Unit &target);
         //void notifyBoard();
         int getCost();
 

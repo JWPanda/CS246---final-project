@@ -2,7 +2,6 @@
 #define PLAYER_H
 #include "Unit.h"
 #include "Face.h"
-#include "Minion.h"
 #include <fstream>
 #include <utility>
 #include <vector>
@@ -19,28 +18,27 @@ class Player
         // Game commands
         void draw();
         void attack(int m1, Unit& target);
-        void use(Board &theBoard, int i,  int p, int t);
+        void use(Board &theBoard, int p = -1, int t = -1);
         void newTurn(); // increase mana cap by 1, fill mana
-        //void checkTrigger(int trigger);
+        void checkTrigger();
         void play(int i);
         void play(int i, Unit& target);
         void die (Unit* unit);
         // Accessors
         std::vector<Card*> & getHand(); // use for graphics
         std::vector<Card*> & getField(); // use for graphics
-        Card* getGraveyard(); // use for graphics, top card on graveyard
-        Card* getRitual(); // use for graphics
-        Face* getFace();// use for graphics
-        Unit &getTarget(int i);
+        Card& getGraveyard(); // use for graphics, top card on graveyard
+        Card& getRitual(); // use for graphics
+        Face& getFace(); // use for graphics
         int getMana();
     private:
         int mana;
-        std::vector<Card*> myDeck;
-        std::vector<Card*> myHand;
-        std::vector<Card*> myGraveyard;
-        std::vector<Card*> myField;
-        std::vector<Card*> myRitual;
-        Face myFace;
+        std::vector<Card*> deck;
+        std::vector<Card*> hand;
+        std::vector<Card*> graveyard;
+        std::vector<Card*> field;
+        std::vector<Card*> ritual;
+        Face player;
 };
 
 #endif // PLAYER_H

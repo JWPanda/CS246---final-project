@@ -37,22 +37,22 @@ struct PotionSeller : public Minion {
     std::string getName() override;
 };
 
-class NovicePyromancer : public Minion {
+struct NovicePyromancer : public Minion {
     NovicePyromancer(Player * player);
     std::string getName() override;
 };
 
-class ApprenticeSummoner : public Minion {
+struct ApprenticeSummoner : public Minion {
     ApprenticeSummoner(Player * player);
     std::string getName() override;
 };
 
-class MasterSummoner : public Minion {
+struct MasterSummoner : public Minion {
     MasterSummoner(Player * player);
     std::string getName() override;
 };
 
-class Troll : public Minion {
+struct Troll() : public Minion {
     Troll(Player * player);
     std::string getName() override;
 };
