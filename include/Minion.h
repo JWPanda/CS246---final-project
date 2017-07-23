@@ -9,8 +9,12 @@ class Minion : public Unit
     public:
         Minion(int cost, int Attack, int Defense, Player * player);
         virtual ~Minion();
+
+        void play(Board* theBoard, int i, int p, int t) override;
+
         void die();
         void reset();
+
 
         int getType() override;
 
