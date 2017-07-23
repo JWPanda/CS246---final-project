@@ -1,21 +1,38 @@
 #ifndef FACE_H
 #define FACE_H
-#include <Unit.h>
+
+#include "Unit.h"
 
 
 class Face : public Unit
 {
     public:
-        Face();
-        virtual ~Face();
-        int getAbilityCost() override;
-        use(Face& player) override;
-        use(Face& player, Unit& target) override;
+        //Ctor & Dtor:
+        Face(std::string name, Player* player);
+         ~Face();
 
-    protected:
+        //stuff:
+         void play (Board &theBoard, int i, int p, int t ) override;
+
+        //Mana Mechanics:
+        void refillMana();
+        void incMana();
+        int getCurrentMana();
+        void spendMana(int cost);
+
+        // End Game:
+        void die();
+
+        // Accessors:
+        int getType() override;
+        std::string getName() override;
 
     private:
-    //mana is handled in the player so i removed the private fields
+        Player* player;
+        std::string name;
+        int mana_cur;
+        int mana_cap;
+
 };
 
 #endif // FACE_H

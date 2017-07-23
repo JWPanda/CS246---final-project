@@ -7,12 +7,9 @@
 class Ritual : public Card
 {
     public:
-        Ritual();
+        Ritual(int cost, Player* player, int charges);
         virtual ~Ritual();
-
-        use(Face& player) override;
-        use(Face& player, Unit& target) override;
-
+        void loseCharges(int i);
 
         // graphic display
         int getCharges();
@@ -20,7 +17,22 @@ class Ritual : public Card
     protected:
 
     private:
-        int charges;
+        int     charges;
+};
+
+class DarkRitual : public Ritual {
+    DarkRitual();
+    std::string getName() override;
+};
+
+class AuraOfPower : public Ritual {
+    AuraOfPower();
+    std::string getName() override;
+};
+
+class Standstill : public Ritual {
+    Standstill();
+    std::string getName() override;
 };
 
 #endif // RITUAL_H

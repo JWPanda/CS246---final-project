@@ -1,47 +1,60 @@
 #ifndef MINION_H
 #define MINION_H
 
-#include <Unit.h>
+#include "Unit.h"
+#include <string>
 
 
 class Minion : public Unit
 {
     public:
-        Minion(int BaseAttack, int BaseDefense);
+        Minion(int cost, int Attack, int Defense, Player * player);
         virtual ~Minion();
-        die(std::vector<Card*> location);
+        void die();
+        void reset();
+        void play (Board& theBoard, int i, int p, int t) override;
+        int getType() override;
 
     private:
-        int BaseAttack, BaseDefense;
 };
 
-class AirElemental : public Minion {
-    AirElemental();
+struct AirElemental : public Minion {
+    AirElemental(Player * player);
+    std::string getName() override;
 };
 
-class EarthElemental : public Minion {
-    EarthElemental();
+struct EarthElemental : public Minion {
+    EarthElemental(Player * player);
+    std::string getName() override;
 };
 
-class FireElemental : public Minion {
-    FireElemental();
+struct FireElemental : public Minion {
+    FireElemental(Player * player);
+    std::string getName() override;
 };
 
-class PotionSeller : public Minion {
-    PotionSeller();
+struct PotionSeller : public Minion {
+    PotionSeller(Player * player);
+    std::string getName() override;
 };
 
-class NovicePyromancer : public Minion {
-    NovicePyromancer();
+struct NovicePyromancer : public Minion {
+    NovicePyromancer(Player * player);
+    std::string getName() override;
 };
 
-class ApprenticeSummoner : public Minion {
-    ApprenticeSummoner();
+struct ApprenticeSummoner : public Minion {
+    ApprenticeSummoner(Player * player);
+    std::string getName() override;
 };
 
-class MasterSummoner : public Minion {
-    MasterSummoner();
+struct MasterSummoner : public Minion {
+    MasterSummoner(Player * player);
+    std::string getName() override;
 };
 
-
+struct Troll : public Minion {
+    Troll(Player * player);
+    std::string getName() override;
+};
 #endif // MINION_H

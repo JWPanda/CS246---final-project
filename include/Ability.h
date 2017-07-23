@@ -1,23 +1,27 @@
 #ifndef ABILITY_H
 #define ABILITY_H
+#include <string>
 
+//predefined class:
+class Board;
 
 class Ability
 {
     public:
+        //Ctor & Dtor:
         Ability(int cost);
-
         virtual ~Ability();
 
-        virtual bool isTriggered() =0;
+        //Ability Mechanics:
+        virtual bool isTriggered()=0;
+        virtual void use(Board& theBoard, int p =-1, int t =-1)=0;
 
+        //Accessors:
+        int getCost();
         virtual std::string getDescription()=0;
 
-        virtual void use(Board& theBoard, int target=0) =0;
-        int getCost();
-    protected:
     private:
-        int cost
+        int cost;
 };
 
 #endif // ABILITY_H

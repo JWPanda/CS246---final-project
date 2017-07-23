@@ -1,67 +1,146 @@
 #include "Player.h"
+#include "Minion.h"
+#include <iostream>
+
 using namespace std;
 
-Player::Player(String Name, vector<Card*> deck, vector<Card*> hand, vector<Card*graveyard>, vector<Card*> field, vector<Card*> ritual): {}
+Player::Player(string Name, ifstream &deck):myFace{Name, this} {
+    string s;
+    while (getline(deck, s)) {
+        if (s == "Air Elemental") {
+            myDeck.emplace_back(new AirElemental(this));
+        }
+        if (s == "Earth Elemental") {
+            myDeck.emplace_back(new EarthElemental(this));
+        }
+        if (s == "Fire Elemental") {
+            myDeck.emplace_back(new FireElemental(this));
+        }
+    }
+    for (int i = 0; i < 5; ++i)  {
+        if(myDeck.size() == 0) break;
+        draw();
+    }
+}
 
 Player::~Player() {}
 
-void draw() {
-    hand.push_back(deck[1]);
-    deck.erase(myvector.begin());
+//Turn logistics methods------------------------------------------------------
+
+void Player::draw() {
+    if (myDeck.size() == 0) return; // put a throw here
+    if (myHand.size() == 5) return; // put a throw here
+    myHand.emplace_back(myDeck[0]);
+    myDeck.erase(myDeck.begin());
 }
 
-void attack(int m1 Unit &target) {
-    field[m1].attack(target);
+void Player::newTurn() {
+    draw();
+    myFace.incMana();
+    myFace.refillMana();
 }
 
-void use(int m1, Board &theBoard) {
-    int cost = field[m1].getCost();
-    if (cost > mana) throw;
-    else {
-        mana -= cost;
-        field.use(m1, theBoard);
+/* TODO void Player::checkTrigger(int trigger) {
+    for (int i = 0 ; i < board.size(); ++i) {
+        if (field[i].isTriggered) // use the card some how
     }
+    //ritual.use(trigger);
+}
+*/
+
+/*
+void Player::use(int m1, Board &theBoard) {
+    myHand[m1].use(theBoard);
 }
 
-void use(int m1, Unit &target) {
-   int cost = field[m1].getCost();
-   if (cost > mana) throw;
-   else {
-       mana -= cost;
-       field.use(m1, theBoard);
+void Player::use(Board &theBoard, int i , int p, int t) {
+    if (!(field[i].hasAbility()) throw;
+    int curMana = myFace.getCurrentMana();
+    int cost = field[i].getAbilityCost();
+    if (cost > curMana) throw;
+    else {
+       field[i].use(theBoard, p , t);
+       myFace.spendMana(cost);
    }
 }
 
-void inspect(int i) {
-    // something with display... not sure what you want to do here iggy
+ TODO void Player::attack(int m1 ,Unit &target) {
+    myField[m1].attack(target);
 }
 
-void newTurn() {
-    draw();
-    ++mana;
-}
+*/
 
-void checkTrigger(int trigger) {
-    for (int i = 0 ; i < board.size(); ++i) {
-        field[i].checkTrigger(trigger);
-    }
-    ritual.checkTrigger(trigger);
-}
-
-void play (int i ) {
-    int cost = hand[i].getCost();
-    if (cost > mana) throw;
+//Move Functions:-----------------------------------------------------------
+void Player::play (Board &theBoard, int i, int p, int t ) {
+    int handSize = myHand.size();
+    if (i + 1 > handSize) throw;
+    int cost = myHand[i]->getCost();
+    int curMana = myFace.getCurrentMana();
+    if (cost > curMana) throw;
     else {
-        mana -= cost;
-        hand[i].play();
+        myHand[i]->play(theBoard, i, p, t);
+        myFace.spendMana(cost);
     }
 }
 
-void play (int i, Unit &target) {
+/* TODO void Player::play (int i, Unit &target) {
+    if (i + 1 > hand.size()) throw;
+    if (field.size() = 5) throw;
     int cost = hand[i].getCost();
-    if (cost > mana)  throw;
-    else {
-        mana-= cost;
-        hand[i].play(i, target);
-    }
+    int curMana = Face.getCurrentMana();
+    if (cost > curMana)  throw;
+    //else {
+    //   hand[i].play(i, target);
+    //}
+    Face.spendMana();
+}
+*/
+
+
+//Move Functions-----------------------------------------------------------
+void Player::moveToGraveyard (int i) {
+  myGraveyard.emplace_back(myField[i]);
+  myField.erase(myField.begin()+i);
+}
+
+void Player::moveToBoard(int i) {
+  int fieldSize = myField.size();
+  if (fieldSize == 5) throw;
+  myField.emplace_back(myHand[i]);
+  myHand.erase(myHand.begin()+i);
+}
+
+void Player::moveToRitual(int i) {
+  myRitual.erase(myRitual.begin());
+  myRitual.emplace_back(myHand[i]);
+  myHand.erase(myHand.begin()+i);
+}
+
+void Player::discard(int i) {
+  myHand.erase(myHand.begin()+i);
+}
+
+// Accessors------------------------------------------------------------
+const int Player::getMana() {
+  return myFace.getCurrentMana();
+}
+
+const Face* Player::getFace() {
+  return &myFace;
+}
+
+const Card* Player::getGraveyard() {
+  return myGraveyard.back();
+}
+
+const Card* Player::getRitual() {
+  return myRitual[1];
+}
+
+const vector<Card*>& Player::getHand() {
+  return myHand;
+}
+
+const vector<Card*>& Player::getField() {
+  return myField;
 }

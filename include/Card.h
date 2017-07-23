@@ -1,42 +1,60 @@
 #ifndef CARD_H
 #define CARD_H
-#include <utility>
-#include <vector>
-#include "Face.h"
-#include "Unit.h"
-#include "Player.h"
-#include "Board.h"
 
+#include <map>
+#include <string>
+#include <memory>
+#include "Ability.h"
+#include "ActiveAbility.h"
+#include "TriggeredAbility.h"
+#include "Ability.h"
+
+
+//Predefined classes
+class Board;
+class Player;
 
 class Card
 {
     public:
-        Card(std::string cardName);
+        //Ctor & Dtor:
+        Card(Player * player, int cost );
         virtual ~Card();
-        virtual use(Face& player) =0;
-        virtual use(Face& player, Unit& target)=0;
-        virtual std::string getName(); // use for graphics
-        void notifyBoard();
-        int getCost();
-        int getType();
+
+        //Game Mechanics:
+        virtual void play (Board& theBoard, int i, int p, int t) = 0;
+        //void use(Board& theBoard, int p =0, int t = 0);
+        virtual std::string getName()=0; // use for graphics
 
         // Ability Implementation
-        static Ability * getAbility(std::string ability);
-        int getAbilityCost (Ability *ability);
-        static void addAbility(std::string ability);
+        static void initializeAbilities();
+        bool hasAbility();
+        int getAbilityCost();
+        void addAbility(std::string abilityName); // changes ability of the card
+
+        //Accessors:
+        int getCost();
+        bool isTriggered();
+        virtual int getType()=0;
+        std::string getDescription();
+        virtual int getAttack();
+        virtual int getDefense();
+
+
+        // Enchantment Implementation
+        virtual std::string getEnchantmentDescription();
+        virtual int getEnchantmentAttack();
+        virtual int getEnchantmentDefense();
+
+
     protected:
-        Ability * ability;
+        std::shared_ptr<Ability> ability;
+        Player * player;
+
     private:
-        std::string Name;
-        Board* theBoard;
         //Ability Implementation
-        static std::vector<Ability> listOfAbilities;
+        static std::map<std::string, std::shared_ptr<Ability>> listOfAbilities;
         int cost;
-        int type;
-            // 1 = minon
-            // 2 = spell
-            // 3 = ritual
-            // 4 = enchantment
-    };
+};
 
 #endif // CARD_H
