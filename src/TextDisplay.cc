@@ -38,7 +38,6 @@ void TextDisplay::printField(vector<Card*> field)
 		{
 			cout << CARD_TEMPLATE_EMPTY[i];
 		}
-
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN
 			 << endl;
 	}

@@ -1,4 +1,4 @@
-  #include "Ability.h"
+#include "Ability.h"
 
 Ability::Ability(int cost) : cost{cost} {}
 
