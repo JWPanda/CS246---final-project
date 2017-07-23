@@ -10,7 +10,7 @@ Face::~Face()
 
 
 Face::Face(string Name, Player* player)
- : Unit{0,0,30,player}, name{name}, mana_cur{3}, mana_cap{3} {}
+ : Unit{0,0,30,player}, name{Name}, mana_cur{3}, mana_cap{3} {}
 
 void Face::refillMana() {
     mana_cur = mana_cap;
