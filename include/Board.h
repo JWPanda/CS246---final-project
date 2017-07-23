@@ -31,12 +31,7 @@ class Board
         Player p2;
         Player* activePlayer;
         Player* nonActivePlayer;
-<<<<<<< HEAD
-=======
-    protected: 
-        Player* p1;
-        Player* p2;
->>>>>>> Add files via upload
+
 };
 
 #endif // BOARD_H
