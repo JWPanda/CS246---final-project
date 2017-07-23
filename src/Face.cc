@@ -2,13 +2,10 @@
 
 using namespace std;
 
+//dtor
+Face::~Face() {}
 
-Face::~Face()
-{
-    //dtor
-}
-
-
+//ctor
 Face::Face(string Name, Player* player)
  : Unit{0,0,30,player}, name{Name}, mana_cur{3}, mana_cap{3} {}
 
