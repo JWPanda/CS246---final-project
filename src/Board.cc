@@ -48,6 +48,7 @@ void Board::play (int i, int p, int t) {
 }
 /*
 
+
 void Board::use (int i) {
     activePlayer.use(this, i);
 }
