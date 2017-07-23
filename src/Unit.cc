@@ -22,7 +22,15 @@ void Unit::attack(Unit& target) {
 // no longer needed since apparently we can access
 // the private fields of another Unit since we are still under the Unit scope
 // this method would make sense if we implemented spells that do damage
-void Unit::getHit(int attack) {}
+
+void Unit::getHit(int attack) {
+    Defense -= attack;
+    isDead();
+}
+
+void Unit::reduceAttack(int i) {
+    Attack -= i;
+}
 
 void Unit::isDead() {
     if (Defense <= 0) die();
@@ -30,3 +38,4 @@ void Unit::isDead() {
 
 int Unit::getAttack() { return Attack; }
 int Unit::getDefense() { return Defense; }
+
