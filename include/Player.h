@@ -1,7 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "Unit.h"
-#include "Minion.h"
 #include "Face.h"
 #include <fstream>
 #include <utility>
@@ -31,7 +30,7 @@ class Player
 
         // Accessors:
         int getMana();
-        Face& getFace(); // use for graphics
+        Face* getFace(); // use for graphics
         //Card& getRitual(); // use for graphics
         //Card& getGraveyard(); // use for graphics, top card on graveyard
         std::vector<Card*> & getHand(); // use for graphics

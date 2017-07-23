@@ -95,3 +95,14 @@ void Player::play (int i ) {
     Face.spendMana();
 }
 */
+vector<Card*>& Player::getHand() {
+  return myHand;
+}
+
+vector<Card*>& Player::getField() {
+  return myField;
+}
+
+Face* Player::getFace() {
+  return &myFace;
+}

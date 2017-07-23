@@ -74,10 +74,21 @@ void Board::attack (int m1, int m2) {
     }
 }*/
 
+<<<<<<< HEAD
 Card & Board::getMinion (int i , int player) {
     if (player == 0) {
       Card &target = *activePlayer->getField()[i];
       return target;
+=======
+//TODO fix this here
+void Board::checkTrigger(int trigger) {
+    // 1 = beginning of turn
+    // 2 = end of turn
+    // 3 = minion is played
+    // 4 = minion dies
+    if (trigger == 1 || trigger == 2) {
+        activePlayer.checkTrigger(this, trigger)
+>>>>>>> 9718b3f827632b0dba8bd4124f7b1631b6d0d88a
     }
     else if (player == 1){
       Card &target = *p1.getField()[i];
