@@ -4,7 +4,6 @@
 #include <map>
 #include <string>
 #include <memory>
-#include "Ability.h"
 #include "ActiveAbility.h"
 #include "TriggeredAbility.h"
 #include "Ability.h"

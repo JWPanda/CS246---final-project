@@ -13,7 +13,7 @@ class Ability
         virtual ~Ability();
 
         //Ability Mechanics:
-        virtual bool isTriggered()=0;
+        virtual int isTriggered()=0;
         virtual void use(Board& theBoard, int p =-1, int t =-1)=0;
 
         //Accessors:

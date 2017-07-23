@@ -20,6 +20,7 @@ void TextDisplay::printField(vector<Card*> field)
 {
 	// Player 1 Field
 	vector<card_template_t> field_output; // Output of each card in field
+	unsigned int numEmpty = 5 - field.size();
 	for (Card* c : field) // Make templates for cards
 	{
 		card_template_t card = getCardTemplate(c);
@@ -32,6 +33,12 @@ void TextDisplay::printField(vector<Card*> field)
 		{
 			cout << minion[i];
 		}
+
+		for (unsigned int j = 0; j < numEmpty; ++j)
+		{
+			cout << CARD_TEMPLATE_EMPTY[i];
+		}
+
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN
 			 << endl;
 	}
