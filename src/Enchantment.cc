@@ -38,10 +38,10 @@ void Enchantment::die() {
 // Enchantment Subclasses
 
 // Giant Strength
-giantStrength::giantStrength(Player* player) :
+GiantStrength::GiantStrength(Player* player) :
     Enchantment{1,2,2,player} {}
 
-Enchantment* giantStrength::enchant(Unit& target) {
+Enchantment* GiantStrength::enchant(Unit& target) {
     attack = target.getAttack() + 2;
     defense = target.getDefense() +2;
     base = &target;
@@ -49,18 +49,21 @@ Enchantment* giantStrength::enchant(Unit& target) {
 }
 
 // Magic Fatigue
-magicFatigue::magicFatigue(Player* player) : Enchantment{0,-1,-1,player} {}
-string magicFatigue::getEnchantmentDescription() {
-    return "Enchanted minion's activated ability costs 2 more"
+MagicFatigue::MagicFatigue(Player* player) : Enchantment{0,-1,-1,player} {}
+
+string MagicFatigue::getEnchantmentDescription()
+{
+    return "Enchanted minion's activated ability costs 2 more";
 }
 int getAbilityCost() {
     return base->getAbilityCost() + 2;
 }
 
 // Silence
-silence::silence(Player* player) : Enchantment{1,-1,-1,player};
-string silence::getEnchantmentDescription() {
-    return "Enchanted minion cannot use abilities"
+Silence::Silence(Player* player) : Enchantment{1,-1,-1,player};
+string silence::getEnchantmentDescription()
+{
+    return "Enchanted minion cannot use abilities";
 }
 bool hasAbility() {
     return false; // or throw?

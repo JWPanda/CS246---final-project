@@ -23,20 +23,20 @@ class Enchantment : public Unit
     private:
 };
 
-struct giantStrength : public Enchantment {
-    giantStrength(Player* player);
+struct GiantStrength : public Enchantment {
+    GiantStrength(Player* player);
     std::string getEnchantmentDescription() override;
     Enchantment * enchant(Unit& target) override;
 };
 
-struct magicFatigue : public Enchantment {
-    magicFatigue(Player* player);
+struct MagicFatigue : public Enchantment {
+    MagicFatigue(Player* player);
     std::string getEnchantmentDescription() override;
     int getAbilityCost() override;
 }
 
-struct silence : public Enchantment {
-    silence(Player* player);
+struct Silence : public Enchantment {
+    Silence(Player* player);
     std::string getEnchantmentDescription() override;
     bool hasAbility() override;
 };
