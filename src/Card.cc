@@ -1,11 +1,16 @@
 #include "Card.h"
 using namespace std;
 
-Card::Card(Player* owner, int cost) : player{owner}, cost{cost} {}
 
+
+//Ctor and Dtor:----------------------------------------------------------------
+Card::Card(Player* owner, int cost) : player{owner}, cost{cost} {}
 
 Card::~Card() {}
 
+
+
+//Game Mechanics----------------------------------------------------------------
 /* TODO
 void Card::use(Board& theBoard, int p, int t) {
     // if (no ability) throw exception
@@ -16,8 +21,12 @@ void Card::use(Board& theBoard, int p, int t) {
 }
 */
 
+// List of Abilities initialization:--------------------------------------------
 std::map<std::string, std::shared_ptr<Ability>> Card::listOfAbilities;
 
+
+
+// Ability Implementation-------------------------------------------------------
 void Card::initializeAbilities() {
     // Active Minion Abilities
     listOfAbilities["NovicePyromancer_Ability"] = make_shared<NovicePyromancer_Ability>();
@@ -35,9 +44,6 @@ void Card::initializeAbilities() {
 
 }
 
-//void Card::attack(Unit& target) {}
-
-
 bool Card::hasAbility() {
     if(ability) return true;
     else return false;
@@ -52,6 +58,9 @@ void Card::addAbility(string name) {
     ability = listOfAbilities[name];
 }
 
+
+
+//Accessors---------------------------------------------------------------------
 int Card::getCost() {
   return cost;
 }
@@ -76,7 +85,7 @@ int Card::getDefense() {
 }
 
 
- // Enchantment Implementation
+ // Enchantment Implementation--------------------------------------------------
 string Card::getEnchantmentDescription() {return "";}
 int Card::getEnchantmentAttack() {return -1;}
 int Card::getEnchantmentDefense() {return -1;};

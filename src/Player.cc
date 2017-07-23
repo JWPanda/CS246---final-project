@@ -25,7 +25,7 @@ Player::Player(string Name, ifstream &deck):myFace{Name, this} {
 
 Player::~Player() {}
 
-//Turn logistics methods------------------------------------------------------
+//Turn logistics methods--------------------------------------------------------
 
 void Player::draw() {
     if (myDeck.size() == 0) return; // put a throw here
@@ -70,7 +70,7 @@ void Player::use(Board &theBoard, int i , int p, int t) {
 
 */
 
-//Move Functions:-----------------------------------------------------------
+//Move Functions:---------------------------------------------------------------
 void Player::play (Board &theBoard, int i, int p, int t ) {
     int handSize = myHand.size();
     if (i + 1 > handSize) throw;
@@ -97,7 +97,7 @@ void Player::play (Board &theBoard, int i, int p, int t ) {
 */
 
 
-//Move Functions-----------------------------------------------------------
+//Move Functions----------------------------------------------------------------
 void Player::moveToGraveyard (int i) {
   myGraveyard.emplace_back(myField[i]);
   myField.erase(myField.begin()+i);
@@ -120,7 +120,7 @@ void Player::discard(int i) {
   myHand.erase(myHand.begin()+i);
 }
 
-// Accessors------------------------------------------------------------
+// Accessors--------------------------------------------------------------------
 const int Player::getMana() {
   return myFace.getCurrentMana();
 }

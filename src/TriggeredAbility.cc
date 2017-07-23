@@ -2,20 +2,18 @@
 
 using namespace std;
 
-TriggeredAbility::~TriggeredAbility()
-{
-    //dtor
-}
-
+//Ctor and Dtor-----------------------------------------------------------------
 TriggeredAbility::TriggeredAbility(int cost) : Ability{cost} {}
 
+TriggeredAbility::~TriggeredAbility() {}
+
+//Trigger Implementation--------------------------------------------------------
 int TriggeredAbility::isTriggered() { return 4; }
 
+//Triggered Ability Sub classes below-------------------------------------------
 
 
-// Triggered Ability Sub classes below
 // Fire Elemental
-
 FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
 
 void FireElemental_Ability::use(Board& theBoard, int p, int t) {
@@ -27,8 +25,8 @@ std::string FireElemental_Ability::getDescription() {
     return "Whenever an opponent's minion enters play, deal 1 damage to it";
 }
 
-// Potion Seller
 
+// Potion Seller
 PotionSeller_Ability::PotionSeller_Ability() : TriggeredAbility(0) {}
 
 void PotionSeller_Ability::use(Board& theBoard, int p, int t) {
@@ -41,8 +39,8 @@ string PotionSeller_Ability::getDescription() {
     return "At the end of your turn, all your minions gain +0/+1.";
 }
 
-// Troll Ability
 
+// Troll Ability
 Troll_Ability::Troll_Ability() : TriggeredAbility(0) {}
 
 void Troll_Ability::use(Board& theBoard, int p, int t) {
