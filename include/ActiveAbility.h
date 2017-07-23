@@ -10,7 +10,7 @@ class ActiveAbility : public Ability
         ActiveAbility(int cost);
         virtual ~ActiveAbility();
 
-        bool isTriggered() override;
+        int isTriggered() override;
 
 
     protected:
@@ -47,6 +47,30 @@ struct Banish_Ability : public ActiveAbility {
 
 struct Unsummon_Ability : public ActiveAbility {
     Unsummon_Ability();
+    void use(Board& theBoard, int t, int p) override;
+    std::string getDescription() override;
+};
+
+struct Recharge_Ability : public ActiveAbility {
+    Recharge_Ability();
+    void use(Board& theBoard, int t, int p) override;
+    std::string getDescription() override;
+};
+
+struct Disenchant_Ability : public ActiveAbility {
+    Disenchant_Ability();
+    void use(Board& theBoard, int t, int p) override;
+    std::string getDescription() override;
+};
+
+struct RaiseDead_Ability : public ActiveAbility {
+    RaiseDead_Ability();
+    void use(Board& theBoard, int t, int p) override;
+    std::string getDescription() override;
+};
+
+struct Blizzard_Ability : public ActiveAbility {
+    Blizzard_Ability();
     void use(Board& theBoard, int t, int p) override;
     std::string getDescription() override;
 };

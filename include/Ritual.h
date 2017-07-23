@@ -12,7 +12,7 @@ class Ritual : public Card
         void loseCharges(int i);
 
         // graphic display
-        int getCharges();
+        int getCharges() override;
 
     protected:
 

@@ -7,6 +7,11 @@ Enchantment::Enchantment(int cost,int Attack, int Defense, Player* player)
 
 Enchantment::~Enchantment();
 
+string Enchantment::getName() {
+    if (base) return base->getDescription();
+    else return getEnchantmentName();
+}
+
 string Enchantment::getDescription() {
     if (base) return base->getDescription();
     else return getEnchantmentDescription();
@@ -24,6 +29,7 @@ int Enchantment::getType() { return 4};
 Enchantment * Enchantment::enchant(Unit& target) {
     attack = target.getAttack();
     defense = target.getDefense();
+    ability = target.ability;
     base = &target;
     return this;
 }
@@ -47,6 +53,8 @@ Enchantment* giantStrength::enchant(Unit& target) {
     return this;
 }
 
+string giantStrength::getEnchantmentName() { return "giantStrenth"}
+
 // Magic Fatigue
 magicFatigue::magicFatigue(Player* player) : Enchantment{0,-1,-1,player} {}
 string magicFatigue::getEnchantmentDescription() {
@@ -56,6 +64,8 @@ int getAbilityCost() {
     return base->getAbilityCost() + 2;
 }
 
+string magicFatigue::getEnchantmentName() { return "Magic Fatigue"}
+
 // Silence
 silence::silence(Player* player) : Enchantment{1,-1,-1,player};
 string silence::getEnchantmentDescription() {
@@ -64,3 +74,5 @@ string silence::getEnchantmentDescription() {
 bool hasAbility() {
     return false; // or throw?
 }
+
+string silence::getEnchantmentName() { return "Silence"}

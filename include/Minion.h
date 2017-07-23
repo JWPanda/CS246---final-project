@@ -2,6 +2,7 @@
 #define MINION_H
 
 #include "Unit.h"
+#include <string>
 
 
 class Minion : public Unit
@@ -61,4 +62,3 @@ struct Troll : public Minion {
     std::string getName() override;
 };
 #endif // MINION_H
-

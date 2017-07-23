@@ -8,7 +8,7 @@ using namespace std;
 ActiveAbility::ActiveAbility(int cost) : Ability{cost} {};
 
 
-bool ActiveAbility::isTriggered() { return false };
+int ActiveAbility::isTriggered() { return -1};
 
 
 
@@ -54,3 +54,80 @@ string MasterSummoner_Ability::getDescription() {
 
 
 // Spell Abilities
+// Banish
+Banish_Ability::Banish_Ability()
+ : ActiveAbiilty{0} {};
+
+void Banish_Ability::use(Board& theBoard, int t, int p) {
+    // check if player field is full, if so throw an exception
+
+    // loop until board is full or 3 air elementals are summoned
+}
+string Banish_Ability::getDescription() {
+    return "Destroy target minion or ritual"
+};
+
+// Unsummon
+Unsummon_Ability::Unsummon_Ability()
+ : ActiveAbiilty{0} {};
+
+void Unsummon_Ability::use(Board& theBoard, int t, int p) {
+    // check if player field is full, if so throw an exception
+
+    // loop until board is full or 3 air elementals are summoned
+}
+string Unsummon_Ability::getDescription() {
+    return "Put Target minion on the bottom of its owner's deck"
+};
+
+// Recharge
+Recharge_Ability::Recharge_Ability()
+ : ActiveAbiilty{0} {};
+
+void Recharge_Ability::use(Board& theBoard, int t, int p) {
+    // check if player field is full, if so throw an exception
+
+    // loop until board is full or 3 air elementals are summoned
+}
+string Recharge_Ability::getDescription() {
+    return "Your ritual gains 3 charges"
+};
+
+// Disenchant
+Disenchant_Ability::Disenchant_Ability()
+ : ActiveAbiilty{0} {};
+
+void Disenchant_Ability::use(Board& theBoard, int t, int p) {
+    // check if player field is full, if so throw an exception
+
+    // loop until board is full or 3 air elementals are summoned
+}
+string Disenchant_Ability::getDescription() {
+    return "Destroy the top enchantment on target minion"
+};
+
+// Raise Dead
+RaiseDead_Ability::RaiseDead_Ability()
+ : ActiveAbiilty{0} {};
+
+void RaiseDead_Ability::use(Board& theBoard, int t, int p) {
+    // check if player field is full, if so throw an exception
+
+    // loop until board is full or 3 air elementals are summoned
+}
+string RaiseDead_Ability::getDescription() {
+    return "Resurrect the top minion on your graveyard"
+};
+
+// Blizzard
+Blizzard_Ability::Blizzard_Ability()
+ : ActiveAbiilty{0} {};
+
+void Blizzard_Ability::use(Board& theBoard, int t, int p) {
+    // check if player field is full, if so throw an exception
+
+    // loop until board is full or 3 air elementals are summoned
+}
+string Blizzard_Ability::getDescription() {
+    return "Destroy target minion or ritual"
+};
