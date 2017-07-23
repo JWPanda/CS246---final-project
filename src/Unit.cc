@@ -2,22 +2,12 @@
 
 using namespace std;
 
-
-Unit::~Unit()
-{
-    //dtor
-}
-
-// ctor
-
 // ctor does card need a name field?
 Unit::Unit(int cost, int Attack, int Defense, Player* player)
- : Card{cost, player}, Attack{Attack}, Defense{Defense},
+ : Card{player, cost}, Attack{Attack}, Defense{Defense},
    BaseAttack{Attack}, BaseDefense{Defense} {}
 
-
-int Unit::getAttack() { return Attack; }
-int Unit::getDefense() { return Defense; }
+Unit::~Unit() {}
 
 void Unit::attack(Unit& target) {
     target.Defense -= Attack;
@@ -29,17 +19,14 @@ void Unit::attack(Unit& target) {
     target.isDead();
 }
 
-void Unit::isDead() {
-    if (Defense <= 0) die();
-};
-
 // no longer needed since apparently we can access
 // the private fields of another Unit since we are still under the Unit scope
 // this method would make sense if we implemented spells that do damage
 void Unit::getHit(int attack) {}
 
+void Unit::isDead() {
+    if (Defense <= 0) die();
+};
 
-// not sure about these implementations...
-// need to send in face to use the magic?
-
-
+int Unit::getAttack() { return Attack; }
+int Unit::getDefense() { return Defense; }

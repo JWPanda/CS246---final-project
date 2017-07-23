@@ -1,15 +1,11 @@
 #include "Card.h"
-
-
 using namespace std;
 
-Card::~Card()
-{
-    //dtor
-}
+Card::Card(Player* owner, int cost) : player{owner}, cost{cost} {}
 
-Card::Card(int cost) : cost{cost} {}
+Card::~Card() {}
 
+/* TODO
 void Card::use(Board& theBoard, int p, int t) {
     // if (no ability) throw exception
 
@@ -17,33 +13,10 @@ void Card::use(Board& theBoard, int p, int t) {
     // ability->use(theBoard, p, t);
     ability->use(theBoard,p,t)
 }
+*/
 
-
-bool Card::hasAbility() {
-    if(ability) return true;
-    else return false;
-}
-
-int Card::getAbilityCost() {
-    return ability->getCost();
-}
-
-bool Card::isTriggered() {
-    if (hasAbility()) return ability->isTriggered();
-    else return false;
-}
-
-string Card::getDescription() {
-    return ability->getDescription();
-}
-
-
-void Card::addAbility(string name) {
-    ability = listOfAbilities[name];
-}
-
-static void Card::initializeAbilities() {
-
+void Card::initializeAbilities() {
+/* TODO~~~~~~~~~~~~
     // Active Minion Abilities
     listOfAbilities["NovicePyromancer_Ability"] = make_shared<Ability>(NovicePyromancer_Ability());
     listOfAbilities["ApprenticeSummoner_Ability"] = make_shared<Ability>(ApprenticeSummoner_Ability());
@@ -57,4 +30,37 @@ static void Card::initializeAbilities() {
     // Spell Abilities
 
     // Ritual Abilities
+    */
+}
+
+bool Card::hasAbility() {
+    if(ability) return true;
+    else return false;
+}
+
+int Card::getAbilityCost() {
+    return ability->getCost();
+}
+
+void Card::addAbility(string name) {
+    ability = listOfAbilities[name];
+}
+
+/*
+bool Card::isTriggered() {
+    if (hasAbility()) return ability->isTriggered();
+    else return false;
+}
+*/
+
+string Card::getDescription() {
+    return ability->getDescription();
+}
+
+int getAttack() {
+  return -1;
+}
+
+int getDefense() {
+  return -1;
 }
