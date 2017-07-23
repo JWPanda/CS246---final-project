@@ -10,7 +10,7 @@ Board::~Board() {
 
 void Board::changeTurn () {
     // checks end turn trigger for active player which only occurs if it is not the first turn. 
-    if (activePlayer != nullptr) checkTrigger(2);
+    if (activePlayer != nullptr) //TODO checkTrigger(2);
     if (activePlayer == nullptr || activePlayer == p1) {// turn change for p1 or turn 2 
         activePlayer = p2;
         nonActivePlayer = p1;
@@ -20,7 +20,7 @@ void Board::changeTurn () {
         nonActivePlayer = p2;
     }
     activePlayer.newTurn(); // initiates new turn for active player
-    checkTrigger(1); // check new turn trigddger for active player
+   //TODO checkTrigger(1);  check new turn trigddger for active player
 }
 
 void Board::play (int i) {
