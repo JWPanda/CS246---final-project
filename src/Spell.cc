@@ -9,3 +9,5 @@ Spell::~Spell()
 {
     //dtor
 }
+
+CardType Spell::getType() {return SPELL;}

@@ -14,6 +14,8 @@ void Ritual::loseCharges(int i) {
     if (charges < 0) charges =0;
 }
 
+CardType Ritual::getType() {return RITUAL;}
+
 // Rituals
 
 DarkRitual::DarkRitual(Player* player) : Ritual{0,player, 5} {

@@ -21,7 +21,7 @@ class Face : public Unit
         void die();
 
         // Accessors:
-        int getType() override;
+        CardType getType() override;
         std::string getName() override;
 
     private:

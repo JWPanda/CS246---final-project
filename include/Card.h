@@ -33,9 +33,10 @@ class Card
         void addAbility(std::string abilityName); // changes ability of the card
 
         //Accessors:
+        enum CardType { MINION, SPELL, RITUAL, ENCHANTMENT, FACE };
         int getCost();
         bool isTriggered();
-        virtual int getType()=0;
+        virtual CardType getType()=0;
         std::string getDescription();
         virtual int getAttack();
         virtual int getDefense();

@@ -90,7 +90,11 @@ void TextDisplay::displayBoard()
 	}
 
 	vector<Card*> field1 = board->p1.getField(); // Get field
+<<<<<<< HEAD
 	printField(field1);
+=======
+	printField(field);
+>>>>>>> Add new files
 
 	for (string s : CENTRE_GRAPHIC) cout << s << endl; // Centre Graphic
 
