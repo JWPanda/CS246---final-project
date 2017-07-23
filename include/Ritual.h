@@ -13,11 +13,12 @@ class Ritual : public Card
 
         // graphic display
         int getCharges();
+        CardType getType() override;
 
     protected:
 
     private:
-        int     charges;
+        int charges;
 };
 
 class DarkRitual : public Ritual {

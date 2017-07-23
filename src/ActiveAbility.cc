@@ -14,7 +14,6 @@ int ActiveAbility::isTriggered() { return -1 ;}
 
 // Minion Abilities
 // Novice Pyromancer
-
 NovicePyromancer_Ability::NovicePyromancer_Ability()
  : ActiveAbility{1} {}
 

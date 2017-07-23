@@ -28,11 +28,6 @@ void Card::initializeAbilities() {
     //listOfAbilities["FireElemental_Ability"] = make_shared<FireElemental_Ability>();
     //listOfAbilities["PotionSeller_Ability"] = make_shared<PotionSeller_Ability>();
     //listOfAbilities["Troll_Ability"] = make_shared<Troll_Ability>();
-
-    // Spell Abilities
-
-    // Ritual Abilities
-
 }
 
 //void Card::attack(Unit& target) {}

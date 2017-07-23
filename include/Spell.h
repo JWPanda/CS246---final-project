@@ -11,7 +11,7 @@ class Spell : public Card
         virtual ~Spell();
         use(Face& player) override;
         use(Face& player, Unit& target) override;
-
+        CardType getType() override;
     protected:
 
     private:

@@ -21,7 +21,7 @@ class ActiveAbility : public Ability
 
 // Minion Abilities
 struct NovicePyromancer_Ability : public ActiveAbility {
-  NovicePyromancer_Ability();
+    NovicePyromancer_Ability();
     void use(Board& theBoard, int t, int p) override;
     std::string getDescription() override;
 };

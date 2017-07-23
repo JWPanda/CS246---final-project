@@ -13,7 +13,6 @@ class Face : public Unit
 
         //stuff:
          void play (Board &theBoard, int i, int p, int t ) override;
-
         //Mana Mechanics:
         void refillMana();
         void incMana();
@@ -24,7 +23,7 @@ class Face : public Unit
         void die();
 
         // Accessors:
-        int getType() override;
+        CardType getType() override;
         std::string getName() override;
 
     private:
