@@ -7,6 +7,8 @@ Face::Face(string Name, Player* player)
 
 Face::~Face() {}
 
+void Face::play (Board &theBoard, int i, int p, int t ) {}
+
 void Face::refillMana() {
     mana_cur = mana_cap;
 }

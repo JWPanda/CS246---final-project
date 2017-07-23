@@ -6,7 +6,6 @@ Card::Card(Player* owner, int cost) : player{owner}, cost{cost} {}
 
 Card::~Card() {}
 
-
 /* TODO
 void Card::use(Board& theBoard, int p, int t) {
     // if (no ability) throw exception

@@ -11,6 +11,9 @@ class Face : public Unit
         Face(std::string name, Player* player);
          ~Face();
 
+        //stuff:
+         void play (Board &theBoard, int i, int p, int t ) override;
+
         //Mana Mechanics:
         void refillMana();
         void incMana();
