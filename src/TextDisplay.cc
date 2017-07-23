@@ -12,10 +12,6 @@ void TextDisplay::notify()
 card_template_t TextDisplay::getCardTemplate(Card* c)
 {
 	//if (c->getType() == MINION)
-	cout << c->getName() << endl;
-	cout << c->getCost() << endl;
-	cout << c->getAttack() << endl;
-	cout << c->getDefense() << endl;
 	return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
 	// else if (c->getType() == )
 }
@@ -94,7 +90,7 @@ void TextDisplay::displayBoard()
 	}
 
 	vector<Card*> field1 = board->p1.getField(); // Get field
-	printField(field);
+	printField(field1);
 
 	for (string s : CENTRE_GRAPHIC) cout << s << endl; // Centre Graphic
 

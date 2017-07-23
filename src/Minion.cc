@@ -31,7 +31,7 @@ void Minion::die() {
 
 // Minion Sub classes below
 
-AirElemental::AirElemental(Player * player) : Minion{0,1,1,player} {}
+AirElemental::AirElemental(Player * player) : Minion{1,1,1,player} {}
 string AirElemental::getName() { return "Air Elemental"; }
 
 EarthElemental::EarthElemental(Player * player) : Minion{3,4,4,player} {}

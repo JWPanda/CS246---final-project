@@ -44,6 +44,7 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 	else if (command == "end")
 	{
 		// Switch player turn
+		board.changeTurn();
 	}
 	else if (command == "quit")
 	{

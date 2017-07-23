@@ -9,6 +9,12 @@ Player::Player(string Name, ifstream &deck):myFace{Name, this} {
         if (s == "Air Elemental") {
             myDeck.emplace_back(new AirElemental(this));
         }
+        if (s == "Earth Elemental") {
+            myDeck.emplace_back(new EarthElemental(this));
+        }
+        if (s == "Fire Elemental") {
+            myDeck.emplace_back(new FireElemental(this));
+        }
     }
     for (int i = 0; i < 5; ++i)  {
         if(myDeck.size() == 0) break;
@@ -16,11 +22,12 @@ Player::Player(string Name, ifstream &deck):myFace{Name, this} {
     }
 }
 
-Player::~Player() {}
+Player::~Player() {} 
 
 void Player::draw() {
-    if (myHand.size() == 5) throw;
-    myHand.emplace_back(myDeck[1]);
+    if (myDeck.size() == 0) return; // put a throw here
+    if (myHand.size() == 5) return; // put a throw here
+    myHand.emplace_back(myDeck[0]);
     myDeck.erase(myDeck.begin());
 }
 
@@ -70,7 +77,7 @@ void Player::play (int i ) {
     else {
         if (myHand[i]->getType() == 1) {
             myField.emplace_back(myHand[i]);
-            myHand.erase(myHand.begin());
+            myHand.erase(myHand.begin()+i);
         }
         //else if (hand[i].getType() == 2) {
         //    hand[i].use(stuff here);
@@ -102,7 +109,7 @@ const vector<Card*>& Player::getHand() {
   return myHand;
 }
 
-const vector<Card*>& Player::getField() {
+const vector<Card*>&   Player::getField() {
   return myField;
 }
 
