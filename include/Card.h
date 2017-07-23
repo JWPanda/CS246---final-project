@@ -27,24 +27,24 @@ class Card
         void addAbility(std::string abilityName); // changes ability of the card
         virtual bool hasAbility();
         virtual int getAbilityCost();
-        bool isTriggered();
+        int isTriggered();
         virtual std::string getDescription();
 
         // Enchantment Implementation
         virtual std::string getEnchantmentDescription();
         virtual int getEnchantmentAttack();
         virtual int getEnchantmentDefense();
+        virtual std::string getEnchantmentName();
 
         virtual void attack(Unit& target);
-        virtual int getAttack()=0;
-        virtual int getDefense()=0;
+        virtual int getAttack();
+        virtual int getDefense();
         virtual int getType()=0;
 
     protected:
         std::shared_ptr<Ability> ability;
         Player * player;
     private:
-        Board* theBoard;
         //Ability Implementation
         static std::map<std::string, std::shared_ptr<Ability>> listOfAbilities;
 
