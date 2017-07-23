@@ -11,7 +11,18 @@ void TextDisplay::notify()
 
 card_template_t TextDisplay::getCardTemplate(Card* c)
 {
-	if (c->getType() == MINION) return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
+	if (c->getType() == MINION)
+	{
+		if (c->hasAbility)
+		{
+			if (c->isTriggered < 0)
+			{
+				return display_minion_triggered_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense(), c->getDescription());
+			}
+			return display_minion_activated_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense(), c->getCost(), c->getDescription());
+		}
+		return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
+	}
 	else if (c->getType() == SPELL) return display_spell(c->getName(), c->getCost(), c->getDescription());
 	else if (c->getType() == RITUAL) return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
 	else if (c->getType() == ENCHANTMENT) return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
