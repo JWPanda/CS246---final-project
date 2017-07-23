@@ -1,7 +1,7 @@
 #ifndef ACTIVEABILITY_H
 #define ACTIVEABILITY_H
 
-#include <Ability.h>
+#include "Ability.h"
 
 
 class ActiveAbility : public Ability
@@ -10,7 +10,7 @@ class ActiveAbility : public Ability
         ActiveAbility(int cost);
         virtual ~ActiveAbility();
 
-        bool isTriggered() override;
+        int isTriggered() override;
 
 
     protected:
@@ -21,7 +21,7 @@ class ActiveAbility : public Ability
 
 // Minion Abilities
 struct NovicePyromancer_Ability : public ActiveAbility {
-    NovicePyromancer_Ability();
+  NovicePyromancer_Ability();
     void use(Board& theBoard, int t, int p) override;
     std::string getDescription() override;
 };

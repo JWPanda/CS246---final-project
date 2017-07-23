@@ -1,7 +1,7 @@
 #ifndef TRIGGEREDABILITY_H
 #define TRIGGEREDABILITY_H
 #include <string>
-#include <Ability.h>
+#include "Ability.h"
 
 
 class TriggeredAbility : public Ability
@@ -11,7 +11,7 @@ class TriggeredAbility : public Ability
         ~TriggeredAbility();
 
 
-        bool isTriggered() override;
+        int isTriggered() override;
 
     protected:
 
@@ -32,8 +32,8 @@ struct PotionSeller_Ability : public TriggeredAbility {
     std::string getDescription() override;
 };
 
-struct ManEater_Ability : public TriggeredAbility {
-    ManEater_Ability();
+struct Troll_Ability : public TriggeredAbility {
+    Troll_Ability();
     void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
@@ -59,4 +59,3 @@ struct Standstill_Ability : public TriggeredAbility {
 };
 
 #endif // TRIGGEREDABILITY_H
-

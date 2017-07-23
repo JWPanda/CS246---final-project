@@ -16,23 +16,23 @@ void Card::use(Board& theBoard, int p, int t) {
 }
 */
 
+std::map<std::string, std::shared_ptr<Ability>> Card::listOfAbilities;
 
 void Card::initializeAbilities() {
-/* TODO~~~~~~~~~~~~
     // Active Minion Abilities
-    listOfAbilities["NovicePyromancer_Ability"] = make_shared<Ability>(NovicePyromancer_Ability());
-    listOfAbilities["ApprenticeSummoner_Ability"] = make_shared<Ability>(ApprenticeSummoner_Ability());
-    listOfAbilities["MasterSummoner_Ability"] = make_shared<Ability>(MasterSummoner_Ability());
+    listOfAbilities["NovicePyromancer_Ability"] = make_shared<NovicePyromancer_Ability>();
+    listOfAbilities["ApprenticeSummoner_Ability"] = make_shared<ApprenticeSummoner_Ability>();
+    listOfAbilities["MasterSummoner_Ability"] = make_shared<MasterSummoner_Ability>();
 
     // Triggered Minion Abilities
-    listOfAbilities["FireElemental_Ability"] = make_shared<Ability>(FireElemental_Ability());
-    listOfAbilities["PotionSeller_Ability"] = make_shared<Ability>(PotionSeller_Ability());
-    listofAbilities["Troll_Ability"] = make_shared<Ability>(Troll_Ability());
+    //listOfAbilities["FireElemental_Ability"] = make_shared<FireElemental_Ability>();
+    //listOfAbilities["PotionSeller_Ability"] = make_shared<PotionSeller_Ability>();
+    //listOfAbilities["Troll_Ability"] = make_shared<Troll_Ability>();
 
     // Spell Abilities
 
     // Ritual Abilities
-    */
+
 }
 
 //void Card::attack(Unit& target) {}
@@ -49,7 +49,7 @@ int Card::getAbilityCost() {
 }
 
 void Card::addAbility(string name) {
-    //ability = listOfAbilities[name];
+    ability = listOfAbilities[name];
 }
 
 int Card::getCost() {

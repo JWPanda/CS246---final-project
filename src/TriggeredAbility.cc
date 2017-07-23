@@ -9,7 +9,7 @@ TriggeredAbility::~TriggeredAbility()
 
 TriggeredAbility::TriggeredAbility(int cost) : Ability{cost} {}
 
-bool TriggeredAbility::isTriggered() { return true; }
+int TriggeredAbility::isTriggered() { return 4; }
 
 
 

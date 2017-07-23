@@ -3,10 +3,7 @@ using namespace std;
 
 Board::Board(string name1, string name2, ifstream &deck1, ifstream &deck2) : p1{name1,deck1}, p2{name2, deck2}, activePlayer{&p1}, nonActivePlayer{&p2} {}
 
-Board::~Board() {
-    delete activePlayer;
-    delete nonActivePlayer;
-}
+Board::~Board() {}
 
 void Board::changeTurn () {
     // checks end turn trigger for active player which only occurs if it is not the first turn.

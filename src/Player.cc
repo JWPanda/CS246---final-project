@@ -8,7 +8,7 @@ Player::Player(string Name, ifstream &deck):myFace{Name, this} {
     string s;
     while (getline(deck, s)) {
         if (s == "Air Elemental") {
-            myDeck.emplace_back(new AirElemental(this));
+            myDeck.emplace_back(new NovicePyromancer(this));
         }
         if (s == "Earth Elemental") {
             myDeck.emplace_back(new EarthElemental(this));
