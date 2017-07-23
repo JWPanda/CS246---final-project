@@ -9,12 +9,12 @@ Ritual::~Ritual()
 
 Ritual::Ritual(int cost, Player* player, int charges) : Card{cost, player}, charges{charges} {}
 
+CardType Ritual::getType() {return RITUAL;}
+
 void Ritual::loseCharges(int i) {
     charges -= i;
     if (charges < 0) charges =0;
 }
-
-CardType Ritual::getType() {return RITUAL;}
 
 // Rituals
 

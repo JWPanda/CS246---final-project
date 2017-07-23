@@ -13,7 +13,7 @@ class Minion : public Unit
         void die();
         void reset();
 
-        int getType() override;
+        CardType getType() override;
 
     private:
 };

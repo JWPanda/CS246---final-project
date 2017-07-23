@@ -23,9 +23,7 @@ void Face::die() {
     // let player know that you are dead. game over
 }
 
-int Face::getType() {
-  return -1;
-}
+CardType Face::getType() {return FACE;}
 
 string Face::getName() {
     return name;
