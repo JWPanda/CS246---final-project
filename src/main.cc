@@ -126,7 +126,7 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 	{
 		// Inspect minion
 		cout << "no" << endl;
-		return false;
+		return true;
 		//display.inspect(i-1);
 	}
 	else if (command == "hand")
@@ -143,7 +143,7 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 	{
 		cout << "SUCK MY DICK" << endl;
 	}
-    return true;
+    return false;
 }
 
 int main(int argc, char* argv[])
@@ -173,6 +173,7 @@ int main(int argc, char* argv[])
 					}
     			}
     			else throw string(argv[i]);
+    			++i;
 			}
 			else if (argv[i] == "-deck1"s)
 			{
@@ -181,6 +182,7 @@ int main(int argc, char* argv[])
 					deck1 = argv[i+1];
 				}
 				else throw string(argv[i]);
+				++i;
 			}
 			else if (argv[i] == "-deck2"s)
 			{
@@ -189,6 +191,7 @@ int main(int argc, char* argv[])
 					deck2 = argv[i+1];
 				}
 				else throw string(argv[i]);
+				++i;
 			}
 			else
 			{
@@ -204,19 +207,19 @@ int main(int argc, char* argv[])
 
 	ifstream deckStream1, deckStream2;
 
-	if (deck1.empty()) deckStream1.open("default.deck");
+	if (deck1.empty()) deckStream1.open("deck1.txt");
 	else deckStream1.open(deck1);
 	if (!deckStream1.is_open()) cout << "Error opening file: " << deck1.empty() ? "default.deck" : deck1;
 
-	if (deck2.empty()) deckStream2.open("default.deck");
+	if (deck2.empty()) deckStream2.open("deck2.txt");
 	else deckStream2.open(deck2);
 	if (!deckStream2.is_open()) cout << "Error opening file: " << deck2.empty() ? "default.deck" : deck2;
 
 	string p1Name, p2Name;
 	cout << "Please enter the name of Player 1: ";
-	cin >> p1Name;
+	getline(cin, p1Name);
 	cout << "Please enter the name of Player 2: ";
-	cin >> p2Name;
+	getline(cin, p2Name);
 	Board board{p1Name, p2Name, deckStream1, deckStream2};
 	TextDisplay display{&board};
     // Card::initializeAbilities();
@@ -234,7 +237,6 @@ int main(int argc, char* argv[])
 	string input;
 	while (getline(cin, input))
 	{
-		stringstream ss{input};
 		try
 		{
 			if (parseCommand(display, board, input, testing)) return 0;
