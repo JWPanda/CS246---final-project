@@ -10,7 +10,8 @@ void TextDisplay::notify()
 
 card_template_t TextDisplay::getCardTemplate(Card* c)
 {
-	if (c->getType() == MINION) return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
+	//if (c->getType() == MINION)
+	return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
 	// else if (c->getType() == )
 }
 

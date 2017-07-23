@@ -100,7 +100,7 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		{
 			ss >> t;
 			if (ss.fail()) throw command;
-			board.play(i-1, p, t-1);
+			// board.play(i-1, p, t-1);
 		}
 	}
 	else if (command == "use")
@@ -113,13 +113,13 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		ss >> p;
 		if (ss.fail())
 		{
-			board.use(i-1);
+			// board.use(i-1);
 		}
 		else
 		{
 			ss >> t;
 			if (ss.fail()) throw command;
-			board.use(i-1, p, t-1);
+			// board.use(i-1, p, t-1);
 		}
 	}
 	else if (command == "inspect")
@@ -219,7 +219,7 @@ int main(int argc, char* argv[])
 	cin >> p2Name;
 	Board board{p1Name, p2Name, deckStream1, deckStream2};
 	TextDisplay display{&board};
-    Card::initializeAbilities();
+    // Card::initializeAbilities();
 
 	if (initStream.is_open())
 	{
