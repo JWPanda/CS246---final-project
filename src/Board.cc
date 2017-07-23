@@ -63,6 +63,7 @@ Card &getMinion (int i , int player) {
     return target;
 }
 
+//TODO fix this here
 void Board::checkTrigger(int trigger) {
     // 1 = beginning of turn
     // 2 = end of turn
