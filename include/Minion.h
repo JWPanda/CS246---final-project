@@ -12,11 +12,7 @@ class Minion : public Unit
         virtual ~Minion();
         void die();
         void reset();
-<<<<<<< HEAD
         void play (Board& theBoard, int i, int p, int t) override;
-=======
-
->>>>>>> af73fedef0537003df88f22d556aea06807d6dcc
         int getType() override;
 
     private:

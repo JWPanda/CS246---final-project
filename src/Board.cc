@@ -44,20 +44,13 @@ Player* Board::getActivePlayer() {
 void Board::play (int i, int p, int t) {
 
 /* TODO!!!!! void Board::play (int i, int p, int t) {
->>>>>>> af73fedef0537003df88f22d556aea06807d6dcc
     // i = the index of the card in the hand that will be played.
     // p = the owner of the target ie: p1 or p2
     // t = the location of the target on the player's field
 
-<<<<<<< HEAD
     activePlayer->play(*this, i , p ,t);
 }
-/*
-=======
-    activePlayer.play(this, i , p ,t);
-}
 
->>>>>>> af73fedef0537003df88f22d556aea06807d6dcc
 void Board::use (int i) {
     activePlayer.use(this, i);
 }
