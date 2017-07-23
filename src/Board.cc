@@ -1,7 +1,7 @@
 #include "Board.h"
 using namespace std;
 
-Board::Board(string name1, string name2, ifstream &deck1, ifstream &deck2) : p1{name1,deck1}, p2{name2, deck2}, activePlayer{nullptr}, nonActivePlayer{nullptr} {}
+Board::Board(string name1, string name2, ifstream &deck1, ifstream &deck2) : p1{name1,deck1}, p2{name2, deck2}, activePlayer{&p1}, nonActivePlayer{&p2} {}
 
 Board::~Board() {
     delete activePlayer;
@@ -75,15 +75,16 @@ void Board::attack (int m1, int m2) {
 }*/
 
 Card & Board::getMinion (int i , int player) {
-    if (player == 0) {
-      Card &target = *activePlayer->getField()[i];
-      return target;
-    } else if (player == 1) {
+    if (player == 1) {
       Card &target = *p1.getField()[i];
       return target;
     }
     else if (player == 2) {
       Card &target = *p2.getField()[i];
+      return target;
+    }
+    else {
+      Card &target = *activePlayer->getField()[i];
       return target;
     }
 }

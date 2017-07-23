@@ -34,8 +34,8 @@ class Player
         Face* getFace(); // use for graphics
         //Card& getRitual(); // use for graphics
         //Card& getGraveyard(); // use for graphics, top card on graveyard
-        std::vector<Card*> & getHand(); // use for graphics
-        std::vector<Card*> & getField(); // use for graphics
+        const std::vector<Card*>& getHand(); // use for graphics
+        const std::vector<Card*>& getField(); // use for graphics
 
     private:
         Face myFace;

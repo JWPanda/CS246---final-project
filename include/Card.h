@@ -34,6 +34,7 @@ class Card
         //Accessors:
         int getCost();
         bool isTriggered();
+        virtual int getType()=0;
         std::string getDescription();
         virtual int getAttack();
         virtual int getDefense();

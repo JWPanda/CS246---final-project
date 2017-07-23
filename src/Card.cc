@@ -36,7 +36,7 @@ void Card::initializeAbilities() {
     */
 }
 
-void Card::attack(Unit& target) {}
+//void Card::attack(Unit& target) {}
 
 
 bool Card::hasAbility() {

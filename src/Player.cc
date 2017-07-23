@@ -6,15 +6,10 @@ using namespace std;
 Player::Player(string Name, ifstream &deck):myFace{Name, this} {
     string s;
     while (getline(deck, s)) {
-        cout << s << endl;
-        cout << s.length() << endl;
-        cout << "Air Elemental"s.length() << endl;
         if (s == "Air Elemental") {
-            cout << "lul" << endl;
             myDeck.emplace_back(new AirElemental(this));
         }
     }
-    cout << myDeck[0]->getName() << endl;
     for (int i = 0; i < 5; ++i)  {
         if(myDeck.size() == 0) break;
         draw();
@@ -103,11 +98,11 @@ void Player::play (int i ) {
     Face.spendMana();
 }
 */
-vector<Card*>& Player::getHand() {
+const vector<Card*>& Player::getHand() {
   return myHand;
 }
 
-vector<Card*>& Player::getField() {
+const vector<Card*>& Player::getField() {
   return myField;
 }
 

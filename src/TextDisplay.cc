@@ -12,6 +12,10 @@ void TextDisplay::notify()
 card_template_t TextDisplay::getCardTemplate(Card* c)
 {
 	//if (c->getType() == MINION)
+	cout << c->getName() << endl;
+	cout << c->getCost() << endl;
+	cout << c->getAttack() << endl;
+	cout << c->getDefense() << endl;
 	return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
 	// else if (c->getType() == )
 }
@@ -45,9 +49,9 @@ void TextDisplay::displayCard()
 void TextDisplay::displayHand()
 {
 	Player* p = board->getActivePlayer();
-	vector<Card*> &hand = p->getHand();
+	const vector<Card*> &hand = p->getHand();
 	vector<card_template_t> hand_output; // Output of each card in hand
-	for (Card* c : hand) // Make templates for cards
+	for (auto c : hand) // Make templates for cards
 	{
 		card_template_t card = getCardTemplate(c);
 		hand_output.push_back(card);
@@ -67,7 +71,7 @@ void TextDisplay::displayBoard()
 	// Top border
 	for (int i = 0; i < 167; ++i) cout << EXTERNAL_BORDER_CHAR_LEFT_RIGHT;
 	cout << endl;
-	
+
 	// Player 1 Deck Player and Graveyard
 	// Card* grave1 = board->p1.getGraveyard(); // Get grave
 	// Card* ritual1 = board->p1.getRitual(); // Get ritual
@@ -89,14 +93,14 @@ void TextDisplay::displayBoard()
 			 << endl;
 	}
 
-	vector<Card*> field = board->p1.getField(); // Get field
+	vector<Card*> field1 = board->p1.getField(); // Get field
 	printField(field);
 
 	for (string s : CENTRE_GRAPHIC) cout << s << endl; // Centre Graphic
 
 	// Player 2 Field
 	vector<Card*> field2 = board->p2.getField(); // Get field
-	printField(field);
+	printField(field2);
 
 	// Player 1 Deck Player and Graveyard
 	// Card* grave2 = board->p2.getGraveyard(); // Get grave
