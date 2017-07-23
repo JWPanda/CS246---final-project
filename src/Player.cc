@@ -144,3 +144,4 @@ const vector<Card*>& Player::getHand() {
 const vector<Card*>& Player::getField() {
   return myField;
 }
+
