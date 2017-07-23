@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <memory>
+#include "Ability.h"
 #include "ActiveAbility.h"
 #include "TriggeredAbility.h"
 #include "Ability.h"
@@ -16,17 +17,17 @@ class Player;
 class Card
 {
     public:
+        enum CardType { MINION, SPELL, RITUAL, ENCHANTMENT, FACE };
         //Ctor & Dtor:
         Card(Player * player, int cost );
         virtual ~Card();
 
-        //Game Mechanics:
-        virtual void play (Board& theBoard, int i, int p, int t) = 0;
         //void use(Board& theBoard, int p =0, int t = 0);
         virtual std::string getName()=0; // use for graphics
 
         // Ability Implementation
         static void initializeAbilities();
+
         bool hasAbility();
         int getAbilityCost();
         void addAbility(std::string abilityName); // changes ability of the card
@@ -34,7 +35,7 @@ class Card
         //Accessors:
         int getCost();
         bool isTriggered();
-        virtual int getType()=0;
+        virtual CardType getType()=0;
         std::string getDescription();
         virtual int getAttack();
         virtual int getDefense();

@@ -13,6 +13,7 @@ class Ritual : public Card
 
         // graphic display
         int getCharges();
+        CardType getType() override;
 
     protected:
 

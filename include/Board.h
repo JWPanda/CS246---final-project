@@ -16,7 +16,7 @@ class Board
         //void checkTrigger(int trigger);
 
         //Game Commands:
-          void play(int i, int p = -1, int t = -1);
+        void play(int i, int p = -1, int t = -1);
         //void use(int i, int p = -1, int t = -1);
         //void attack(int m1, int m2 = -1);
 
