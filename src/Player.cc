@@ -22,7 +22,7 @@ Player::Player(string Name, ifstream &deck):myFace{Name, this} {
     }
 }
 
-Player::~Player() {} 
+Player::~Player() {}
 
 void Player::draw() {
     if (myDeck.size() == 0) return; // put a throw here
@@ -75,10 +75,6 @@ void Player::play (int i ) {
     int curMana = myFace.getCurrentMana();
     if (cost > curMana) throw;
     else {
-        if (myHand[i]->getType() == 1) {
-            myField.emplace_back(myHand[i]);
-            myHand.erase(myHand.begin()+i);
-        }
         //else if (hand[i].getType() == 2) {
         //    hand[i].use(stuff here);
         //    hand.erase(i);
@@ -105,14 +101,49 @@ void Player::play (int i ) {
     Face.spendMana();
 }
 */
+
+
+//Move Functions-----------------------------------------------------------
+void Player::moveToGraveyard (int i) {
+  myGraveyard.emplace_back(myField[i]);
+  myField.earse(myField.begin()+i);
+}
+
+void Player::moveToBoard(int i) {
+  myField.emplace_back(myHand[i]);
+  myHand.erase(myHand.begin()+i);
+}
+
+void Player::moveToRitual(int i) {
+  myRitual = myHand[i];
+  myHand.erase(myHand.begin()+i);
+}
+
+void Player::discard(int i) {
+  myHand.erase(myHand.begin()+i);
+}
+
+// Accessors---------------------------------------------------------------
+const int Player::getMana() {
+  return myFace.getCurrentMana();
+}
+
+const Face* Player::getFace() {
+  return &myFace;
+}
+
+const Card* Player::getGraveyard() {
+  return myGraveyard.back();
+}
+
+const shared_ptr<Card> Player::getRitual() {
+  return myRitual;
+}
+
 const vector<Card*>& Player::getHand() {
   return myHand;
 }
 
-const vector<Card*>&   Player::getField() {
+const vector<Card*>& Player::getField() {
   return myField;
-}
-
-Face* Player::getFace() {
-  return &myFace;
 }

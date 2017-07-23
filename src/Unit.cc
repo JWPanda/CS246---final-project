@@ -38,4 +38,3 @@ void Unit::isDead() {
 
 int Unit::getAttack() { return Attack; }
 int Unit::getDefense() { return Defense; }
-

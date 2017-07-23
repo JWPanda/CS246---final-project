@@ -4,6 +4,7 @@
 #include "Minion.h"
 #include "Face.h"
 #include <fstream>
+#include <memory>
 #include <utility>
 #include <vector>
 
@@ -29,11 +30,17 @@ class Player
         //void use(Board &theBoard,int i, int p = -1, int t = -1);
         //void attack(int m1, Unit& target);
 
+        //Move Functions:
+        void moveToGraveyard(int i);
+        void moveToBoard(int i);
+        void moveToRitual(int i);
+        void discard(int i);
+
         // Accessors:
-        int getMana();
-        Face* getFace(); // use for graphics
-        //Card& getRitual(); // use for graphics
-        //Card& getGraveyard(); // use for graphics, top card on graveyard
+        const int getMana();
+        const Face* getFace(); // use for graphics
+        const Card* getGraveyard(); // use for graphics, top card on graveyard
+        const shared_ptr<Card> getRitual(); // use for graphics
         const std::vector<Card*>& getHand(); // use for graphics
         const std::vector<Card*>& getField(); // use for graphics
 
@@ -42,8 +49,8 @@ class Player
         std::vector<Card*> myDeck;
         std::vector<Card*> myHand;
         std::vector<Card*> myField;
-        //std::vector<Card*> myRitual;
-        //std::vector<Card*> myGraveyard;
+        std::shared_ptr<Card> myRitual;
+        std::vector<Card*> myGraveyard;
 };
 
 #endif // PLAYER_H

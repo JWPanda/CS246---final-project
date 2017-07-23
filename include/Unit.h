@@ -15,11 +15,8 @@ class Unit : public Card
         void attack(Unit& target);
         void getHit(int attack);
 
-
         //Death Mechanics:
-
         void reduceAttack(int i);
-
         virtual void die()=0;
         void isDead();
 
