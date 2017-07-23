@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Minion.h"
 #include <iostream>
+
 using namespace std;
 
 Player::Player(string Name, ifstream &deck):myFace{Name, this} {
@@ -24,33 +25,14 @@ Player::Player(string Name, ifstream &deck):myFace{Name, this} {
 
 Player::~Player() {}
 
+//Turn logistics methods------------------------------------------------------
+
 void Player::draw() {
     if (myDeck.size() == 0) return; // put a throw here
     if (myHand.size() == 5) return; // put a throw here
     myHand.emplace_back(myDeck[0]);
     myDeck.erase(myDeck.begin());
 }
-
-/* TODO void Player::attack(int m1 ,Unit &target) {
-    myField[m1].attack(target);
-}
-
-
-void Player::use(int m1, Board &theBoard) {
-    myHand[m1].use(theBoard);
-}
-
-void Player::use(Board &theBoard, int i , int p, int t) {
-    if (!(field[i].hasAbility()) throw;
-    int curMana = myFace.getCurrentMana();
-    int cost = field[i].getAbilityCost();
-    if (cost > curMana) throw;
-    else {
-       field[i].use(theBoard, p , t);
-       myFace.spendMana(cost);
-   }
-}
-*/
 
 void Player::newTurn() {
     draw();
@@ -66,25 +48,37 @@ void Player::newTurn() {
 }
 */
 
-void Player::play (int i ) {
+/*
+void Player::use(int m1, Board &theBoard) {
+    myHand[m1].use(theBoard);
+}
+
+void Player::use(Board &theBoard, int i , int p, int t) {
+    if (!(field[i].hasAbility()) throw;
+    int curMana = myFace.getCurrentMana();
+    int cost = field[i].getAbilityCost();
+    if (cost > curMana) throw;
+    else {
+       field[i].use(theBoard, p , t);
+       myFace.spendMana(cost);
+   }
+}
+
+ TODO void Player::attack(int m1 ,Unit &target) {
+    myField[m1].attack(target);
+}
+
+*/
+
+//Move Functions:-----------------------------------------------------------
+void Player::play (Board &theBoard, int i, int p, int t ) {
     int handSize = myHand.size();
-    int fieldSize = myField.size();
     if (i + 1 > handSize) throw;
-    if (fieldSize == 5) throw;
     int cost = myHand[i]->getCost();
     int curMana = myFace.getCurrentMana();
     if (cost > curMana) throw;
     else {
-        //else if (hand[i].getType() == 2) {
-        //    hand[i].use(stuff here);
-        //    hand.erase(i);
-        //}
-        //else if (hand[i].getType() == 3) {
-        //    ritual.erase(ritual.being());
-        //    ritual.emplace_back(hand[i]);
-        //    hand.erase(i);
-        //}
-        //else if do enchantment here !!!!!!!
+        myHand[i]->play(theBoard, i, p, t);
         myFace.spendMana(cost);
     }
 }
@@ -106,16 +100,19 @@ void Player::play (int i ) {
 //Move Functions-----------------------------------------------------------
 void Player::moveToGraveyard (int i) {
   myGraveyard.emplace_back(myField[i]);
-  myField.earse(myField.begin()+i);
+  myField.erase(myField.begin()+i);
 }
 
 void Player::moveToBoard(int i) {
+  int fieldSize = myField.size();
+  if (fieldSize == 5) throw;
   myField.emplace_back(myHand[i]);
   myHand.erase(myHand.begin()+i);
 }
 
 void Player::moveToRitual(int i) {
-  myRitual = myHand[i];
+  myRitual.erase(myRitual.begin());
+  myRitual.emplace_back(myHand[i]);
   myHand.erase(myHand.begin()+i);
 }
 
@@ -123,7 +120,7 @@ void Player::discard(int i) {
   myHand.erase(myHand.begin()+i);
 }
 
-// Accessors---------------------------------------------------------------
+// Accessors------------------------------------------------------------
 const int Player::getMana() {
   return myFace.getCurrentMana();
 }
@@ -136,8 +133,8 @@ const Card* Player::getGraveyard() {
   return myGraveyard.back();
 }
 
-const shared_ptr<Card> Player::getRitual() {
-  return myRitual;
+const Card* Player::getRitual() {
+  return myRitual[1];
 }
 
 const vector<Card*>& Player::getHand() {

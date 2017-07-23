@@ -1,4 +1,5 @@
 #include "Minion.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -10,8 +11,11 @@ Minion::~Minion()
 Minion::Minion(int cost, int Attack, int Defense, Player * player)
  : Unit{cost,Attack,Defense,player} {}
 
+void Minion::play (Board& theBoard, int i, int p, int t) {
+  player->moveToBoard(i);
+}
 
-CardType Minion::getType() {return MINION;}
+int Minion::getType() {return 1;}
 
  // reset minion's attack and defense to base values
 void Minion::reset() {
@@ -31,7 +35,7 @@ void Minion::die() {
 
 // Minion Sub classes below
 
-AirElemental::AirElemental(Player * player) : Minion{1,1,1,player} {}
+AirElemental::AirElemental(Player * player) : Minion{0,1,1,player} {}
 string AirElemental::getName() { return "Air Elemental"; }
 
 EarthElemental::EarthElemental(Player * player) : Minion{3,4,4,player} {}

@@ -12,8 +12,8 @@ class Minion : public Unit
         virtual ~Minion();
         void die();
         void reset();
-
-        CardType getType() override;
+        void play (Board& theBoard, int i, int p, int t) override;
+        int getType() override;
 
     private:
 };

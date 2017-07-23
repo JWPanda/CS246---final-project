@@ -25,8 +25,7 @@ class Player
       //void checkTrigger();
 
         // Game commands:
-        void play(int i);
-        //void play(Board &theBoard, int i, int p, int t);
+        void play(Board &theBoard, int i, int p, int t);
         //void use(Board &theBoard,int i, int p = -1, int t = -1);
         //void attack(int m1, Unit& target);
 
@@ -40,7 +39,7 @@ class Player
         const int getMana();
         const Face* getFace(); // use for graphics
         const Card* getGraveyard(); // use for graphics, top card on graveyard
-        const shared_ptr<Card> getRitual(); // use for graphics
+        const Card* getRitual(); // use for graphics
         const std::vector<Card*>& getHand(); // use for graphics
         const std::vector<Card*>& getField(); // use for graphics
 
@@ -49,7 +48,7 @@ class Player
         std::vector<Card*> myDeck;
         std::vector<Card*> myHand;
         std::vector<Card*> myField;
-        std::shared_ptr<Card> myRitual;
+        std::vector<Card*> myRitual;
         std::vector<Card*> myGraveyard;
 };
 

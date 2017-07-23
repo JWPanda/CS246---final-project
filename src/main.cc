@@ -101,7 +101,7 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		{
 			ss >> t;
 			if (ss.fail()) throw command;
-			// board.play(i-1, p, t-1);
+				board.play(i-1, p, t-1);
 		}
 	}
 	else if (command == "use")
