@@ -3,7 +3,9 @@ using namespace std;
 
 Card::Card(Player* owner, int cost) : player{owner}, cost{cost} {}
 
+
 Card::~Card() {}
+
 
 /* TODO
 void Card::use(Board& theBoard, int p, int t) {
@@ -14,6 +16,7 @@ void Card::use(Board& theBoard, int p, int t) {
     ability->use(theBoard,p,t)
 }
 */
+
 
 void Card::initializeAbilities() {
 /* TODO~~~~~~~~~~~~
@@ -32,6 +35,9 @@ void Card::initializeAbilities() {
     // Ritual Abilities
     */
 }
+
+void Card::attack(Unit& target) {}
+
 
 bool Card::hasAbility() {
     if(ability) return true;
@@ -69,3 +75,9 @@ int Card::getAttack() {
 int Card::getDefense() {
   return -1;
 }
+
+
+ // Enchantment Implementation
+string Card::getEnchantmentDescription() {return "";}
+int Card::getEnchantmentAttack() {return -1;}
+int Card::getEnchantmentDefense() {return -1;};

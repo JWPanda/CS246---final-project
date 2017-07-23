@@ -7,6 +7,8 @@
 #include "Ability.h"
 #include "ActiveAbility.h"
 #include "TriggeredAbility.h"
+#include "Ability.h"
+
 
 //Predefined classes
 class Board;
@@ -24,6 +26,7 @@ class Card
 
         // Ability Implementation
         static void initializeAbilities();
+
         bool hasAbility();
         int getAbilityCost();
         void addAbility(std::string abilityName); // changes ability of the card
@@ -34,7 +37,13 @@ class Card
         std::string getDescription();
         virtual int getAttack();
         virtual int getDefense();
-        virtual int getType()=0;
+
+
+        // Enchantment Implementation
+        virtual std::string getEnchantmentDescription();
+        virtual int getEnchantmentAttack();
+        virtual int getEnchantmentDefense();
+
 
     protected:
         std::shared_ptr<Ability> ability;
