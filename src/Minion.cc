@@ -15,7 +15,7 @@ void Minion::play (Board& theBoard, int i, int p, int t) {
   player->moveToBoard(i);
 }
 
-int Minion::getType() {return 1;}
+CardType Minion::getType() {return MINION;}
 
  // reset minion's attack and defense to base values
 void Minion::reset() {

@@ -16,7 +16,7 @@ class Enchantment : public Unit
         int getEnchantmentDefense() override;
 
         void die() override();
-        int getType() override;
+        CardType getType() override;
 
     protected:
         Unit* base;

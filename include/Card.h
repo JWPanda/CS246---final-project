@@ -17,23 +17,22 @@ class Player;
 class Card
 {
     public:
+        enum CardType { MINION, SPELL, RITUAL, ENCHANTMENT, FACE };
         //Ctor & Dtor:
         Card(Player * player, int cost );
         virtual ~Card();
 
-        //Game Mechanics:
-        virtual void play (Board& theBoard, int i, int p, int t) = 0;
         //void use(Board& theBoard, int p =0, int t = 0);
         virtual std::string getName()=0; // use for graphics
 
         // Ability Implementation
         static void initializeAbilities();
+
         bool hasAbility();
         int getAbilityCost();
         void addAbility(std::string abilityName); // changes ability of the card
 
         //Accessors:
-        enum CardType { MINION, SPELL, RITUAL, ENCHANTMENT, FACE };
         int getCost();
         bool isTriggered();
         virtual CardType getType()=0;

@@ -11,7 +11,7 @@ using namespace std;
 class TextDisplay : public Observer
 {
 	Board* board;
-	enum CardTypes { MINION, SPELL, RITUAL, ENCHANTMENT };
+	enum CardType { MINION, SPELL, RITUAL, ENCHANTMENT, FACE };
 	card_template_t getCardTemplate(Card* c);
 	void printField(vector<Card*> field);
 public:

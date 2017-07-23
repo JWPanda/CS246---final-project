@@ -18,7 +18,7 @@ class Ritual : public Card
     protected:
 
     private:
-        int charges;
+        int     charges;
 };
 
 class DarkRitual : public Ritual {

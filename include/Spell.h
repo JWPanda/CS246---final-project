@@ -12,6 +12,7 @@ class Spell : public Card
         use(Face& player) override;
         use(Face& player, Unit& target) override;
         CardType getType() override;
+
     protected:
 
     private:
