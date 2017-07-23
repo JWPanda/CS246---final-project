@@ -59,8 +59,10 @@ void Player::newTurn() {
 */
 
 void Player::play (int i ) {
-    if (i + 1 > myHand.size()) throw;
-    if (myField.size() == 5) throw;
+    int handSize = myHand.size();
+    int fieldSize = myField.size();
+    if (i + 1 > handSize) throw;
+    if (fieldSize == 5) throw;
     int cost = myHand[i]->getCost();
     int curMana = myFace.getCurrentMana();
     if (cost > curMana) throw;
