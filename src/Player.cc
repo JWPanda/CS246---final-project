@@ -58,13 +58,13 @@ void Player::use(Board &theBoard, int i , int p, int t) {
        field[i].use(theBoard, p , t);
        myFace.spendMana(cost);
    }
+}*/
+
+void Player::attack(int m1, Unit &target) {
+    Unit* attacker = dynamic_cast<Unit*>(myField[m1]);
+    attacker->attack(target);
 }
 
- TODO void Player::attack(int m1 ,Unit &target) {
-    myField[m1].attack(target);
-}
-
-*/
 
 //Move Functions:---------------------------------------------------------------
 void Player::play (Board &theBoard, int i, int p, int t ) {
@@ -109,7 +109,7 @@ int Player::getMana() const{
   return myFace.getCurrentMana();
 }
 
-const Face* Player::getFace() const{
+Face* Player::getFace() {
   return &myFace;
 }
 

@@ -12,16 +12,9 @@ Unit::~Unit() {}
 void Unit::attack(Unit& target) {
     target.Defense -= Attack;
     Defense -= target.Attack;
-    // does death check happen here or in board??
-    // occurring on the board makes trigger check easier
-    // occuring on board makes die to graveyard make sense
     isDead();
     target.isDead();
 }
-
-// no longer needed since apparently we can access
-// the private fields of another Unit since we are still under the Unit scope
-// this method would make sense if we implemented spells that do damage
 
 void Unit::getHit(int attack) {
     Defense -= attack;

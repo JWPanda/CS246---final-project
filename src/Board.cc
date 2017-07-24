@@ -12,14 +12,7 @@ Board::~Board() {}
 void Board::changeTurn () {
     // checks end turn trigger for active player which only occurs if it is not the first turn.
     //if (activePlayer != nullptr) //TODO checkTrigger(2);
-    if (activePlayer == &p1) {// turn change for p1 or turn 2
-        activePlayer = &p2;
-        nonActivePlayer = &p1;
-    }
-    else {// turn change for p2
-        activePlayer = &p1;
-        nonActivePlayer = &p2;
-    }
+    swap(activePlayer, nonActivePlayer);
     activePlayer->newTurn(); // initiates new turn for active player
    //TODO checkTrigger(1);  check new turn trigddger for active player
 }
@@ -63,10 +56,11 @@ void Board::use (int i, int p, int t) {
 
 void Board::attack (int m1, int m2) {
     if (m2 != -1) { //  attack an enemy minon
-        Unit &target = *nonActivePlayer->getField()[m2] ;
+        Unit& target = dynamic_cast<Unit&>(*(nonActivePlayer->getField()[m2])) ;
         activePlayer->attack(m1, target);
     } else { // attack the enemy face
-    activePlayer->attack(m1, nonActivePlayer->getFace());
+        Unit& target = dynamic_cast<Unit&>(*(nonActivePlayer->getFace()));
+        activePlayer->attack(m1, target);
     }
 }
 

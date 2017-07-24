@@ -72,10 +72,10 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		else
 		{
 			// Discard a card
-			// int i;
-			// cin >> i;
-			// Player* p = board.getActivePlayer();
-			// p->draw();
+			int i;
+			cin >> i;
+			Player* p = board.getActivePlayer();
+			p->discard(i-1);
 		}
 	}
 	else if (command == "attack")
@@ -84,6 +84,16 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		int i;
 		ss >> i;
 		if (ss.fail()) throw command;
+		int j;
+		ss >> j;
+		if (ss.fail())
+		{
+			board.attack(i-1);
+		}
+		else
+		{
+			board.attack(i-1, j-1);
+		}
 	}
 	else if (command == "play")
 	{

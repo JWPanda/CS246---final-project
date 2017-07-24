@@ -131,13 +131,14 @@ void TextDisplay::displayBoard()
 	// Player 1 Deck Player and Graveyard
 	const Card* grave1 = board->p1.getGraveyard(); // Get grave
 	const Card* ritual1 = board->p1.getRitual(); // Get ritual
-	const Face* face1 = board->p1.getFace(); // Get face
+	Face* face1 = board->p1.getFace(); // Get face
 	card_template_t grave1_output;
 	if (grave1) grave1_output = getCardTemplate(grave1);
 	card_template_t ritual1_output;
 	if (ritual1) ritual1_output = display_ritual(ritual1->getName(), ritual1->getCost(),
 		ritual1->getAbilityCost(), ritual1->getDescription(), ritual1->getCharges());
-	card_template_t player1_output = display_player_card(1, face1->getName(), face1->getDefense(), face1->getCurrentMana());
+	string player1Name = (&(board->p1) == board->getActivePlayer()) ? face1->getName() + "(Active)" : face1->getName();
+	card_template_t player1_output = display_player_card(1, player1Name, face1->getDefense(), face1->getCurrentMana());
 	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
 	{
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN
@@ -162,13 +163,14 @@ void TextDisplay::displayBoard()
 	// Player 1 Deck Player and Graveyard
 	const Card* grave2 = board->p2.getGraveyard(); // Get grave
 	const Card* ritual2 = board->p2.getRitual(); // Get ritual
-	const Face* face2 = board->p2.getFace(); // Get face
+	Face* face2 = board->p2.getFace(); // Get face
 	card_template_t grave2_output;
 	if (grave2) grave2_output = getCardTemplate(grave2);
 	card_template_t ritual2_output;
 	if (ritual2) ritual2_output = display_ritual(ritual2->getName(), ritual2->getCost(),
 		ritual2->getAbilityCost(), ritual2->getDescription(), ritual2->getCharges());
-	card_template_t player2_output = display_player_card(1, face2->getName(), face2->getDefense(), face2->getCurrentMana());
+	string player2Name = (&(board->p2) == board->getActivePlayer()) ? face2->getName() + "(Active)" : face2->getName();
+	card_template_t player2_output = display_player_card(1, player2Name, face2->getDefense(), face2->getCurrentMana());
 	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
 	{
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN

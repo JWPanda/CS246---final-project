@@ -71,8 +71,8 @@ card_template_t display_player_card(int player_num,std::string name,int life,int
   card_template_t out = player_num == 1 ? PLAYER_1_TEMPLATE : PLAYER_2_TEMPLATE;
   prepare_for_replace(out);
   std::string centred_name = name;
-  if (centred_name.size() < 13) {
-    int extend = 13 - centred_name.size();
+  if (centred_name.size() < 17) {
+    int extend = 17 - centred_name.size();
     oss.str("");
     for (int i=0;i<extend/2-1;i++) oss << ' ';
     oss << centred_name;
@@ -307,7 +307,7 @@ const card_template_t PLAYER_1_TEMPLATE =
       {"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓",
        "┃                               ┃",
        "┃                               ┃",
-       "┃         ~NNNNNNNNNNN~         ┃",
+       "┃       ~NNNNNNNNNNNNNNN~       ┃",
        "┃                               ┃",
        "┃                               ┃",
        "┃                               ┃",
@@ -319,7 +319,7 @@ const card_template_t PLAYER_1_TEMPLATE =
       {"|-------------------------------|",
        "|                               |",
        "|                               |",
-       "|         ~NNNNNNNNNNN~         |",
+       "|       ~NNNNNNNNNNNNNNN~       |",
        "|                               |",
        "|                               |",
        "|                               |",
@@ -338,7 +338,7 @@ const card_template_t PLAYER_2_TEMPLATE =
        "┃                               ┃",
        "┃                               ┃",
        "┃                               ┃",
-       "┃          ~NNNNNNNNNNN~        ┃",
+       "┃       ~NNNNNNNNNNNNNNN~       ┃",
        "┃                               ┃",
        "┃                               ┃",
        "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"};
@@ -350,7 +350,7 @@ const card_template_t PLAYER_2_TEMPLATE =
        "|                               |",
        "|                               |",
        "|                               |",
-       "|          ~NNNNNNNNNNN~        |",
+       "|       ~NNNNNNNNNNNNNNN~       |",
        "|                               |",
        "|                               |",
        "|-------------------------------|"};

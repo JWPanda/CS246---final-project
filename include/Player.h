@@ -29,7 +29,7 @@ class Player
         // Game commands:
         void play(Board &theBoard, int i, int p, int t);
         //void use(Board &theBoard,int i, int p = -1, int t = -1);
-        //void attack(int m1, Unit& target);
+        void attack(int m1, Unit& target);
 
         //Move Functions:
         void moveToGraveyard(Card* self);
@@ -39,7 +39,7 @@ class Player
 
         // Accessors:
         int getMana() const;
-        const Face* getFace() const; // use for graphics
+        Face* getFace(); // use for graphics and attack
         const Card* getGraveyard() const; // use for graphics, top card on graveyard
         const Card* getRitual() const; // use for graphics
         const std::vector<Card*>& getHand() const; // use for graphics
