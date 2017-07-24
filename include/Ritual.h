@@ -7,20 +7,24 @@
 class Ritual : public Card
 {
     public:
+        //Ctor and Dtor:
         Ritual(int cost, Player* player, int charges);
         virtual ~Ritual();
+
+        //Game Mechanics:
         void loseCharges(int i);
         void play (Board& theBoard, int i, int p, int t) override;
-        // graphic display
+
+        //Accessors:
         int getCharges() const;
         CardType getType() const override;
-
-    protected:
 
     private:
         int charges;
 };
 
+
+//Individual Rituals:
 struct DarkRitual : public Ritual {
     DarkRitual(Player* player);
     std::string getName() const override;

@@ -8,16 +8,22 @@
 class Minion : public Unit
 {
     public:
+        //Ctor and Dtor:
         Minion(int cost, int Attack, int Defense, Player * player);
         virtual ~Minion();
+
+        //Death Mechanics:
         void die();
         void reset();
-        void play (Board& theBoard, int i, int p, int t) override;
-        CardType getType() const override;
 
-    private:
+        //Game Mechanics
+        void play (Board& theBoard, int i, int p, int t) override;
+
+        //Accessors
+        CardType getType() const override;
 };
 
+// Individual Minion Classes :
 struct AirElemental : public Minion {
     AirElemental(Player * player);
     std::string getName() const override;

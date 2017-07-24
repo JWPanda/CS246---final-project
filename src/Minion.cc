@@ -3,26 +3,14 @@
 
 using namespace std;
 
-Minion::~Minion()
-{
-    //dtor
-}
-
+//Ctor and Dtor-----------------------------------------------------------------
 Minion::Minion(int cost, int Attack, int Defense, Player * player)
  : Unit{cost,Attack,Defense,player} {}
 
-void Minion::play (Board& theBoard, int i, int p, int t) {
-  player->moveToBoard(i);
-}
+Minion::~Minion() {}
 
-Card::CardType Minion::getType() const {return MINION;}
 
- // reset minion's attack and defense to base values
-void Minion::reset() {
-    Attack = BaseAttack;
-    Defense = BaseDefense;
-}
-
+//Death Mechanics---------------------------------------------------------------
 // in order to move, we must also know both the current location and location dying to
 // must reset to base stats
 void Minion::die() {
@@ -32,6 +20,21 @@ void Minion::die() {
     // move to next field
     player->moveToGraveyard(this);
 }
+
+// reset minion's attack and defense to base values
+void Minion::reset() {
+   Attack = BaseAttack;
+   Defense = BaseDefense;
+}
+
+
+// Game Mechanics---------------------------------------------------------------
+void Minion::play (Board& theBoard, int i, int p, int t) {
+  player->moveToBoard(i);
+}
+
+Card::CardType Minion::getType() const {return MINION;}
+
 
 // Minion Sub classes below-----------------------------------------------------
 AirElemental::AirElemental(Player * player) : Minion{0,1,1,player} {}

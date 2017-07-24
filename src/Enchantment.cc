@@ -2,10 +2,31 @@
 
 using namespace std;
 
+//Ctor and Dtor-----------------------------------------------------------------
 Enchantment::Enchantment(int cost,int Attack, int Defense, Player* player)
 : Unit{cost, Attack, Defense, player} {};
 
 Enchantment::~Enchantment() {}
+
+
+//Game Mechanics----------------------------------------------------------------
+Enchantment * Enchantment::enchant(Unit& target) {  //TODO smart pointer here
+    Attack = target.getAttack();
+    Defense = target.getDefense();
+    base = &target;
+    return this;
+}
+
+void Enchantment::die() {
+    if (getEnchantmentAttack() > 0) base->reduceAttack(getEnchantmentAttack());
+    if (getEnchantmentDefense() > 0) base->getHit(getEnchantmentAttack());
+    // IDK
+}
+
+
+//Accessors---------------------------------------------------------------------
+
+Card::CardType Enchantment::getType() const { return Card::ENCHANTMENT; }
 
 string Enchantment::getName() const {
   if (base) return base->getName();
@@ -25,22 +46,8 @@ int Enchantment::getEnchantmentDefense() const {
     return BaseDefense;
 };
 
-Card::CardType Enchantment::getType() const { return Card::ENCHANTMENT; }
 
-Enchantment * Enchantment::enchant(Unit& target) {
-    Attack = target.getAttack();
-    Defense = target.getDefense();
-    base = &target;
-    return this;
-}
-
-void Enchantment::die() {
-    if (getEnchantmentAttack() > 0) base->reduceAttack(getEnchantmentAttack());
-    if (getEnchantmentDefense() > 0) base->getHit(getEnchantmentAttack());
-    // IDK
-}
-
-// Enchantment Subclasses
+// Enchantment Subclasses-------------------------------------------------------
 
 // Giant Strength
 GiantStrength::GiantStrength(Player* player) :

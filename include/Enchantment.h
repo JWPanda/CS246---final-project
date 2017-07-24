@@ -7,23 +7,29 @@
 class Enchantment : public Unit
 {
     public:
+
+        //Ctor and Dtor:
         Enchantment(int cost,int Attack, int Defense, Player* player);
         virtual ~Enchantment();
+
+        //Game Mechanics:
+        void die() override;
         virtual Enchantment * enchant(Unit& target); // enchant target and produce pointer to be placed on the field
 
+        //Accessors
+        CardType getType() const override;
         std::string getName() const override;
         std::string getDescription() const override;
         int getEnchantmentAttack() const override;
         int getEnchantmentDefense() const override;
 
-        void die() override;
-        CardType getType() const override;
-
     protected:
+        // TODO make this a smart pointer
         Unit* base;
-    private:
 };
 
+
+// Enchantment structures:
 struct GiantStrength : public Enchantment {
     GiantStrength(Player* player);
     std::string getEnchantmentName() const override;

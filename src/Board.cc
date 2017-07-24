@@ -44,7 +44,6 @@ void Board::play (int i, int p, int t) {
     // i = the index of the card in the hand that will be played.
     // p = the owner of the target ie: p1 or p2
     // t = the location of the target on the player's field
-
     activePlayer->play(*this, i , p ,t);
 }
 
@@ -60,7 +59,7 @@ void Board::use (int i, int p, int t) {
 
     activePlayer.use(this, i, p, t)
 }
-
+*/
 
 void Board::attack (int m1, int m2) {
     if (m2 != -1) { //  attack an enemy minon
@@ -70,7 +69,7 @@ void Board::attack (int m1, int m2) {
     activePlayer->attack(m1, nonActivePlayer->getFace());
     }
 }
-*/
+
 
 // Accessors--------------------------------------------------------------------
 const Card & Board::getMinion (int i , int player) const {
