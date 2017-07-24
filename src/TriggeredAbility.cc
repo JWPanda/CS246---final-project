@@ -9,10 +9,6 @@ TriggeredAbility::~TriggeredAbility()
 
 TriggeredAbility::TriggeredAbility(int cost) : Ability{cost} {}
 
-bool TriggeredAbility::isTriggered() { return true; }
-
-
-
 // Triggered Ability Sub classes below
 
 // Minions
