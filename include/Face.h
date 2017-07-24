@@ -13,6 +13,7 @@ class Face : public Unit
 
         //stuff:
          void play (Board &theBoard, int i, int p, int t ) override;
+
         //Mana Mechanics:
         void refillMana();
         void incMana();

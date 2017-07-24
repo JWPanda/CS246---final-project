@@ -60,7 +60,8 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		{
 			// Draw a card
 			Player* p = board.getActivePlayer();
-			p->draw();
+			try p->draw();
+			catch (const string e) cout << e << endl;
 		}
 	}
 	else if (command == "discard")
@@ -124,13 +125,15 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		ss >> p;
 		if (ss.fail())
 		{
-			// board.use(i-1);
+			try board.use(i-1);
+			catch (const string e) cout << e << endl;
 		}
 		else
 		{
 			ss >> t;
 			if (ss.fail()) throw command;
-			// board.use(i-1, p, t-1);
+			try board.use(i-1, p, t-1);
+			catch (const string e) cout << e << endl;
 		}
 	}
 	else if (command == "inspect")
@@ -153,7 +156,8 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 	}
 	else
 	{
-		cout << "SUCK MY DICK" << endl;
+		cout << "Error: Invalid Command" << endl;
+		showMainHelp();
 	}
     return false;
 }
@@ -207,13 +211,14 @@ int main(int argc, char* argv[])
 			}
 			else
 			{
-				cout << "SUCK MY DICK" << endl;
+				cout << "Error: invalid command" << endl;
+				showCommandLineHelp();
 			}
 		}
 		catch (string arg)
 		{
 			cout << "You do not use command line argument " << arg << " in this way." << endl;
-
+			showCommandLineHelp();
 		}
 	}
 
@@ -256,7 +261,7 @@ int main(int argc, char* argv[])
 		catch (string command)
 		{
 			cout << "That is not how you use the " << command << "command." << endl;
-			showCommandLineHelp();
+			showMainHelp();
 		}
 	}
 	return 0;

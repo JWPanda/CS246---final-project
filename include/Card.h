@@ -28,7 +28,6 @@ class Card
 
         // Ability Implementation
         static void initializeAbilities();
-
         virtual bool hasAbility() const;
         virtual int getAbilityCost() const;
         virtual int getCharges() const;

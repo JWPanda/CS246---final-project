@@ -21,17 +21,16 @@ Player::Player(string Name, ifstream &deck):myFace{Name, this} {
 
 Player::~Player() {}
 
-//Turn logistics methods--------------------------------------------------------
-
+//Turn logistics methods------------------------------------------------------
 void Player::draw() {
-    if (myDeck.size() == 0) return; // put a throw here
-    if (myHand.size() == 5) return; // put a throw here
+    if (myDeck.size() == 0) throw "Error: cannot draw card as deck is empty";
+    if (myHand.size() == 5) throw "Error: cannot draw card as hand is full";
     myHand.emplace_back(myDeck[0]);
     myDeck.erase(myDeck.begin());
 }
 
 void Player::newTurn() {
-    draw();
+    if (!(!myDeck.size() == 0 && myHand.size() == 5)) draw();
     myFace.incMana();
     myFace.refillMana();
 }
@@ -50,10 +49,10 @@ void Player::use(int m1, Board &theBoard) {
 }
 
 void Player::use(Board &theBoard, int i , int p, int t) {
-    if (!(field[i].hasAbility()) throw;
+    if (!(field[i].hasAbility()) throw "Error: " field[i]->getName() " has no ability";
     int curMana = myFace.getCurrentMana();
     int cost = field[i].getAbilityCost();
-    if (cost > curMana) throw;
+    if (cost > curMana) throw "Error: not enough mana to play " field[i]->getName() "'s ability";
     else {
        field[i].use(theBoard, p , t);
        myFace.spendMana(cost);
@@ -66,13 +65,14 @@ void Player::attack(int m1, Unit &target) {
 }
 
 
-//Move Functions:---------------------------------------------------------------
+//Move Functions:-----------------------------------------------------------
 void Player::play (Board &theBoard, int i, int p, int t ) {
     int handSize = myHand.size();
-    if (i + 1 > handSize) throw;
+    if (i + 1 > handSize) throw "Error: you only have " + handSize + " cards in your hand";
+    if (field.size() == 5) throw "Error: there are already 5 cards on your field";
     int cost = myHand[i]->getCost();
     int curMana = myFace.getCurrentMana();
-    if (cost > curMana) throw;
+    if (cost > curMana) throw "Error: not enough mana";
     else {
         myHand[i]->play(theBoard, i, p, t);
         myFace.spendMana(cost);
@@ -89,7 +89,7 @@ void Player::moveToGraveyard (Card* self) {
 
 void Player::moveToBoard(int i) {
   int fieldSize = myField.size();
-  if (fieldSize == 5) throw;
+  if (fieldSize == 5) throw "Error: there are already 5 cards on your field";
   myField.emplace_back(myHand[i]);
   myHand.erase(myHand.begin()+i);
 }

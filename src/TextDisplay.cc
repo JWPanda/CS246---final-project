@@ -35,7 +35,7 @@ card_template_t TextDisplay::getCardTemplate(const Card* c)
 		return display_enchantment_attack_defence(c->getName(), c->getEnchantmentCost(), c->getEnchantmentDescription(), ss1.str(), ss2.str());
 	}*/
 	else if (c->getType() == Card::FACE) return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
-	else throw "THERE'S SOME WEIRD SHIT GOING DOWN";
+	else throw "Weird card encountered in Text Display that cannot be displayed >_<";
 }
 
 void TextDisplay::printField(vector<Card*> field)
