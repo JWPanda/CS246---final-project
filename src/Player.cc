@@ -79,24 +79,12 @@ void Player::play (Board &theBoard, int i, int p, int t ) {
     }
 }
 
-/* TODO void Player::play (int i, Unit &target) {
-    if (i + 1 > hand.size()) throw;
-    if (field.size() = 5) throw;
-    int cost = hand[i].getCost();
-    int curMana = Face.getCurrentMana();
-    if (cost > curMana)  throw;
-    //else {
-    //   hand[i].play(i, target);
-    //}
-    Face.spendMana();
-}
-*/
-
-
 //Move Functions----------------------------------------------------------------
-void Player::moveToGraveyard (int i) {
-  myGraveyard.emplace_back(myField[i]);
-  myField.erase(myField.begin()+i);
+void Player::moveToGraveyard (Card* self) {
+  myGraveyard.emplace_back(self);
+  for (int i = 0; i < myFeld.size(); ++i) {
+    if (myField[i] == self) myField.erase(myField.begin()+i);
+  }
 }
 
 void Player::moveToBoard(int i) {

@@ -30,11 +30,10 @@ void Minion::die() {
     reset();
 
     // move to next field
-    //player->die(this);
+    player->moveToGraveyard(this);
 }
 
-// Minion Sub classes below
-
+// Minion Sub classes below-----------------------------------------------------
 AirElemental::AirElemental(Player * player) : Minion{0,1,1,player} {}
 string AirElemental::getName() const { return "Air Elemental"; }
 
