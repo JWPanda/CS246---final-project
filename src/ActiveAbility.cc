@@ -17,9 +17,12 @@ int ActiveAbility::isTriggered() { return -1};
 NovicePyromancer_Ability::NovicePyromancer_Ability()
  : ActiveAbility{1} {};
 
- void NovicePyromancer_Ability::use(Board& theBoard, int t, int p) {
-     // find minion i on enemy borad
+ void NovicePyromancer_Ability::use(Board& theBoard, Card* target) {
+     // find minion t on player p's board
      // make it take 1 damage
+     Card& target = tehBoard.getMinion(t,p);
+     target.getHit(1);
+
  }
 
 string NovicePyromancer_Ability::getDescription() {
@@ -30,7 +33,7 @@ string NovicePyromancer_Ability::getDescription() {
 ApprenticeSummoner_Ability::ApprenticeSummoner_Ability()
  : ActiveAbiilty{1} {};
 
-void ApprenticeSummoner_Ability::use(Board& theBoard, int t, int p) {
+void ApprenticeSummoner_Ability::use(Board& theBoard, Card* target) {
     // check if player field is full, if so throw an exception
     // if board is not full, create an air elemental on board
 }
@@ -43,7 +46,7 @@ string ApprenticeSummoner_Ability::getDescription() {
 MasterSummoner_Ability::MasterSummoner_Ability()
  : ActiveAbiilty{2} {};
 
-void MasterSummoner_Ability::use(Board& theBoard, int t, int p) {
+void MasterSummoner_Ability::use(Board& theBoard, Card* target){
     // check if player field is full, if so throw an exception
 
     // loop until board is full or 3 air elementals are summoned
@@ -58,7 +61,7 @@ string MasterSummoner_Ability::getDescription() {
 Banish_Ability::Banish_Ability()
  : ActiveAbiilty{0} {};
 
-void Banish_Ability::use(Board& theBoard, int t, int p) {
+void Banish_Ability::use(Board& theBoard, Card* target){
     // check if player field is full, if so throw an exception
 
     // loop until board is full or 3 air elementals are summoned
@@ -71,7 +74,7 @@ string Banish_Ability::getDescription() {
 Unsummon_Ability::Unsummon_Ability()
  : ActiveAbiilty{0} {};
 
-void Unsummon_Ability::use(Board& theBoard, int t, int p) {
+void Unsummon_Ability::use(Board& theBoard, Card* target) {
     // check if player field is full, if so throw an exception
 
     // loop until board is full or 3 air elementals are summoned
@@ -84,7 +87,7 @@ string Unsummon_Ability::getDescription() {
 Recharge_Ability::Recharge_Ability()
  : ActiveAbiilty{0} {};
 
-void Recharge_Ability::use(Board& theBoard, int t, int p) {
+void Recharge_Ability::use(Board& theBoard, Card* target) {
     // check if player field is full, if so throw an exception
 
     // loop until board is full or 3 air elementals are summoned
@@ -97,7 +100,7 @@ string Recharge_Ability::getDescription() {
 Disenchant_Ability::Disenchant_Ability()
  : ActiveAbiilty{0} {};
 
-void Disenchant_Ability::use(Board& theBoard, int t, int p) {
+void Disenchant_Ability::use(Board& theBoard, Card* target){
     // check if player field is full, if so throw an exception
 
     // loop until board is full or 3 air elementals are summoned
@@ -110,7 +113,7 @@ string Disenchant_Ability::getDescription() {
 RaiseDead_Ability::RaiseDead_Ability()
  : ActiveAbiilty{0} {};
 
-void RaiseDead_Ability::use(Board& theBoard, int t, int p) {
+void RaiseDead_Ability::use(Board& theBoard, Card* target) {
     // check if player field is full, if so throw an exception
 
     // loop until board is full or 3 air elementals are summoned
@@ -123,7 +126,7 @@ string RaiseDead_Ability::getDescription() {
 Blizzard_Ability::Blizzard_Ability()
  : ActiveAbiilty{0} {};
 
-void Blizzard_Ability::use(Board& theBoard, int t, int p) {
+void Blizzard_Ability::use(Board& theBoard, Card* target){
     // check if player field is full, if so throw an exception
 
     // loop until board is full or 3 air elementals are summoned

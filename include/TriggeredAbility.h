@@ -20,21 +20,21 @@ class TriggeredAbility : public Ability
 // Minion Triggered Abilities
 struct FireElemental_Ability : public TriggeredAbility {
     FireElemental_Ability();
-    void use(Board& theBoard, int p, int t) override;
+    void use(Board& theBoard, Card* target, Player* targetPlayer, Player* myPlayer) override;
     std::string getDescription() override;
     int isTriggered() override;
 };
 
 struct PotionSeller_Ability : public TriggeredAbility {
     PotionSeller_Ability();
-    void use(Board& theBoard, int p, int t) override;
+    void use(Board& theBoard, Card* target, Player* targetPlayer, Player* myPlayer) override;
     std::string getDescription() override;
     int isTriggered() override;
 };
 
 struct Troll_Ability : public TriggeredAbility {
     Troll_Ability();
-    void use(Board& theBoard, int p, int t) override;
+    void use(Board& theBoard, Card* target, Player* targetPlayer, Player* myPlayer) override;
     std::string getDescription() override;
     int isTriggered() override;
 };
@@ -43,21 +43,21 @@ struct Troll_Ability : public TriggeredAbility {
 
 struct DarkRitual_Ability : public TriggeredAbility {
     DarkRitual_Ability();
-    void use(Board& theBoard, int p, int t) override;
+    void use(Board& theBoard, Card* target, Player* targetPlayer, Player* myPlayer) override;
     std::string getDescription() override;
     int isTriggered() override;
 };
 
 struct AuraOfPower_Ability : public TriggeredAbility {
     AuraOfPower_Ability();
-    void use(Board& theBoard, int p, int t) override;
+    void use(Board& theBoard, Card* target, Player* targetPlayer, Player* myPlayer) override;
     std::string getDescription() override;
     int isTriggered() override;
 };
 
 struct Standstill_Ability : public TriggeredAbility {
     Standstill_Ability();
-    void use(Board& theBoard, int p, int t) override;
+    void use(Board& theBoard, Card* target, Player* targetPlayer, Player* myPlayer) override;
     std::string getDescription() override;
     int isTriggered() override;
 };

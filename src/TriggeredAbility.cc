@@ -19,7 +19,7 @@ bool TriggeredAbility::isTriggered() { return true; }
 // Fire Elemental
 FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
 
-void FireElemental_Ability::use(Board& theBoard, int p, int t) {
+void FireElemental_Ability::use(Board& theBoard, Card* target, Player* targetPlayer, Player* myPlayer){
         // go to the most recent minion on enemy field and make it take damage
 }
 std::string FireElemental_Ability::getDescription() {
@@ -32,7 +32,7 @@ int FireElemental_Ability::isTriggered() { return 69;} // when opponent's minion
 
 PotionSeller_Ability::PotionSeller_Ability() : TriggeredAbility(0) {}
 
-void PotionSeller_Ability::use(Board& theBoard, int p, int t) {
+void PotionSeller_Ability::use(Board& theBoard, Card* target, Player* targetPlayer, Player* myPlayer){
         // go through each minion on YOUR board and give it +0/+1
 }
 
@@ -46,7 +46,7 @@ int PotionSeller_Ability::isTriggered() {return 69;} // at the end of yourn turn
 
 Troll_Ability::Troll_Ability() : TriggeredAbility(0) {}
 
-void Troll_Ability::use(Board& theBoard, int p, int t) {
+void Troll_Ability::use(Board& theBoard, Card* target, Player* targetPlayer, Player* myPlayer) {
         // gives all minions on YOUR board +1/+0
 }
 

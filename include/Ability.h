@@ -14,7 +14,7 @@ class Ability
 
         //Ability Mechanics:
         virtual bool isTriggered()=0;
-        virtual void use(Board& theBoard, int p =-1, int t =-1)=0;
+        virtual void use(Board& theBoard, int p, int t)=0;
 
         //Accessors:
         int getCost();
