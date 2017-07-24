@@ -34,7 +34,10 @@ class Player
         //Move Functions:
         void moveToGraveyard(Card* self);
         void moveToBoard(int i);
+        void destroyRitual();
         void moveToRitual(int i);
+        void moveToDeck(Card* self);
+        void placeEnchantment(Card* self);
         void discard(int i);
 
         // Accessors:
@@ -44,6 +47,9 @@ class Player
         const Card* getRitual() const; // use for graphics
         const std::vector<Card*>& getHand() const; // use for graphics
         const std::vector<Card*>& getField() const; // use for graphics
+
+        //Helper Method:
+        int findSelf(Card* self, std::vector<Card*> cvec);
 
     private:
         Face myFace;

@@ -94,10 +94,27 @@ void Player::moveToBoard(int i) {
   myHand.erase(myHand.begin()+i);
 }
 
+void Player::destroyRitual() {
+  if (!myRitual.size()) throw "Error: ritual field is empty"s;
+  myRitual.erase(myRitual.begin());
+}
+
 void Player::moveToRitual(int i) {
-  if (myRitual.size() > 0) myRitual.erase(myRitual.begin());
+  if (myRitual.size() > 0) destroyRitual();
   myRitual.emplace_back(myHand[i]);
-  myHand.erase(myHand.begin()+i);
+  myHand.erase(myHand.begin() + i);
+}
+
+void Player::moveToDeck(Card* self) {
+  int index = findSelf(self, myField);
+  myDeck.emplace_back(self);
+  myField.erase(myField.begin() + index);
+}
+
+void Player::placeEnchantment(Card* self) {
+  int handi = findSelf(self, myHand);
+  swap(myField[handi], self);
+  myHand.erase(myHand.begin() + handi);
 }
 
 void Player::discard(int i) {
@@ -131,4 +148,12 @@ const vector<Card*>& Player::getHand() const{
 
 const vector<Card*>& Player::getField() const{
   return myField;
+}
+
+//Helper Functions--------------------------------------------------------------
+int Player::findSelf(Card* self, vector<Card*> cvec) {
+  for (unsigned int i = 0; i < cvec.size(); ++i) {
+    if (cvec[i] == self) return i;
+  }
+    return -1;
 }

@@ -135,7 +135,8 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		int i;
 		ss >> i;
 		if (ss.fail()) throw command;
-		int p, t;
+		int p;
+		char t;
 		ss >> p;
 		if (ss.fail())
 		{
@@ -155,7 +156,7 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 			if (ss.fail()) throw command;
 			try
 			{
-				board.play(i-1, p, t-1);
+				board.play(i-1, p, t);
 				display.displayBoard();
 			}
 			catch (const string e)

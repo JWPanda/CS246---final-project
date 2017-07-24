@@ -33,11 +33,15 @@ void Board::changeTurn () {
 */
 
 //Game Commands----------------------------------------------------------------
-void Board::play (int i, int p, int t) {
+void Board::play (int i, int p, char t) {
     // i = the index of the card in the hand that will be played.
     // p = the owner of the target ie: p1 or p2
     // t = the location of the target on the player's field
-    activePlayer->play(*this, i , p ,t);
+    if (t == 'r') activePlayer->play(*this, i , p , 6);
+    else {
+      int index = t - '0';
+      activePlayer->play(*this, i , p , index-1);
+    }
 }
 
 /*
@@ -56,7 +60,7 @@ void Board::use (int i, int p, int t) {
 
 void Board::attack (int m1, int m2) {
     if (m2 != -1) { //  attack an enemy minon
-        Unit& target = dynamic_cast<Unit&>(*(nonActivePlayer->getField()[m2])) ;
+        Unit& target =  getMinion (m2, 0);
         activePlayer->attack(m1, target);
     } else { // attack the enemy face
         Unit& target = dynamic_cast<Unit&>(*(nonActivePlayer->getFace()));
@@ -66,21 +70,26 @@ void Board::attack (int m1, int m2) {
 
 
 // Accessors--------------------------------------------------------------------
-const Card & Board::getMinion (int i , int player) const {
+Unit& Board::getMinion (int i , int player) const {
     if (player == 1) {
-      Card &target = *p1.getField()[i];
+      Unit& target = dynamic_cast<Unit&>(*(p1.getField()[i]));
       return target;
     }
     else if (player == 2) {
-      Card &target = *p2.getField()[i];
+      Unit& target = dynamic_cast<Unit&>(*(p2.getField()[i]));
       return target;
     }
     else {
-      Card &target = *activePlayer->getField()[i];
+      Unit& target = dynamic_cast<Unit&>(*(nonActivePlayer->getField()[i]));
       return target;
     }
 }
 
 Player* Board::getActivePlayer() const {
   return activePlayer;
+}
+
+const Player* Board::getPlayer(int i) const {
+  if (i == 1) return &p1;
+  else return &p2;
 }

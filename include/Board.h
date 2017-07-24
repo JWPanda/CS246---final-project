@@ -16,13 +16,14 @@ class Board
         //void checkTrigger(int trigger);
 
         //Game Commands:
-        void play(int i, int p = -1, int t = -1);
+        void play(int i, int p = -1, char t = 'e');
         //void use(int i, int p = -1, int t = -1);
         void attack(int m1, int m2 = -1);
 
         // Accessors:
-        const Card &getMinion (int i, int player = 0) const;
+        Unit &getMinion (int i, int player = 0) const;
         Player* getActivePlayer() const;
+        const Player* getPlayer(int i) const;
 
     friend class TextDisplay;
 
