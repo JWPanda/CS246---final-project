@@ -17,7 +17,7 @@ public:
 	TextDisplay(Board *b);
 	void notify();
 	void displayBoard();
-	void displayCard();
+	void displayCard(int i);
 	void displayHand();
 	// void displayMinionNoAbility(std::string name,int cost,int attack,int defence);
 	// void displayMinionTriggeredAbility(std::string name,int cost,int attack,int defence, std::string trigger_desc);

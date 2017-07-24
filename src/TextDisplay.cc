@@ -1,6 +1,7 @@
 #include "TextDisplay.h"
 #include <string>
 #include <iostream>
+#include <sstream>
 
 TextDisplay::TextDisplay(Board *b) : board{b} {}
 
@@ -25,7 +26,14 @@ card_template_t TextDisplay::getCardTemplate(const Card* c)
 	}
 	else if (c->getType() == Card::SPELL) return display_spell(c->getName(), c->getCost(), c->getDescription());
 	else if (c->getType() == Card::RITUAL) return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
-	else if (c->getType() == Card::ENCHANTMENT) return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
+	else if (c->getType() == Card::ENCHANTMENT)
+	{
+		if (c->getEnchantmentAttack() < 0) return display_enchantment(c->getName(), c->getEnchantmentCost(), c->getEnchantmentDescription());
+		stringstream ss1{"+"s}, ss2{"+"s};
+		ss1 << c->getEnchantmentAttack();
+		ss2 << c->getEnchantmentDefense();
+		return display_enchantment_attack_defence(c->getName(), c->getEnchantmentCost(), c->getEnchantmentDescription(), ss1.str(), ss2.str());
+	}
 	else if (c->getType() == Card::FACE) return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
 	else throw "THERE'S SOME WEIRD SHIT GOING DOWN";
 }
@@ -58,9 +66,41 @@ void TextDisplay::printField(vector<Card*> field)
 	}
 }
 
-void TextDisplay::displayCard()
+void TextDisplay::displayCard(int i)
 {
-	return;
+	Player *p = board->getActivePlayer();
+	const vector<Card*> &field = p->getField();
+	Card *c = field[i];
+	vector<Card*> enchantments;
+	enchantments.push_back(c.getBase());
+	while (enchantments.back()->getBase())
+	{
+		enchantments.push_back(enchantments.back()->getBase());
+	}
+	enchantments.pop_back();
+	card_template_t minion_output = getCardTemplate(c);
+	vector<card_template_t> enchantments_output;
+	for (auto line : minion_output)
+	{
+		cout << line << endl;
+	}
+
+	for (auto e : enchantments)
+	{
+		enchantments_output.push_back(getCardTemplate(e));
+	}
+
+	for (unsigned int i = 0; i < enchantments_output.size(); i += 5)
+	{
+		for (unsigned int j = 0; j < CARD_TEMPLATE_BORDER.size(); ++j)
+		{
+			for (unsigned int k = 0; k < 5 && i+k < enchantments_output.size(); ++k)
+			{
+				cout << enchantments_output[i+k][j];
+			}
+			cout << endl;
+		}
+	}
 }
 
 void TextDisplay::displayHand()

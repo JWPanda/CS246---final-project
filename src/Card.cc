@@ -89,5 +89,5 @@ int Card::getDefense() const {
 
  // Enchantment Implementation--------------------------------------------------
 string Card::getEnchantmentDescription() {return "";}
-int Card::getEnchantmentAttack() {return -1;}
-int Card::getEnchantmentDefense() {return -1;};
+int Card::getEnchantmentAttack() const {return -1;}
+int Card::getEnchantmentDefense() const {return -1;};

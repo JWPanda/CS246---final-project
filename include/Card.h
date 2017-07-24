@@ -45,9 +45,9 @@ class Card
 
 
         // Enchantment Implementation
-        virtual std::string getEnchantmentDescription();
-        virtual int getEnchantmentAttack();
-        virtual int getEnchantmentDefense();
+        virtual std::string getEnchantmentDescription() const;
+        virtual int getEnchantmentAttack() const;
+        virtual int getEnchantmentDefense() const;
 
 
     protected:

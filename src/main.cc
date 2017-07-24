@@ -126,9 +126,7 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 	else if (command == "inspect")
 	{
 		// Inspect minion
-		cout << "no" << endl;
-		return true;
-		//display.inspect(i-1);
+		display.displayCard(i-1);
 	}
 	else if (command == "hand")
 	{

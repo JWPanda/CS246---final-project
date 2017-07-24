@@ -12,8 +12,8 @@ class Enchantment : public Unit
         virtual Enchantment * enchant(Unit& target); // enchant target and produce pointer to be placed on the field
 
         std::string getDescription() override;
-        int getEnchantmentAttack() override;
-        int getEnchantmentDefense() override;
+        int getEnchantmentAttack() const override;
+        int getEnchantmentDefense() const override;
 
         void die() override();
         CardType getType() override;
