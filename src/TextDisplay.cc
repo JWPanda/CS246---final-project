@@ -34,12 +34,12 @@ void TextDisplay::printField(vector<Card*> field)
 {
 	// Player 1 Field
 	vector<card_template_t> field_output; // Output of each card in field
-	unsigned int numEmpty = 5 - field_output.size();
 	for (Card* c : field) // Make templates for cards
 	{
 		card_template_t card = getCardTemplate(c);
 		field_output.push_back(card);
 	}
+	unsigned int numEmpty = 5 - field_output.size();
 	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
 	{
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
