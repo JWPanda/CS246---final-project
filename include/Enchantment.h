@@ -9,7 +9,9 @@ class Enchantment : public Unit
     public:
         Enchantment(int cost,int Attack, int Defense, Player* player);
         virtual ~Enchantment();
-        virtual Enchantment * enchant(Unit& target); // enchant target and produce pointer to be placed on the field
+
+        void play (Board& theBoard, int i, int p, int t) override;
+        virtual void enchant(Unit& target); // enchant target
 
         std::string getName() override;
         std::string getDescription() override;

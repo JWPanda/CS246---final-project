@@ -11,15 +11,13 @@ Card::~Card() {}
 
 
 //Game Mechanics----------------------------------------------------------------
-/* TODO
-void Card::use(Board& theBoard, int p, int t) {
-    // if (no ability) throw exception
 
-    // use ability
-    // ability->use(theBoard, p, t);
-    ability->use(theBoard,p,t)
+void Card::use(Board& theBoard, const Card& target) {
+    if(!ability) throw;
+    if(ability->isTriggered() == 0) ability->use(theBoard, target,player);
+    else ability->use(theBoard, target, target.player, player);
 }
-*/
+
 
 // List of Abilities initialization:--------------------------------------------
 std::map<std::string, std::shared_ptr<Ability>> Card::listOfAbilities;

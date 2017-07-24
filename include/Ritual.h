@@ -9,7 +9,11 @@ class Ritual : public Card
     public:
         Ritual(int cost, Player* player, int charges);
         virtual ~Ritual();
+
+        void gainCharges(int i);
         void loseCharges(int i);
+
+        void use(Board& theBoard, const Card& target) override;
 
         // graphic display
         int getCharges() override;

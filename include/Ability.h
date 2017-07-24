@@ -14,7 +14,8 @@ class Ability
 
         //Ability Mechanics:
         virtual bool isTriggered()=0;
-        virtual void use(Board& theBoard, int p, int t)=0;
+        virtual void use(Board& theBoard, const Card& target, Player* myPlayer);
+        virtual void use(Board& theBoard, const Card& target, Player* targetPlayer, Player* myPlayer);
 
         //Accessors:
         int getCost();

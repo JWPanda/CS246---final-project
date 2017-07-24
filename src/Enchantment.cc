@@ -7,6 +7,13 @@ Enchantment::Enchantment(int cost,int Attack, int Defense, Player* player)
 
 Enchantment::~Enchantment();
 
+void Enchantment::play (Board& theBoard, int i, int p, int t)
+    if (p == 1) {
+        enchant(theBoard.getP1().getMinion(t));
+        theBoard.getP1().replaceOnBoard(i,t); // replaces card t on field with card i on board
+    }
+}
+
 string Enchantment::getName() {
     if (base) return base->getDescription();
     else return getEnchantmentName();
@@ -26,18 +33,24 @@ int getEnchantmentDefense() {
 
 int Enchantment::getType() { return 4};
 
-Enchantment * Enchantment::enchant(Unit& target) {
+void Enchantment::enchant(Unit& target) {
     attack = target.getAttack();
     defense = target.getDefense();
     ability = target.ability;
     base = &target;
-    return this;
+}
+
+void Enchantment::disenchant() {
+    // replaces the unit on the board with the base
+    if (getEnchantmentAttack() > 0) base->reduceAttack(getEnchantmentAttack());
+    if (getEnchantmentDefense() > 0) base->getHit(getEnchantmentAttack());
+    // remove this enchantment from game
+
 }
 
 void Enchantment::die() {
-    if (getEnchantmentAttack() > 0) base->reduceAttack(getEnchantmentAttack());
-    if (getEnchantmentDefense() > 0) base->getHit(getEnchantmentAttack());
-    // IDK
+    // replace the unit on the board with the base
+    base->die();
 }
 
 // Enchantment Subclasses

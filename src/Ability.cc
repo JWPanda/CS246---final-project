@@ -6,7 +6,7 @@ Ability::~Ability() {}
 
 int Ability::getCost () {return cost;}
 
-void Ability::use(Board& theBoard, const Card& target) {
+void Ability::use(Board& theBoard, const Card& target, Player* myPlayer) {
     throw "invalid use call";
     return;
 }

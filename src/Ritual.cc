@@ -14,6 +14,16 @@ void Ritual::loseCharges(int i) {
     if (charges < 0) charges =0;
 }
 
+void Ritual::gainCharges(int i) {
+    charges +=i;
+}
+
+void Ritual::use(Board& theBoard, const Card& target) {
+    if (charges < getAbilityCost()) return;
+    ability->use(theBoard, target, target.player, player);
+    lostCharges(getAbilityCost());
+}
+
 // Rituals
 
 DarkRitual::DarkRitual(Player* player) : Ritual{0,player, 5} {
