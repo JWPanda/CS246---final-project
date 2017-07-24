@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "Unit.h"
+#include "Factory.h"
 #include "Minion.h"
 #include "Face.h"
 #include <fstream>
@@ -18,6 +19,7 @@ class Player
         // Ctor & Dtor:
         Player( std::string Name, std::ifstream & deck);
         ~Player(); // stwill need to destroy deck/hand/etc
+        static Factory myFactory;
 
         //Turn logistics methods:
         void draw();

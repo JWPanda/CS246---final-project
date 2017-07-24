@@ -4,19 +4,15 @@
 
 using namespace std;
 
+Factory Player::myFactory;
+
 Player::Player(string Name, ifstream &deck):myFace{Name, this} {
     string s;
+
     while (getline(deck, s)) {
-        if (s == "Air Elemental") {
-            myDeck.emplace_back(new NovicePyromancer(this));
-        }
-        if (s == "Earth Elemental") {
-            myDeck.emplace_back(new EarthElemental(this));
-        }
-        if (s == "Fire Elemental") {
-            myDeck.emplace_back(new FireElemental(this));
-        }
+      myDeck.emplace_back(myFactory.makeCard(s, this));
     }
+
     for (int i = 0; i < 5; ++i)  {
         if(myDeck.size() == 0) break;
         draw();

@@ -221,9 +221,9 @@ int main(int argc, char* argv[])
 	getline(cin, p1Name);
 	cout << "Please enter the name of Player 2: ";
 	getline(cin, p2Name);
+	Card::initializeAbilities();
 	Board board{p1Name, p2Name, deckStream1, deckStream2};
 	TextDisplay display{&board};
-    // Card::initializeAbilities();
 
 	if (initStream.is_open())
 	{

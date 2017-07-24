@@ -10,7 +10,7 @@ class Ritual : public Card
         Ritual(int cost, Player* player, int charges);
         virtual ~Ritual();
         void loseCharges(int i);
-
+        void play (Board& theBoard, int i, int p, int t) override;
         // graphic display
         int getCharges() const;
         CardType getType() const override;
@@ -21,18 +21,18 @@ class Ritual : public Card
         int charges;
 };
 
-class DarkRitual : public Ritual {
-    DarkRitual();
+struct DarkRitual : public Ritual {
+    DarkRitual(Player* player);
     std::string getName() const override;
 };
 
-class AuraOfPower : public Ritual {
-    AuraOfPower();
+struct AuraOfPower : public Ritual {
+    AuraOfPower(Player* player);
     std::string getName() const override;
 };
 
-class Standstill : public Ritual {
-    Standstill();
+struct Standstill : public Ritual {
+    Standstill(Player* player);
     std::string getName() const override;
 };
 

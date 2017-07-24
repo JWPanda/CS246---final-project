@@ -67,7 +67,7 @@ void Board::attack (int m1, int m2) {
     }
 }*/
 
-Card & Board::getMinion (int i , int player) {
+const Card & Board::getMinion (int i , int player) const {
     if (player == 1) {
       Card &target = *p1.getField()[i];
       return target;

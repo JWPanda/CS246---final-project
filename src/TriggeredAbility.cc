@@ -50,5 +50,5 @@ void Troll_Ability::use(Board& theBoard, int p, int t) {
 }
 
 string Troll_Ability::getDescription() {
-    return "When a minion dies, all your minions gain +1/+0"
+    return "When a minion dies, all your minions gain +1/+0";
 }

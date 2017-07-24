@@ -19,7 +19,7 @@ card_template_t TextDisplay::getCardTemplate(const Card* c)
 			{
 				return display_minion_triggered_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense(), c->getDescription());
 			}
-			return display_minion_activated_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense(), c->getCost(), c->getDescription());
+			return display_minion_activated_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense(), c->getAbilityCost(), c->getDescription());
 		}
 		return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
 	}

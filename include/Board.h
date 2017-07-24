@@ -21,7 +21,7 @@ class Board
         //void attack(int m1, int m2 = -1);
 
         // Accessors:
-        Card &getMinion (int i, int player = 0);
+        const Card &getMinion (int i, int player = 0) const;
         Player* getActivePlayer() const;
 
     friend class TextDisplay;

@@ -1,4 +1,5 @@
 #include "Ritual.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -7,7 +8,7 @@ Ritual::~Ritual()
     //dtor
 }
 
-Ritual::Ritual(int cost, Player* player, int charges) : Card{cost, player}, charges{charges} {}
+Ritual::Ritual(int cost, Player* player, int charges) : Card{player, cost}, charges{charges} {}
 
 Card::CardType Ritual::getType() const {return RITUAL;}
 
@@ -16,6 +17,10 @@ int Ritual::getCharges() const {return charges;}
 void Ritual::loseCharges(int i) {
     charges -= i;
     if (charges < 0) charges =0;
+}
+
+void Ritual::play (Board& theBoard, int i, int p, int t) {
+  player->moveToRitual(i);
 }
 
 // Rituals

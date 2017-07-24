@@ -8,7 +8,7 @@ ActiveAbility::ActiveAbility(int cost) : Ability{cost} {}
 ActiveAbility::~ActiveAbility() {}
 
 // Trigger Implementation-------------------------------------------------------
-int ActiveAbility::isTriggered() { return -1 ;}
+int ActiveAbility::isTriggered() { return 0;}
 
 // Minion Abilities-------------------------------------------------------------
 
