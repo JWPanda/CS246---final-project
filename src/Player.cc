@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "Minion.h"
-#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -23,8 +23,8 @@ Player::~Player() {}
 
 //Turn logistics methods------------------------------------------------------
 void Player::draw() {
-    if (myDeck.size() == 0) throw "Error: cannot draw card as deck is empty";
-    if (myHand.size() == 5) throw "Error: cannot draw card as hand is full";
+    if (myDeck.size() == 0) throw "Error: cannot draw card as deck is empty"s;
+    if (myHand.size() == 5) throw "Error: cannot draw card as hand is full"s;
     myHand.emplace_back(myDeck[0]);
     myDeck.erase(myDeck.begin());
 }
@@ -68,11 +68,11 @@ void Player::attack(int m1, Unit &target) {
 //Move Functions:-----------------------------------------------------------
 void Player::play (Board &theBoard, int i, int p, int t ) {
     int handSize = myHand.size();
-    if (i + 1 > handSize) throw "Error: you only have " + handSize + " cards in your hand";
-    if (field.size() == 5) throw "Error: there are already 5 cards on your field";
+    if (i + 1 > handSize) throw "Error: you only have "s + to_string(handSize) + " cards in your hand"s;
+    if (myField.size() == 5) throw "Error: there are already 5 cards on your field"s;
     int cost = myHand[i]->getCost();
     int curMana = myFace.getCurrentMana();
-    if (cost > curMana) throw "Error: not enough mana";
+    if (cost > curMana) throw "Error: not enough mana"s;
     else {
         myHand[i]->play(theBoard, i, p, t);
         myFace.spendMana(cost);
@@ -89,7 +89,7 @@ void Player::moveToGraveyard (Card* self) {
 
 void Player::moveToBoard(int i) {
   int fieldSize = myField.size();
-  if (fieldSize == 5) throw "Error: there are already 5 cards on your field";
+  if (fieldSize == 5) throw "Error: there are already 5 cards on your field"s;
   myField.emplace_back(myHand[i]);
   myHand.erase(myHand.begin()+i);
 }
@@ -101,6 +101,8 @@ void Player::moveToRitual(int i) {
 }
 
 void Player::discard(int i) {
+  int handSize = myHand.size();
+  if (i > handSize) throw "Error: there are only "s + to_string(myHand.size()) + " cards in your hand"s;
   myHand.erase(myHand.begin()+i);
 }
 

@@ -23,11 +23,11 @@ void Face::spendMana(int cost) { mana_cur -= cost;}
 
 void Face::die() {
     // let player know that you are dead. game over
-    throw name + " loses! Game Over!";
+    throw name + " loses! Game Over!"s;
 }
 
 Card::CardType Face::getType() const {return FACE;}
 
-string Face::getName() {
+string Face::getName() const {
     return name;
 }

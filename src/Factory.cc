@@ -34,5 +34,5 @@ Card* Factory::makeCard(string cardname, Player* owner) {
   else if (cardname == "Dark Ritual") return (new DarkRitual(owner));
   else if (cardname == "Aura of Power") return (new AuraOfPower(owner));
   else if (cardname == "Standstill") return (new Standstill(owner));
-  else throw;
+  else throw "Invalid card "s + cardname + " found in deck! Exiting..."s;
 }

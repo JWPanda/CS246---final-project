@@ -60,8 +60,15 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		{
 			// Draw a card
 			Player* p = board.getActivePlayer();
-			try p->draw();
-			catch (const string e) cout << e << endl;
+			try
+			{
+				p->draw();
+				display.displayHand();
+			}
+			catch (const string e)
+			{
+				cout << e << endl;
+			}
 		}
 	}
 	else if (command == "discard")
@@ -76,7 +83,15 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 			int i;
 			cin >> i;
 			Player* p = board.getActivePlayer();
-			p->discard(i-1);
+			try
+			{
+				p->discard(i-1);
+				display.displayHand();
+			}
+			catch (const string e)
+			{
+				cout << e << endl;
+			}
 		}
 	}
 	else if (command == "attack")
@@ -89,11 +104,29 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		ss >> j;
 		if (ss.fail())
 		{
-			board.attack(i-1);
+			try
+			{
+				board.attack(i-1);
+				display.displayBoard();
+			}
+			catch (const string e)
+			{
+				cout << e << endl;
+				return 0;
+			}
 		}
 		else
 		{
-			board.attack(i-1, j-1);
+			try
+			{
+				board.attack(i-1, j-1);
+				display.displayBoard();
+			}
+			catch (const string e)
+			{
+				cout << e << endl;
+				return 0;
+			}
 		}
 	}
 	else if (command == "play")
@@ -106,13 +139,29 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		ss >> p;
 		if (ss.fail())
 		{
-			board.play(i-1);
+			try
+			{
+				board.play(i-1);
+				display.displayBoard();
+			}
+			catch (const string e)
+			{
+				cout << e << endl;
+			}
 		}
 		else
 		{
 			ss >> t;
 			if (ss.fail()) throw command;
+			try
+			{
 				board.play(i-1, p, t-1);
+				display.displayBoard();
+			}
+			catch (const string e)
+			{
+				cout << e << endl;
+			}
 		}
 	}
 	else if (command == "use")
@@ -125,15 +174,29 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		ss >> p;
 		if (ss.fail())
 		{
-			try board.use(i-1);
-			catch (const string e) cout << e << endl;
+			try
+			{
+				//board.use(i-1);
+				display.displayBoard();
+			}
+			catch (const string e)
+			{
+				cout << e << endl;
+			}
 		}
 		else
 		{
 			ss >> t;
 			if (ss.fail()) throw command;
-			try board.use(i-1, p, t-1);
-			catch (const string e) cout << e << endl;
+			try
+			{
+				//board.use(i-1, p, t-1);
+				display.displayBoard();
+			}
+			catch (const string e)
+			{
+				cout << e << endl;
+			}
 		}
 	}
 	else if (command == "inspect")
@@ -238,31 +301,37 @@ int main(int argc, char* argv[])
 	cout << "Please enter the name of Player 2: ";
 	getline(cin, p2Name);
 	Card::initializeAbilities();
-	Board board{p1Name, p2Name, deckStream1, deckStream2};
-	TextDisplay display{&board};
-
-	if (initStream.is_open())
+	try
 	{
-		string input;
-		while(getline(initStream, input))
+		Board board{p1Name, p2Name, deckStream1, deckStream2};
+		TextDisplay display{&board};
+		if (initStream.is_open())
 		{
-			istringstream ss{input};
-			if (parseCommand(display, board, input, testing)) return 0;
+			string input;
+			while(getline(initStream, input))
+			{
+				istringstream ss{input};
+				if (parseCommand(display, board, input, testing)) return 0;
+			}
+		}
+		string input;
+		while (getline(cin, input))
+		{
+			try
+			{
+				if (parseCommand(display, board, input, testing)) return 0;
+			}
+			catch (string command)
+			{
+				cout << "That is not how you use the " << command << "command." << endl;
+				showMainHelp();
+			}
 		}
 	}
-
-	string input;
-	while (getline(cin, input))
+	catch (const string e)
 	{
-		try
-		{
-			if (parseCommand(display, board, input, testing)) return 0;
-		}
-		catch (string command)
-		{
-			cout << "That is not how you use the " << command << "command." << endl;
-			showMainHelp();
-		}
+		cout << e << endl;
+		return -1;
 	}
 	return 0;
 }
