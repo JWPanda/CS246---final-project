@@ -3,10 +3,7 @@
 
 using namespace std;
 
-Ritual::~Ritual()
-{
-    //dtor
-}
+Ritual::~Ritual() {}
 
 Ritual::Ritual(int cost, Player* player, int charges) : Card{player, cost}, charges{charges} {}
 

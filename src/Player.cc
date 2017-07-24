@@ -82,7 +82,7 @@ void Player::play (Board &theBoard, int i, int p, int t ) {
 //Move Functions----------------------------------------------------------------
 void Player::moveToGraveyard (Card* self) {
   myGraveyard.emplace_back(self);
-  for (int i = 0; i < myFeld.size(); ++i) {
+  for (unsigned int i = 0; i < myField.size(); ++i) {
     if (myField[i] == self) myField.erase(myField.begin()+i);
   }
 }
@@ -95,7 +95,7 @@ void Player::moveToBoard(int i) {
 }
 
 void Player::moveToRitual(int i) {
-  myRitual.erase(myRitual.begin());
+  if (myRitual.size() > 0) myRitual.erase(myRitual.begin());
   myRitual.emplace_back(myHand[i]);
   myHand.erase(myHand.begin()+i);
 }

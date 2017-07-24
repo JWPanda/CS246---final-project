@@ -37,7 +37,7 @@ struct Troll_Ability : public TriggeredAbility
     std::string getDescription() override;
 };
 
-/* TODO
+
 // Ritual Triggered Abilities
 
 struct DarkRitual_Ability : public TriggeredAbility
@@ -60,6 +60,6 @@ struct Standstill_Ability : public TriggeredAbility
     void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
-*/
+
 
 #endif // TRIGGEREDABILITY_H

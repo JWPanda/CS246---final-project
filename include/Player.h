@@ -32,7 +32,7 @@ class Player
         //void attack(int m1, Unit& target);
 
         //Move Functions:
-        void moveToGraveyard(int i);
+        void moveToGraveyard(Card* self);
         void moveToBoard(int i);
         void moveToRitual(int i);
         void discard(int i);
