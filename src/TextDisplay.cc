@@ -26,16 +26,16 @@ card_template_t TextDisplay::getCardTemplate(const Card* c)
 	}
 	else if (c->getType() == Card::SPELL) return display_spell(c->getName(), c->getCost(), c->getDescription());
 	else if (c->getType() == Card::RITUAL) return display_ritual(c->getName(), c->getCost(), c->getAbilityCost(), c->getDescription(), c->getCharges());
-	/*else if (c->getType() == Card::ENCHANTMENT)
+	else if (c->getType() == Card::ENCHANTMENT)
 	{
 		if (c->getEnchantmentAttack() < 0) return display_enchantment(c->getName(), c->getEnchantmentCost(), c->getEnchantmentDescription());
-		stringstream ss1{"+"s}, ss2{"+"s};
-		ss1 << c->getEnchantmentAttack();
-		ss2 << c->getEnchantmentDefense();
+		stringstream ss1, ss2;
+		ss1 << "+" << c->getEnchantmentAttack();
+		ss2 << "+" << c->getEnchantmentDefense();
 		return display_enchantment_attack_defence(c->getName(), c->getEnchantmentCost(), c->getEnchantmentDescription(), ss1.str(), ss2.str());
-	}*/
+	}
 	else if (c->getType() == Card::FACE) return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
-	else throw "Weird card encountered in Text Display that cannot be displayed >_<";
+	else throw "Weird card encountered in Text Display that cannot be displayed >_<"s;
 }
 
 void TextDisplay::printField(vector<Card*> field)
@@ -67,39 +67,43 @@ void TextDisplay::printField(vector<Card*> field)
 
 void TextDisplay::displayCard(int i)
 {
-	/*Player *p = board->getActivePlayer();
+	Player *p = board->getActivePlayer();
 	const vector<Card*> &field = p->getField();
 	Card *c = field[i];
-	vector<Card*> enchantments;
-	enchantments.push_back(c.getBase());
-	while (enchantments.back()->getBase())
-	{
-		enchantments.push_back(enchantments.back()->getBase());
-	}
-	enchantments.pop_back();
 	card_template_t minion_output = getCardTemplate(c);
-	vector<card_template_t> enchantments_output;
 	for (auto line : minion_output)
 	{
 		cout << line << endl;
 	}
 
-	for (auto e : enchantments)
+	if (c->getBase())
 	{
-		enchantments_output.push_back(getCardTemplate(e));
-	}
-
-	for (unsigned int i = 0; i < enchantments_output.size(); i += 5)
-	{
-		for (unsigned int j = 0; j < CARD_TEMPLATE_BORDER.size(); ++j)
+		vector<Card*> enchantments;
+		enchantments.push_back(c->getBase());
+		while (enchantments.back()->getBase())
 		{
-			for (unsigned int k = 0; k < 5 && i+k < enchantments_output.size(); ++k)
-			{
-				cout << enchantments_output[i+k][j];
-			}
-			cout << endl;
+			enchantments.push_back(enchantments.back()->getBase());
 		}
-	}*/
+		enchantments.pop_back();
+		vector<card_template_t> enchantments_output;
+
+		for (auto e : enchantments)
+		{
+			enchantments_output.push_back(getCardTemplate(e));
+		}
+
+		for (unsigned int i = 0; i < enchantments_output.size(); i += 5)
+		{
+			for (unsigned int j = 0; j < CARD_TEMPLATE_BORDER.size(); ++j)
+			{
+				for (unsigned int k = 0; k < 5 && i+k < enchantments_output.size(); ++k)
+				{
+					cout << enchantments_output[i+k][j];
+				}
+				cout << endl;
+			}
+		}
+	}
 }
 
 void TextDisplay::displayHand()

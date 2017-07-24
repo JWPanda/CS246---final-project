@@ -1,3 +1,6 @@
+Giant Strength
+Magic Fatigue
+Silence
 Air Elemental
 Earth Elemental
 Fire Elemental

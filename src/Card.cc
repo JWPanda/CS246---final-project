@@ -88,9 +88,14 @@ int Card::getDefense() const {
   return -1;
 }
 
+Unit* getBase() {
+    return nullptr;
+}
+
 
  // Enchantment Implementation--------------------------------------------------
 string Card::getEnchantmentName() const {return "";}
 string Card::getEnchantmentDescription() const {return "";}
+int Card::getEnchantmentCost() const {return -1;}
 int Card::getEnchantmentAttack() const {return -1;}
 int Card::getEnchantmentDefense() const {return -1;};

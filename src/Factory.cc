@@ -24,13 +24,12 @@ Card* Factory::makeCard(string cardname, Player* owner) {
   else if (cardname == "Recharge") return (new Recharge(owner));
   else if (cardname == "Disenchant") return (new Disenchant(owner));
   else if (cardname == "Raise Dead") return (new RaiseDead(owner));
-  else if (cardname == "Blizzard") return (new Blizzard(owner));
+  else if (cardname == "Blizzard") return (new Blizzard(owner));*/
   //Enchantment:
   else if (cardname == "Giant Strength") return (new GiantStrength(owner));
   else if (cardname == "Magic Fatigue") return (new MagicFatigue(owner));
   else if (cardname == "Silence") return (new Silence(owner));
   //Rituals:
-  */
   else if (cardname == "Dark Ritual") return (new DarkRitual(owner));
   else if (cardname == "Aura of Power") return (new AuraOfPower(owner));
   else if (cardname == "Standstill") return (new Standstill(owner));

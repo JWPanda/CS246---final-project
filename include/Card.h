@@ -13,6 +13,7 @@
 //Predefined classes
 class Board;
 class Player;
+class Unit;
 
 class Card
 {
@@ -45,17 +46,19 @@ class Card
         // Enchantment Implementation
         virtual std::string getEnchantmentName() const;
         virtual std::string getEnchantmentDescription() const;
+        virtual Unit* getBase();
+        virtual int getEnchantmentCost() const;
         virtual int getEnchantmentAttack() const;
         virtual int getEnchantmentDefense() const;
 
     protected:
         std::shared_ptr<Ability> ability;
         Player * player;
+        int cost;
 
     private:
         //Ability Implementation
         static std::map<std::string, std::shared_ptr<Ability>> listOfAbilities;
-        int cost;
 };
 
 #endif // CARD_H

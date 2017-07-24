@@ -1,21 +1,27 @@
 #include "Enchantment.h"
+#include "Player.h"
 
 using namespace std;
 
 //Ctor and Dtor-----------------------------------------------------------------
 Enchantment::Enchantment(int cost,int Attack, int Defense, Player* player)
-: Unit{cost, Attack, Defense, player} {};
+: Unit{cost, Attack, Defense, player}, enchantmentCost(cost) {};
 
 Enchantment::~Enchantment() {}
 
 
 //Game Mechanics----------------------------------------------------------------
-Enchantment * Enchantment::enchant(Unit& target) {  //TODO smart pointer here
-    Attack = target.getAttack();
-    Defense = target.getDefense();
-    base = &target;
-    return this;
+void Enchantment::play (Board& theBoard, int i, int p, int t) {
+  player->moveToBoard(i);
 }
+
+// Enchantment * Enchantment::enchant(Unit* target) {  //TODO smart pointer here
+//     Attack = target->getAttack();
+//     Defense = target->getDefense();
+//     cost = target->getCost();
+//     base = target;
+//     return this;
+// }
 
 void Enchantment::die() {
     if (getEnchantmentAttack() > 0) base->reduceAttack(getEnchantmentAttack());
@@ -38,6 +44,14 @@ string Enchantment::getDescription() const {
     else return getEnchantmentDescription();
 }
 
+Unit* Enchantment::getBase() {
+    return base;
+}
+
+int Enchantment::getEnchantmentCost() const {
+    if (base) return base->getCost();
+    else return getCost();
+}
 int Enchantment::getEnchantmentAttack() const {
     return BaseAttack;
 };
@@ -53,12 +67,12 @@ int Enchantment::getEnchantmentDefense() const {
 GiantStrength::GiantStrength(Player* player) :
     Enchantment{1,2,2,player} {}
 string GiantStrength::getEnchantmentName() const {return "Giant Strength";}
-Enchantment* GiantStrength::enchant(Unit& target) {
+/*Enchantment* GiantStrength::enchant(Unit& target) {
     Attack = target.getAttack() + 2;
     Defense = target.getDefense() + 2;
     base = &target;
     return this;
-}
+}*/
 
 // Magic Fatigue
 MagicFatigue::MagicFatigue(Player* player) : Enchantment{0,-1,-1,player} {}
