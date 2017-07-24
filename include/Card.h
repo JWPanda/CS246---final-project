@@ -23,7 +23,7 @@ class Card
 
         //Game Mechanics:
         virtual void play (Board& theBoard, int i, int p, int t) = 0;
-        virtual void use(Board& theBoard, const Card& target);
+        virtual void use(Board& theBoard, int p, int t);
         virtual std::string getName()=0; // use for graphics
         virtual void attack(Unit& target);
 

@@ -12,10 +12,10 @@ Card::~Card() {}
 
 //Game Mechanics----------------------------------------------------------------
 
-void Card::use(Board& theBoard, const Card& target) {
+void Card::use(Board& theBoard, int p, t) {
     if(!ability) throw;
-    if(ability->isTriggered() == 0) ability->use(theBoard, target,player);
-    else ability->use(theBoard, target, target.player, player);
+    if(ability->isTriggered() == 0) ability->use(theBoard, p, t,player);
+    else ability->use(theBoard, theBoard.gettarget, target.player, player);
 }
 
 
