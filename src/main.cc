@@ -126,6 +126,9 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 	else if (command == "inspect")
 	{
 		// Inspect minion
+		int i;
+		ss >> i;
+		if (ss.fail()) throw command;
 		display.displayCard(i-1);
 	}
 	else if (command == "hand")

@@ -30,7 +30,7 @@ class Card
         // Ability Implementation
         static void initializeAbilities();
 
-        bool hasAbility() const;
+        virtual bool hasAbility() const;
         virtual int getAbilityCost() const;
         virtual int getCharges() const;
         void addAbility(std::string abilityName); // changes ability of the card
@@ -39,16 +39,16 @@ class Card
         int getCost() const;
         int isTriggered() const;
         virtual CardType getType() const = 0;
-        std::string getDescription() const;
+        virtual std::string getDescription() const;
         virtual int getAttack() const;
         virtual int getDefense() const;
 
 
         // Enchantment Implementation
+        virtual std::string getEnchantmentName() const;
         virtual std::string getEnchantmentDescription() const;
         virtual int getEnchantmentAttack() const;
         virtual int getEnchantmentDefense() const;
-
 
     protected:
         std::shared_ptr<Ability> ability;

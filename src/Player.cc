@@ -120,7 +120,7 @@ const Card* Player::getGraveyard() const{
 
 const Card* Player::getRitual() const{
   if (myRitual.empty()) return nullptr;
-  return myRitual.back();
+  return myRitual.front();
 }
 
 const vector<Card*>& Player::getHand() const{

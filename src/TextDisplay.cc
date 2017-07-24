@@ -25,22 +25,21 @@ card_template_t TextDisplay::getCardTemplate(const Card* c)
 		return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
 	}
 	else if (c->getType() == Card::SPELL) return display_spell(c->getName(), c->getCost(), c->getDescription());
-	else if (c->getType() == Card::RITUAL) return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
-	else if (c->getType() == Card::ENCHANTMENT)
+	else if (c->getType() == Card::RITUAL) return display_ritual(c->getName(), c->getCost(), c->getAbilityCost(), c->getDescription(), c->getCharges());
+	/*else if (c->getType() == Card::ENCHANTMENT)
 	{
 		if (c->getEnchantmentAttack() < 0) return display_enchantment(c->getName(), c->getEnchantmentCost(), c->getEnchantmentDescription());
 		stringstream ss1{"+"s}, ss2{"+"s};
 		ss1 << c->getEnchantmentAttack();
 		ss2 << c->getEnchantmentDefense();
 		return display_enchantment_attack_defence(c->getName(), c->getEnchantmentCost(), c->getEnchantmentDescription(), ss1.str(), ss2.str());
-	}
+	}*/
 	else if (c->getType() == Card::FACE) return display_minion_no_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense());
 	else throw "THERE'S SOME WEIRD SHIT GOING DOWN";
 }
 
 void TextDisplay::printField(vector<Card*> field)
 {
-	// Player 1 Field
 	vector<card_template_t> field_output; // Output of each card in field
 	for (Card* c : field) // Make templates for cards
 	{
@@ -68,7 +67,7 @@ void TextDisplay::printField(vector<Card*> field)
 
 void TextDisplay::displayCard(int i)
 {
-	Player *p = board->getActivePlayer();
+	/*Player *p = board->getActivePlayer();
 	const vector<Card*> &field = p->getField();
 	Card *c = field[i];
 	vector<Card*> enchantments;
@@ -100,7 +99,7 @@ void TextDisplay::displayCard(int i)
 			}
 			cout << endl;
 		}
-	}
+	}*/
 }
 
 void TextDisplay::displayHand()
@@ -142,7 +141,7 @@ void TextDisplay::displayBoard()
 	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
 	{
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN
-			 << CARD_TEMPLATE_BORDER[i]
+			 << ((ritual1) ? ritual1_output[i] : CARD_TEMPLATE_BORDER[i])
 			 << CARD_TEMPLATE_EMPTY[i]
 			 << player1_output[i]
 			 << CARD_TEMPLATE_EMPTY[i]
@@ -173,7 +172,7 @@ void TextDisplay::displayBoard()
 	for (unsigned int i = 0; i < CARD_TEMPLATE_BORDER.size(); ++i)
 	{
 		cout << EXTERNAL_BORDER_CHAR_UP_DOWN
-			 << CARD_TEMPLATE_BORDER[i]
+			 << ((ritual2) ? ritual2_output[i] : CARD_TEMPLATE_BORDER[i])
 			 << CARD_TEMPLATE_EMPTY[i]
 			 << player2_output[i]
 			 << CARD_TEMPLATE_EMPTY[i]

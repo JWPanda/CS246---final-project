@@ -1,7 +1,7 @@
 #ifndef ENCHANTMENT_H
 #define ENCHANTMENT_H
 
-#include <Unit.h>
+#include "Unit.h"
 
 
 class Enchantment : public Unit
@@ -11,12 +11,13 @@ class Enchantment : public Unit
         virtual ~Enchantment();
         virtual Enchantment * enchant(Unit& target); // enchant target and produce pointer to be placed on the field
 
-        std::string getDescription() override;
+        std::string getName() const override;
+        std::string getDescription() const override;
         int getEnchantmentAttack() const override;
         int getEnchantmentDefense() const override;
 
-        void die() override();
-        CardType getType() override;
+        void die() override;
+        CardType getType() const override;
 
     protected:
         Unit* base;
@@ -25,19 +26,21 @@ class Enchantment : public Unit
 
 struct GiantStrength : public Enchantment {
     GiantStrength(Player* player);
-    std::string getEnchantmentDescription() override;
+    std::string getEnchantmentName() const override;
     Enchantment * enchant(Unit& target) override;
 };
 
 struct MagicFatigue : public Enchantment {
     MagicFatigue(Player* player);
-    std::string getEnchantmentDescription() override;
-    int getAbilityCost() override;
-}
+    std::string getEnchantmentName() const override;
+    std::string getEnchantmentDescription() const override;
+    int getAbilityCost() const override;
+};
 
 struct Silence : public Enchantment {
     Silence(Player* player);
-    std::string getEnchantmentDescription() override;
-    bool hasAbility() override;
+    std::string getEnchantmentName() const override;
+    std::string getEnchantmentDescription() const override;
+    bool hasAbility() const override;
 };
 #endif // ENCHANTMENT_H

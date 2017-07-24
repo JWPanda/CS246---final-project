@@ -41,7 +41,9 @@ void Card::initializeAbilities() {
     // Spell Abilities
 
     // Ritual Abilities
-
+    listOfAbilities["DarkRitual_Ability"] = make_shared<DarkRitual_Ability>();
+    listOfAbilities["AuraOfPower_Ability"] = make_shared<AuraOfPower_Ability>();
+    listOfAbilities["Standstill_Ability"] = make_shared<Standstill_Ability>();
 }
 
 bool Card::hasAbility() const {
@@ -88,6 +90,7 @@ int Card::getDefense() const {
 
 
  // Enchantment Implementation--------------------------------------------------
-string Card::getEnchantmentDescription() {return "";}
+string Card::getEnchantmentName() const {return "";}
+string Card::getEnchantmentDescription() const {return "";}
 int Card::getEnchantmentAttack() const {return -1;}
 int Card::getEnchantmentDefense() const {return -1;};
