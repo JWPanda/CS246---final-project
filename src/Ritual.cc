@@ -23,8 +23,7 @@ void Ritual::play (Board& theBoard, int i, int p, int t) {
   player->moveToRitual(i);
 }
 
-// Rituals
-
+// Rituals----------------------------------------------------------------------
 DarkRitual::DarkRitual(Player* player) : Ritual{0,player, 5} {
     addAbility("DarkRitual_Ability");
 }

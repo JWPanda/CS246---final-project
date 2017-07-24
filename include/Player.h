@@ -43,7 +43,7 @@ class Player
         const Card* getGraveyard() const; // use for graphics, top card on graveyard
         const Card* getRitual() const; // use for graphics
         const std::vector<Card*>& getHand() const; // use for graphics
-        const std::vector<Card*>& getField()const; // use for graphics
+        const std::vector<Card*>& getField() const; // use for graphics
 
     private:
         Face myFace;
