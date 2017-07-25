@@ -28,19 +28,12 @@ void Ritual::play (Board& theBoard, int i, int p, int t) {
 
 void Ritual::use(Board& theBoard, shared_ptr<Unit> target) {
   if (charges < getAbilityCost()) return;
-<<<<<<< HEAD
   try {
-    Card::use(theBoard,target);
+    Player * enemy = nullptr;
+    if (target) enemy = target->getPlayer();
+    ability->use(theBoard,target,enemy,player);
     charges -= getAbilityCost();
   } catch (const string e) {}
-
-
-=======
-  Player * enemy = nullptr;
-  if (target) enemy = target->getPlayer();
-  ability->use(theBoard,target,enemy,player);
-  charges -= getAbilityCost();
->>>>>>> introduce trigger without smart pointer
 }
 
 //Accessors

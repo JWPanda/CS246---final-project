@@ -173,11 +173,7 @@ void Player::discard(int i) {
 
 // Accessors--------------------------------------------------------------------
 void Player::gainMana(int m) {
-<<<<<<< HEAD
   myFace->gainMana(m);
-=======
-  myFace.gainMana(m);
->>>>>>> introduce trigger without smart pointer
 }
 
 int Player::getMana() const{
