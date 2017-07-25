@@ -32,5 +32,5 @@ shared_ptr<Card> Factory::makeCard(string cardname, Player* owner) {
   else if (cardname == "Dark Ritual") return (make_shared<DarkRitual>(owner));
   else if (cardname == "Aura of Power") return (make_shared<AuraOfPower>(owner));
   else if (cardname == "Standstill") return (make_shared<Standstill>(owner));
-  else throw "Invalid card "s + cardname + " found in deck! Exiting..."s;
+  else throw "Invalid card '"s + cardname + "' found in deck! Exiting..."s;
 }

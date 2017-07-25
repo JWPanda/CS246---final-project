@@ -6,7 +6,8 @@ using namespace std;
 
 
 // Ctor and Dtor----------------------------------------------------------------
-Board::Board(string name1, string name2, ifstream &deck1, ifstream &deck2, bool testing) : p1{name1, deck1, 1, *this, testing}, p2{name2, deck2, 2, *this, testing}, activePlayer{&p1}, nonActivePlayer{&p2} {}
+Board::Board(string name1, string name2, ifstream &deck1, ifstream &deck2, bool testing)
+ : p1{name1, deck1, 1, *this, testing}, p2{name2, deck2, 2, *this, testing}, activePlayer{&p1}, nonActivePlayer{&p2} {}
 
 Board::~Board() {}
 
