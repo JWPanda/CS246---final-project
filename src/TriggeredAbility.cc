@@ -75,8 +75,7 @@ Ability::AbilityType Troll_Ability::checkAbility() {
 DarkRitual_Ability::DarkRitual_Ability() : TriggeredAbility(1) {}
 
 void DarkRitual_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
-    friendly->gainMana(1);
-}
+    friendly->gainMana(1);}
 std::string DarkRitual_Ability::getDescription() {
     return "At the start of your turn, gain 1 magic";
 }
@@ -92,8 +91,7 @@ void AuraOfPower_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* 
     if (!(enemy == friendly && target->OnBoard())){
       throw "Unable to use ritual"s;
     }
-    else {
-        target->gainStats(1,1);
+    else {        target->gainStats(1,1);
     }
 }
 std::string AuraOfPower_Ability::getDescription() {
