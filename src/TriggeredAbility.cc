@@ -15,15 +15,13 @@ TriggeredAbility::~TriggeredAbility() {}
 //Minion Triggered Abilities----------------------------------------------------
 
 
-<<<<<<< HEAD
 // Fire Elemental
 FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
+<<<<<<< HEAD
 
 void FireElemental_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
         if(friendly != enemy && target->OnBoard()) {
 =======
-// Fire Elemental
-FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
 
 void FireElemental_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
         if(friendly != enemy && target->onBoard()) {
