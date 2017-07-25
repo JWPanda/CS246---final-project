@@ -20,7 +20,7 @@ FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
 
 void FireElemental_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
         if(friendly != enemy && target->OnBoard()) {
-            target->getHit(1);
+              target->getHit(1);
         }
 }
 string FireElemental_Ability::getDescription() {
