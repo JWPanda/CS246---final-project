@@ -15,11 +15,19 @@ TriggeredAbility::~TriggeredAbility() {}
 //Minion Triggered Abilities----------------------------------------------------
 
 
+<<<<<<< HEAD
 // Fire Elemental
 FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
 
 void FireElemental_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
         if(friendly != enemy && target->OnBoard()) {
+=======
+// Fire Elemental
+FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
+
+void FireElemental_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+        if(friendly != enemy && target->onBoard()) {
+>>>>>>> 5fe68a97ba98b3a9c70776771c604fafdfad8938
             target->getHit(1);
         }
 }
@@ -34,10 +42,17 @@ Ability::AbilityType FireElemental_Ability::checkAbility() {
 // Potion Seller
 PotionSeller_Ability::PotionSeller_Ability() : TriggeredAbility(0) {}
 
+<<<<<<< HEAD
 void PotionSeller_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
     // go through each minion on YOUR board and give it +0/+1
     for(auto c : friendly->getField()) {
         dynamic_cast<shared_ptr<Unit>>(c)->gainStats(0,1);
+=======
+void PotionSeller_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+    // go through each minion on YOUR board and give it +0/+1
+    for(auto c : friendly->getField()) {
+        dynamic_cast<Unit*>(c)->gainStats(0,1);
+>>>>>>> 5fe68a97ba98b3a9c70776771c604fafdfad8938
     }
 }
 
@@ -52,10 +67,17 @@ Ability::AbilityType PotionSeller_Ability::checkAbility() {
 // Troll Ability
 Troll_Ability::Troll_Ability() : TriggeredAbility(0) {}
 
+<<<<<<< HEAD
 void Troll_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
             // go through each minion on YOUR board and give it +1/+0
     for(auto c : friendly->getField()) {
         dynamic_cast<shared_ptr<Unit>>(c)->gainStats(1,0);
+=======
+void Troll_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+            // go through each minion on YOUR board and give it +1/+0
+    for(auto c : friendly->getField()) {
+        dynamic_cast<Unit*>(c)->gainStats(1,0);
+>>>>>>> 5fe68a97ba98b3a9c70776771c604fafdfad8938
     }
 }
 
