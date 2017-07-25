@@ -16,7 +16,7 @@ class TriggeredAbility : public Ability
 struct FireElemental_Ability : public TriggeredAbility
 {
     FireElemental_Ability();
-    void use(Board& theBoard, Unit* target, Player* enemy, Player* friendly) override;
+    void use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly) override;
     std::string getDescription() override;
     Ability::AbilityType checkAbility() override;
 };
@@ -24,7 +24,7 @@ struct FireElemental_Ability : public TriggeredAbility
 struct PotionSeller_Ability : public TriggeredAbility
 {
     PotionSeller_Ability();
-    void use(Board& theBoard, Unit* target, Player* enemy, Player* friendly) override;
+    void use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly) override;
     std::string getDescription() override;
     Ability::AbilityType checkAbility() override;
 };
@@ -32,7 +32,7 @@ struct PotionSeller_Ability : public TriggeredAbility
 struct Troll_Ability : public TriggeredAbility
 {
     Troll_Ability();
-    void use(Board& theBoard, Unit* target, Player* enemy, Player* friendly) override;
+    void use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly) override;
     std::string getDescription() override;
     Ability::AbilityType checkAbility() override;
 };
@@ -43,7 +43,7 @@ struct Troll_Ability : public TriggeredAbility
 struct DarkRitual_Ability : public TriggeredAbility
 {
     DarkRitual_Ability();
-    void use(Board& theBoard, Unit* target, Player* enemy, Player* friendly) override;
+    void use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly) override;
     std::string getDescription() override;
     Ability::AbilityType checkAbility() override;
 };
@@ -51,7 +51,7 @@ struct DarkRitual_Ability : public TriggeredAbility
 struct AuraOfPower_Ability : public TriggeredAbility
 {
     AuraOfPower_Ability();
-    void use(Board& theBoard, Unit* target, Player* enemy, Player* friendly) override;
+    void use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly) override;
     std::string getDescription() override;
     Ability::AbilityType checkAbility() override;
 };
@@ -59,10 +59,16 @@ struct AuraOfPower_Ability : public TriggeredAbility
 struct Standstill_Ability : public TriggeredAbility
 {
     Standstill_Ability();
-    void use(Board& theBoard, Unit* target, Player* enemy, Player* friendly) override;
+    void use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly) override;
     std::string getDescription() override;
     Ability::AbilityType checkAbility() override;
 };
 
+struct ElementalParty_Ability : public TriggeredAbility
+{
+    ElementalParty_Ability();
+    void use(Board& theBoard, int p, int t) override;
+    std::string getDescription() override;
+};
 
 #endif // TRIGGEREDABILITY_H
