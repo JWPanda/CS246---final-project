@@ -19,7 +19,7 @@ class Ability
         //Ability Mechanics:
         virtual AbilityType checkAbility()= 0;
         virtual void use(Board& theBoard, int p , int t, Player* myPlayer);
-        virtual void use(Board& theBoard, Unit& target, Player* enemy, Player* friendly);
+        virtual void use(Board& theBoard, Unit* target, Player* enemy, Player* friendly);
         int getCost();
         virtual std::string getDescription()=0;
 

@@ -1,4 +1,5 @@
 #include "Card.h"
+#include "Unit.h"
 using namespace std;
 
 
@@ -12,12 +13,12 @@ Card::~Card() {}
 //Game Mechanics----------------------------------------------------------------
 void Card::use(Board& theBoard, int p, int t) {
     if(!ability) throw "Error: this card does not have an ability"s;
-    if(ability->isTriggered() == 0) ability->use(theBoard, p, t, player);
+    if(ability->checkAbility() != Ability::NONE) ability->use(theBoard, p, t, player);
 }
-void Card::use(Board& theBoard, Unit* target);
+void Card::use(Board& theBoard, Unit* target) {
   if(!ability) return;
   Player * enemy = nullptr;
-  if (target) enemy = target->player;
+  if (target) enemy = target->getPlayer();
   ability->use(theBoard, target, enemy, player);
 }
 
@@ -52,7 +53,7 @@ void Card::initializeAbilities() {
 }
 
 Ability::AbilityType Card::checkAbility() const {
-    if(!ability) return Ability::AbilityType NONE;
+    if(!ability) return Ability::NONE;
     else return ability->checkAbility();
 }
 
@@ -72,6 +73,10 @@ void Card::unsummon() {
 
 
 //Accessors---------------------------------------------------------------------
+Player* Card::getPlayer() {
+  return player;
+}
+
 int Card::getCost() const {
   return cost;
 }

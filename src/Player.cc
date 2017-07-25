@@ -44,7 +44,10 @@ void Player::checkTrigger(Ability::AbilityType trigger, Unit* target) {
           myField[i]->use(theBoard, target);
         }
     }
-    myRitual.front()->use(theBoard, target);
+    if (myRitual.size() && myRitual.front()->checkAbility() == trigger)
+    {
+      myRitual.front()->use(theBoard, target);
+    }
 }
 
 
@@ -123,10 +126,11 @@ void Player::revive() {
   moveToBoard (myGraveyard.back());
   myGraveyard.pop_back();
 }
-
+/*
 void Player::Disenchant(Card* self) {
   swap (self,)
 }
+*/
 
 void Player::discard(int i) {
   int handSize = myHand.size();

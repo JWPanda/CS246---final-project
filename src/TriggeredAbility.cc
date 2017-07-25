@@ -15,11 +15,8 @@ TriggeredAbility::~TriggeredAbility() {}
 // Fire Elemental
 FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
 
-void FireElemental_Ability::use(Board& theBoard, Unit& target, Player* enemy, Player* friendly)  {
-    if (p == 69) { // trigger on play minion
-        // go to the most recent minion on enemy fiel and make it take damage
-        cout << "Fire Elemental" << endl;
-    }
+void FireElemental_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+    cout << "Fire Elemental" << endl;
 }
 string FireElemental_Ability::getDescription() {
     return "Whenever an opponent's minion enters play, deal 1 damage to it";
@@ -32,11 +29,8 @@ Ability::AbilityType FireElemental_Ability::checkAbility() {
 // Potion Seller
 PotionSeller_Ability::PotionSeller_Ability() : TriggeredAbility(0) {}
 
-void PotionSeller_Ability::use(Board& theBoard, Unit& target, Player* enemy, Player* friendly)  {
-    if (p == 69) { // trigger on end of YOUR turn
-        // go through each minion on YOUR board and give it +0/+1
-        cout << "Potion Seller" << endl;
-    }
+void PotionSeller_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+    cout << "Potion Seller" << endl;
 }
 
 string PotionSeller_Ability::getDescription() {
@@ -50,11 +44,8 @@ Ability::AbilityType PotionSeller_Ability::checkAbility() {
 // Troll Ability
 Troll_Ability::Troll_Ability() : TriggeredAbility(0) {}
 
-void Troll_Ability::use(Board& theBoard, Unit& target, Player* enemy, Player* friendly)  {
-    if (p == 69) { // trigger on end death of minion
-        // gives all minions on YOUR board +1/+0
-        cout << "Troll" << endl;
-    }
+void Troll_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+    cout << "Troll" << endl;
 }
 
 string Troll_Ability::getDescription() {
@@ -72,11 +63,8 @@ Ability::AbilityType Troll_Ability::checkAbility() {
 //Dark Ritual
 DarkRitual_Ability::DarkRitual_Ability() : TriggeredAbility(1) {}
 
-void DarkRitual_Ability::use(Board& theBoard, Unit& target, Player* enemy, Player* friendly)  {
-    if (p == 69) { // trigger on play minion
-        // go to the most recent minion on enemy field and make it take damage
-        cout << "Dark Ritual" << endl;
-    }
+void DarkRitual_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+    cout << "Dark Ritual" << endl;
 }
 std::string DarkRitual_Ability::getDescription() {
     return "At the start of your turn, gain 1 magic";
@@ -89,11 +77,8 @@ Ability::AbilityType DarkRitual_Ability::checkAbility() {
 //Aura of Power
 AuraOfPower_Ability::AuraOfPower_Ability() : TriggeredAbility(1) {}
 
-void AuraOfPower_Ability::use(Board& theBoard, Unit& target, Player* enemy, Player* friendly)  {
-    if (p == 69) { // trigger on play minion
-        // go to the most recent minion on enemy field and make it take damage
-        cout << "Aura of Power" << endl;
-    }
+void AuraOfPower_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+    cout << "Aura of Power" << endl;
 }
 std::string AuraOfPower_Ability::getDescription() {
     return "Whenever a minion enters play under your control, it gains +1/+1";
@@ -107,11 +92,8 @@ Ability::AbilityType AuraOfPower_Ability::checkAbility() {
 //Standstill
 Standstill_Ability::Standstill_Ability() : TriggeredAbility(2) {}
 
-void Standstill_Ability::use(Board& theBoard, Unit& target, Player* enemy, Player* friendly)  {
-    if (p == 69) { // trigger on play minion
-        // go to the most recent minion on enemy field and make it take damage
-        cout << "Standstill" << endl;
-    }
+void Standstill_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+    cout << "Standstill" << endl;
 }
 std::string Standstill_Ability::getDescription() {
     return "Whenever a minion enters play, destory it";

@@ -37,6 +37,7 @@ class Card
         virtual void unsummon();
 
         //Accessors:
+        Player* getPlayer();
         int getCost() const;
         virtual CardType getType() const = 0;
         virtual std::string getDescription() const;

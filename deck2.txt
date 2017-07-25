@@ -1,9 +1,12 @@
+Fire Elemental
+Dark Ritual
+Potion Seller
+Troll
 Giant Strength
 Magic Fatigue
 Silence
 Air Elemental
 Troll
-Dark Ritual
 Aura of Power
 Standstill
 Earth Elemental

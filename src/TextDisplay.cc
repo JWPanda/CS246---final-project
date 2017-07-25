@@ -14,9 +14,9 @@ card_template_t TextDisplay::getCardTemplate(const Card* c)
 {
 	if (c->getType() == Card::MINION)
 	{
-		if (c->hasAbility())
+		if (c->checkAbility() != Ability::NONE)
 		{
-			if (c->isTriggered() > 0)
+			if (c->checkAbility() != Ability::ACTIVE)
 			{
 				return display_minion_triggered_ability(c->getName(), c->getCost(), c->getAttack(), c->getDefense(), c->getDescription());
 			}

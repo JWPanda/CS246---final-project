@@ -33,7 +33,7 @@ class Player
         void attack(int m1, Unit& target);
 
         //Move Methods:
-        void moveToGraveyard(Card* self);
+        void moveToGraveyard(Unit* self);
         void moveToBoard(Unit* self);
         void destroyRitual();
         void moveToRitual(int i);
@@ -60,7 +60,7 @@ class Player
         std::vector<Card*> myHand;
         std::vector<Card*> myField;
         std::vector<Card*> myRitual;
-        std::vector<Card*> myGraveyard;
+        std::vector<Unit*> myGraveyard;
 };
 
 #endif // PLAYER_H

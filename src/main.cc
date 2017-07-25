@@ -34,7 +34,7 @@ void showCommandLineHelp()
 
 bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 {
-    stringstream ss{input};
+  stringstream ss{input};
 	string command;
 	ss >> command;
 	if (command == "help")
