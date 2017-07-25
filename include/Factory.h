@@ -1,7 +1,7 @@
 #ifndef FACTORY_H
 #define FACTORY_H
 #include "Minion.h"
-//#include "Spell.h"
+#include "Spell.h"
 #include "Enchantment.h"
 #include "Ritual.h"
 

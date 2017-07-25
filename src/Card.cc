@@ -11,7 +11,7 @@ Card::~Card() {}
 
 //Game Mechanics----------------------------------------------------------------
 void Card::use(Board& theBoard, int p, int t) {
-    if(!ability) throw;
+    if(!ability) throw "Error: this card does not have an ability"s;
     if(ability->isTriggered() == 0) ability->use(theBoard, p, t, player);
   //TODO else ability->use(theBoard, theBoard.gettarget, target.player, player);
 }
@@ -33,6 +33,12 @@ void Card::initializeAbilities() {
     listOfAbilities["Troll_Ability"] = make_shared<Troll_Ability>();
 
     // Spell Abilities
+    listOfAbilities["Banish_Ability"] = make_shared<Banish_Ability>();
+    listOfAbilities["Unsummon_Ability"] = make_shared<Unsummon_Ability>();
+    listOfAbilities["Recharge_Ability"] = make_shared<Recharge_Ability>();
+    listOfAbilities["Disenchant_Ability"] = make_shared<Disenchant_Ability>();
+    listOfAbilities["RaiseDead_Ability"] = make_shared<RaiseDead_Ability>();
+    listOfAbilities["Blizzard_Ability"] = make_shared<Blizzard_Ability>();
 
     // Ritual Abilities
     listOfAbilities["DarkRitual_Ability"] = make_shared<DarkRitual_Ability>();
@@ -52,6 +58,10 @@ int Card::getAbilityCost() const {
 
 void Card::addAbility(string name) {
     ability = listOfAbilities[name];
+}
+
+void Card::unsummon() {
+    return;
 }
 
 

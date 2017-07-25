@@ -18,6 +18,7 @@ class Minion : public Unit
 
         //Game Mechanics
         void play (Board& theBoard, int i, int p, int t) override;
+        void unsummon() override;
 
         //Accessors
         CardType getType() const override;
@@ -62,5 +63,5 @@ struct MasterSummoner : public Minion {
 struct Troll : public Minion {
     Troll(Player * player);
     std::string getName() const override;
-};
+};;
 #endif // MINION_H

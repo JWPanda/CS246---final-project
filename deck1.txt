@@ -1,3 +1,9 @@
+Unsummon
+Banish
+Recharge
+Disenchant
+Raise Dead
+Blizzard
 Novice Pyromancer
 Apprentice Summoner
 Air Elemental

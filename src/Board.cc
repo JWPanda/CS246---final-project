@@ -71,19 +71,19 @@ void Board::attack (int m1, int m2) {
 Unit& Board::getMinion (int i, int player) const {
     if (player == 1) {
         int field_size = p1.getField().size();
-        if (i >= field_size) throw "Error: there is no minion at "s + to_string(i) + " on your field";
+        if (i >= field_size) throw "Error: there is no minion at "s + to_string(i+1) + " on your field";
         Unit& target = dynamic_cast<Unit&>(*(p1.getField()[i]));
         return target;
     }
     else if (player == 2) {
         int field_size = p2.getField().size();
-        if (i >= field_size) throw "Error: there is no minion at "s + to_string(i) + " on your field";
+        if (i >= field_size) throw "Error: there is no minion at "s + to_string(i+1) + " on your field";
         Unit& target = dynamic_cast<Unit&>(*(p2.getField()[i]));
         return target;
     }
     else {
         int field_size = nonActivePlayer->getField().size();
-        if (i >= field_size) throw "Error: there is no minion at "s + to_string(i) + " on your field";
+        if (i >= field_size) throw "Error: there is no minion at "s + to_string(i+1) + " on your field";
         Unit& target = dynamic_cast<Unit&>(*(nonActivePlayer->getField()[i]));
         return target;
     }
@@ -93,7 +93,7 @@ Player* Board::getActivePlayer() const {
   return activePlayer;
 }
 
-const Player* Board::getPlayer(int i) const {
+Player* Board::getPlayer(int i) {
   if (i == 1) return &p1;
   else return &p2;
 }

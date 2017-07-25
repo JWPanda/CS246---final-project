@@ -329,7 +329,7 @@ int main(int argc, char* argv[])
 			}
 			catch (string command)
 			{
-				cout << "That is not how you use the " << command << "command." << endl;
+				cout << "That is not how you use the " << command << " command." << endl;
 				showMainHelp();
 			}
 		}

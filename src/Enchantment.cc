@@ -31,6 +31,10 @@ void Enchantment::die() {
     base->die();
 }
 
+void Enchantment::unsummon() {
+    base->unsummon();
+}
+
 
 //Accessors---------------------------------------------------------------------
 

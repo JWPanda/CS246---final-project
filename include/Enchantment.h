@@ -16,6 +16,7 @@ class Enchantment : public Unit
         void die() override;
         void play (Board& theBoard, int i, int p, int t) override;
         virtual void enchant(Unit* target); // enchant target and produce pointer to be placed on the field
+        void unsummon(); // Unsummons the enchantment
 
         //Accessors
         CardType getType() const override;

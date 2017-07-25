@@ -33,6 +33,7 @@ class Card
         virtual int getAbilityCost() const;
         virtual int getCharges() const;
         void addAbility(std::string abilityName); // changes ability of the card
+        virtual void unsummon();
 
         //Accessors:
         int getCost() const;

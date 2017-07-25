@@ -112,7 +112,7 @@ void Player::placeEnchantment(Card* self) {
   swap(myField[handi], self);
 }
 
-void Player::Revive() {
+void Player::revive() {
   if (!myGraveyard.size()) throw "Error: graveyard is empty";
   moveToBoard (myGraveyard.back());
   myGraveyard.pop_back();
@@ -154,7 +154,15 @@ const vector<Card*>& Player::getField() const{
 //Helper Functions--------------------------------------------------------------
 int Player::findSelf(Card* self, vector<Card*> cvec) {
   for (unsigned int i = 0; i < cvec.size(); ++i) {
-    if (cvec[i] == self) return i;
+    Card* baseCheck = cvec[i]->getBase();
+    if (baseCheck)
+    {
+      while (baseCheck->getBase())
+      {
+        baseCheck = baseCheck->getBase();
+      }
+    }
+    if (baseCheck == self) return i;
   }
     return -1;
 }

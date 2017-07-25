@@ -17,14 +17,13 @@ Card* Factory::makeCard(string cardname, Player* owner) {
   else if (cardname == "Apprentice Summoner") return (new ApprenticeSummoner(owner));
   else if (cardname == "Master Summoner") return (new MasterSummoner(owner));
   else if (cardname == "Troll") return (new Troll(owner));
-  /* TODO
   //Make Spells:
   else if (cardname == "Banish") return (new Banish(owner));
   else if (cardname == "Unsummon") return (new Unsummon(owner));
   else if (cardname == "Recharge") return (new Recharge(owner));
   else if (cardname == "Disenchant") return (new Disenchant(owner));
   else if (cardname == "Raise Dead") return (new RaiseDead(owner));
-  else if (cardname == "Blizzard") return (new Blizzard(owner));*/
+  else if (cardname == "Blizzard") return (new Blizzard(owner));
   //Enchantment:
   else if (cardname == "Giant Strength") return (new GiantStrength(owner));
   else if (cardname == "Magic Fatigue") return (new MagicFatigue(owner));

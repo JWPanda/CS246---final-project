@@ -33,6 +33,11 @@ void Minion::play (Board& theBoard, int i, int p, int t) {
   player->moveToBoard(this);
 }
 
+void Minion::unsummon() {
+  player->moveToDeck(this);
+}
+
+// Acessors---------------------------------------------------------------------
 Card::CardType Minion::getType() const {return MINION;}
 
 

@@ -23,9 +23,7 @@ class Board
         // Accessors:
         Unit &getMinion (int i, int player = 0) const;
         Player* getActivePlayer() const;
-        const Player* getPlayer(int i) const;
-
-    friend class TextDisplay;
+        Player* getPlayer(int i);
 
     private:
         Player p1;

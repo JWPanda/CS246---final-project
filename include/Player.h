@@ -38,7 +38,7 @@ class Player
         void moveToRitual(int i);
         void moveToDeck(Card* self);
         void placeEnchantment(Card* self);
-        void Revive();
+        void revive();
         void discard(int i);
 
         // Accessors:

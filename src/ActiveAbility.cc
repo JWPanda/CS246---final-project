@@ -77,7 +77,7 @@ Banish_Ability::Banish_Ability() : ActiveAbility{0} {}
 void Banish_Ability::use(Board& theBoard, int p , int t, Player* myPlayer){
     // if target is a ritual
     if (t == 6) {
-        //theBoard.getPlayer(p)->destroyRitual();
+        theBoard.getPlayer(p)->destroyRitual();
     }
     else {// target is a minion
         // if target card is a minion,
@@ -94,7 +94,7 @@ Unsummon_Ability::Unsummon_Ability(): ActiveAbility{0} {}
 
 void Unsummon_Ability::use(Board& theBoard, int p , int t, Player* myPlayer){
     // idea 2:
-    //     theBoard.getMinion(t,p,).unsummon();
+    theBoard.getMinion(t,p).unsummon();
 }
 
 string Unsummon_Ability::getDescription() {
@@ -129,7 +129,7 @@ string Disenchant_Ability::getDescription() {
 RaiseDead_Ability::RaiseDead_Ability(): ActiveAbility{0} {};
 
 void RaiseDead_Ability::use(Board& theBoard, int p , int t, Player* myPlayer) {
-    myPlayer->Revive();
+    myPlayer->revive();
 }
 string RaiseDead_Ability::getDescription() {
     return "Resurrect the top minion on your graveyard";
