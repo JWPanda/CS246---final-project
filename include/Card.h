@@ -23,7 +23,7 @@ class Card
         virtual ~Card();
 
         virtual void play (Board& theBoard, int i, int p, int t)=0;
-        //void use(Board& theBoard, int p =0, int t = 0);
+        virtual void use(Board& theBoard, int p, int t);
         virtual std::string getName() const =0; // use for graphics
 
         // Ability Implementation

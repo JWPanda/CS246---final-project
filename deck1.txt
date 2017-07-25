@@ -1,3 +1,5 @@
+Novice Pyromancer
+Apprentice Summoner
 Air Elemental
 Earth Elemental
 Fire Elemental
