@@ -38,9 +38,14 @@ void Enchantment::unsummon() {
 }
 
 void Enchantment::disenchant() {
+<<<<<<< HEAD
   player->disenchant(shared_from_this());
   if (BaseAttack > 0) Attack -= BaseAttack;
   base->setStats(Attack,Defense);
+=======
+  player->disenchant(make_shared_this(),base);
+  if (BaseAttack > 0) base->gainStats(-BaseAttack,0);
+>>>>>>> introduce trigger without smart pointer
   if (BaseDefense > 0) base->getHit(BaseDefense);
 }
 

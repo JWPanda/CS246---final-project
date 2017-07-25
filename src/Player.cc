@@ -2,7 +2,10 @@
 #include "Minion.h"
 #include "Board.h"
 #include <string>
+<<<<<<< HEAD
 #include <random>
+=======
+>>>>>>> introduce trigger without smart pointer
 #include <iostream>
 
 using namespace std;
@@ -170,7 +173,11 @@ void Player::discard(int i) {
 
 // Accessors--------------------------------------------------------------------
 void Player::gainMana(int m) {
+<<<<<<< HEAD
   myFace->gainMana(m);
+=======
+  myFace.gainMana(m);
+>>>>>>> introduce trigger without smart pointer
 }
 
 int Player::getMana() const{

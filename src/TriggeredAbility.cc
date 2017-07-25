@@ -90,7 +90,7 @@ AuraOfPower_Ability::AuraOfPower_Ability() : TriggeredAbility(1) {}
 
 void AuraOfPower_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
     if (!(enemy == friendly && target->OnBoard())){
-      throw "unable to use ritual"s;
+      throw "Unable to use ritual"s;
     }
     else {
         target->gainStats(1,1);
@@ -110,7 +110,7 @@ Standstill_Ability::Standstill_Ability() : TriggeredAbility(2) {}
 
 void Standstill_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
   if (!(enemy == friendly && target->OnBoard())){
-    throw "unable to use ritual"s;
+    throw "Unable to use ritual"s;
   }
   else {
       target->die();

@@ -14,11 +14,19 @@ Board::~Board() {}
 
 //Game Mechanics----------------------------------------------------------------
 void Board::changeTurn () {
+<<<<<<< HEAD
     // checks end turn trigger for active player whi ch only occurs if it is not the first turn.
     checkTrigger(Ability::END);
     swap(activePlayer, nonActivePlayer);
     activePlayer->newTurn(); // initiates new turn for active player
     checkTrigger(Ability::BEGIN);  // check new turn trigger for active player
+=======
+    // checks end turn trigger for active player which only occurs if it is not the first turn.
+    checkTrigger(Ability::END);
+    swap(activePlayer, nonActivePlayer);
+    activePlayer->newTurn(); // initiates new turn for active player
+    checkTrigger(Ability::BEGIN);
+>>>>>>> introduce trigger without smart pointer
 }
 
 void Board::checkTrigger(Ability::AbilityType trigger, shared_ptr<Unit> target) {

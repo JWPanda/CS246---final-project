@@ -12,12 +12,15 @@ class Face : public Unit
          ~Face();
 
         //stuff:
-         void play (Board &theBoard, int i, int p, int t ) override;
+         void play (Board &theBoard, int i, int p, int t ) override;]
 
         //Mana Mechanics:
         void refillMana();
         void incMana();
+<<<<<<< HEAD
         void getMana(int m);
+=======
+>>>>>>> introduce trigger without smart pointer
         void gainMana(int m);
         int getCurrentMana() const;
         void spendMana(int cost);
