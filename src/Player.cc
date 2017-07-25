@@ -1,25 +1,28 @@
 #include "Player.h"
 #include "Minion.h"
+#include "Board.h"
 #include <string>
 
 using namespace std;
 
 Factory Player::myFactory;
 
-Player::Player(string Name, ifstream &deck):myFace{Name, this} {
+Player::Player(string Name, ifstream &deck, Board& theBoard) : myFace{Name, this}, theBoard{theBoard} {
     string s;
 
     while (getline(deck, s)) {
       myDeck.emplace_back(myFactory.makeCard(s, this));
     }
 
-    for (int i = 0; i < 5; ++i)  {
+    for (int i = 0; i < 4; ++i)  {
         if(myDeck.size() == 0) break;
         draw();
     }
 }
 
 Player::~Player() {}
+
+
 
 //Turn logistics methods------------------------------------------------------
 void Player::draw() {
@@ -35,17 +38,34 @@ void Player::newTurn() {
     myFace.refillMana();
 }
 
-/* TODO void Player::checkTrigger(int trigger) {
-    for (int i = 0 ; i < board.size(); ++i) {
-        if (field[i].isTriggered) // use the card some how
+void Player::checkTrigger(Ability::AbilityType trigger, Unit* target) {
+    for (unsigned int i = 0 ; i < myField.size(); ++i) {
+        if (myField[i]->checkAbility() > Ability::ACTIVE) {
+          myField[i]->use(theBoard, target);
+        }
     }
-    //ritual.use(trigger);
+    myRitual.front()->use(theBoard, target);
 }
-*/
 
 
-void Player::use(Board &theBoard, int i , int p, int t) {
-    if (!myField[i]->hasAbility()) throw "Error: "s + myField[i]->getName() + " has no ability"s;
+
+//Game Commands-----------------------------------------------------------------
+void Player::play (int i, int p, int t ) {
+    int handSize = myHand.size();
+    if (i + 1 > handSize) throw "Error: you only have "s + to_string(handSize) + " cards in your hand"s;
+    if (myField.size() == 5) throw "Error: there are already 5 cards on your field"s;
+    int cost = myHand[i]->getCost();
+    int curMana = myFace.getCurrentMana();
+    if (cost > curMana) throw "Error: not enough mana"s;
+    else {
+        myHand[i]->play(theBoard, i, p, t);
+        myFace.spendMana(cost);
+        myHand.erase(myHand.begin()+i);
+    }
+}
+
+void Player::use(int i , int p, int t) {
+    if (myField[i]->checkAbility() != Ability::NONE) throw "Error: "s + myField[i]->getName() + " has no ability"s;
     int curMana = myFace.getCurrentMana();
     int cost = myField[i]->getAbilityCost();
     if (cost > curMana) throw "Error: not enough mana to use "s + myField[i]->getName() +  "'s ability"s;
@@ -61,34 +81,20 @@ void Player::attack(int m1, Unit &target) {
 }
 
 
-//Move Functions:-----------------------------------------------------------
-void Player::play (Board &theBoard, int i, int p, int t ) {
-    int handSize = myHand.size();
-    if (i + 1 > handSize) throw "Error: you only have "s + to_string(handSize) + " cards in your hand"s;
-    if (myField.size() == 5) throw "Error: there are already 5 cards on your field"s;
-    int cost = myHand[i]->getCost();
-    int curMana = myFace.getCurrentMana();
-    if (cost > curMana) throw "Error: not enough mana"s;
-    else {
-        myHand[i]->play(theBoard, i, p, t);
-        myFace.spendMana(cost);
-        myHand.erase(myHand.begin()+i);
-    }
-}
 
 //Move Methods----------------------------------------------------------------
-void Player::moveToGraveyard (Card* self) {
-  //implement trigger check
+void Player::moveToGraveyard (Unit* self) {
   int index = findSelf(self, myField);
   myGraveyard.emplace_back(self);
   myField.erase(myField.begin() + index);
+  theBoard.checkTrigger(Ability::DEATH, self);
 }
 
-void Player::moveToBoard(Card* self) {
-  //implement trigger check
+void Player::moveToBoard(Unit* self) {
   int fieldSize = myField.size();
   if (fieldSize == 5) throw "Error: there are already 5 cards on your field"s;
   myField.emplace_back(self);
+  theBoard.checkTrigger(Ability::ENTER, self);
 }
 
 void Player::destroyRitual() {
@@ -118,11 +124,17 @@ void Player::revive() {
   myGraveyard.pop_back();
 }
 
+void Player::Disenchant(Card* self) {
+  swap (self,)
+}
+
 void Player::discard(int i) {
   int handSize = myHand.size();
   if (i > handSize) throw "Error: there are only "s + to_string(myHand.size()) + " cards in your hand"s;
   myHand.erase(myHand.begin()+i);
 }
+
+
 
 // Accessors--------------------------------------------------------------------
 int Player::getMana() const{
@@ -150,6 +162,8 @@ const vector<Card*>& Player::getHand() const{
 const vector<Card*>& Player::getField() const{
   return myField;
 }
+
+
 
 //Helper Functions--------------------------------------------------------------
 int Player::findSelf(Card* self, vector<Card*> cvec) {

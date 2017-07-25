@@ -102,7 +102,6 @@ string Silence::getEnchantmentDescription() const
 {
     return "Enchanted minion cannot use abilities";
 }
-
-bool Silence::hasAbility() const {
-    return false;
+Ability::AbilityType Silence::hasAbility() const {
+    return NONE;
 }

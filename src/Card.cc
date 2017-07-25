@@ -13,7 +13,12 @@ Card::~Card() {}
 void Card::use(Board& theBoard, int p, int t) {
     if(!ability) throw "Error: this card does not have an ability"s;
     if(ability->isTriggered() == 0) ability->use(theBoard, p, t, player);
-  //TODO else ability->use(theBoard, theBoard.gettarget, target.player, player);
+}
+void Card::use(Board& theBoard, Unit* target);
+  if(!ability) return;
+  Player * enemy = nullptr;
+  if (target) enemy = target->player;
+  ability->use(theBoard, target, enemy, player);
 }
 
 // List of Abilities initialization:--------------------------------------------
@@ -46,9 +51,9 @@ void Card::initializeAbilities() {
     listOfAbilities["Standstill_Ability"] = make_shared<Standstill_Ability>();
 }
 
-bool Card::hasAbility() const {
-    if(ability) return true;
-    else return false;
+Ability::AbilityType Card::checkAbility() const {
+    if(!ability) return Ability::AbilityType NONE;
+    else return ability->checkAbility();
 }
 
 int Card::getAbilityCost() const {
@@ -69,11 +74,6 @@ void Card::unsummon() {
 //Accessors---------------------------------------------------------------------
 int Card::getCost() const {
   return cost;
-}
-
-int Card::isTriggered() const {
-    if (hasAbility()) return ability->isTriggered();
-    else return false;
 }
 
 int Card::getCharges() const {

@@ -25,11 +25,12 @@ class Card
 
         virtual void play (Board& theBoard, int i, int p, int t)=0;
         virtual void use(Board& theBoard, int p, int t);
+        virtual void use(Board& theBoard, Unit* target);
         virtual std::string getName() const =0; // use for graphics
 
         // Ability Implementation
         static void initializeAbilities();
-        virtual bool hasAbility() const;
+        virtual Ability::AbilityType checkAbility() const;
         virtual int getAbilityCost() const;
         virtual int getCharges() const;
         void addAbility(std::string abilityName); // changes ability of the card
@@ -37,7 +38,6 @@ class Card
 
         //Accessors:
         int getCost() const;
-        int isTriggered() const;
         virtual CardType getType() const = 0;
         virtual std::string getDescription() const;
         virtual int getAttack() const;

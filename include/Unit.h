@@ -17,7 +17,7 @@ class Unit : public Card
 
         //Death Mechanics:
         void reduceAttack(int i);
-        virtual void die()=0;
+        virtual void die() = 0;
         void isDead();
 
         //Accessors:
@@ -27,6 +27,7 @@ class Unit : public Card
 
     protected:
         int Attack, Defense, BaseAttack, BaseDefense;
+        bool Action, OnBoard;
 };
 
 #endif // UNIT_H

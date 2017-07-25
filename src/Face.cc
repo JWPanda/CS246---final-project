@@ -3,7 +3,7 @@
 using namespace std;
 
 Face::Face(string Name, Player* player)
- : Unit{0,0,30,player}, name{Name}, mana_cur{3}, mana_cap{3} {}
+ : Unit{0,0,20,player}, name{Name}, mana_cur{3}, mana_cap{3} {}
 
 Face::~Face() {}
 

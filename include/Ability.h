@@ -10,14 +10,16 @@ class Unit;
 class Ability
 {
     public:
+      enum AbilityType {NONE, ACTIVE, BEGIN, END, ENTER, DEATH};
+
         //Ctor & Dtor:
         Ability(int cost);
         virtual ~Ability();
 
         //Ability Mechanics:
-        virtual int isTriggered()=0;
+        virtual AbilityType checkAbility()= 0;
         virtual void use(Board& theBoard, int p , int t, Player* myPlayer);
-        virtual void use(Board& theBoard, int p, int t);
+        virtual void use(Board& theBoard, Unit& target, Player* enemy, Player* friendly);
         int getCost();
         virtual std::string getDescription()=0;
 

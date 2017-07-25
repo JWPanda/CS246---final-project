@@ -2,6 +2,7 @@
 #define BOARD_H
 #include <fstream>
 #include "Player.h"
+#include "Ability.h"
 
 class Card;
 class Board
@@ -13,7 +14,7 @@ class Board
 
         //Game Mechanics
         void changeTurn();
-        //void checkTrigger(int trigger);
+        void checkTrigger(Ability::AbilityType trigger, Unit* target = nullptr);
 
         //Game Commands:
         void play(int i, int p = -1, char t = 'e');

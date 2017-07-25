@@ -12,7 +12,7 @@ class ActiveAbility : public Ability
         virtual ~ActiveAbility();
 
         // Trigger Implementation:
-        int isTriggered() override;
+        Ability::AbilityType checkAbility() override;
 };
 
 
@@ -73,5 +73,5 @@ struct Blizzard_Ability : public ActiveAbility {
   std::string getDescription() override;
 };
 
-  
+
 #endif // ACTIVEABILITY_H

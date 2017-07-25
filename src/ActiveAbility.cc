@@ -13,7 +13,7 @@ ActiveAbility::ActiveAbility(int cost) : Ability{cost} {}
 ActiveAbility::~ActiveAbility() {}
 
 // Trigger Implementation-------------------------------------------------------
-int ActiveAbility::isTriggered() { return 0;}
+Ability::AbilityType ActiveAbility::checkAbility () { return Ability::ACTIVE;}
 
 // Minion Abilities-------------------------------------------------------------
 
@@ -68,6 +68,7 @@ void MasterSummoner_Ability::use(Board& theBoard, int p , int t, Player* myPlaye
 string MasterSummoner_Ability::getDescription() {
     return "Summon up to three 1/1 air elementals";
 }
+
 
 
 // Spell Abilities--------------------------------------------------------------

@@ -4,6 +4,7 @@
 #include "Factory.h"
 #include "Minion.h"
 #include "Face.h"
+#include "Ability.h"
 #include <fstream>
 #include <memory>
 #include <utility>
@@ -17,23 +18,23 @@ class Player
 {
     public:
         // Ctor & Dtor:
-        Player( std::string Name, std::ifstream & deck);
+        Player( std::string Name, std::ifstream & deck, Board& theBoard);
         ~Player(); // stwill need to destroy deck/hand/etc
         static Factory myFactory;
 
         //Turn logistics methods:
         void draw();
         void newTurn(); // increase mana cap by 1, fill mana
-      //void checkTrigger();
+        void checkTrigger(Ability::AbilityType trigger, Unit* target);
 
         // Game commands:
-        void play(Board &theBoard, int i, int p, int t);
-        void use(Board &theBoard,int i, int p, int t);
+        void play(int i, int p, int t);
+        void use(int i, int p, int t);
         void attack(int m1, Unit& target);
 
         //Move Methods:
         void moveToGraveyard(Card* self);
-        void moveToBoard(Card* self);
+        void moveToBoard(Unit* self);
         void destroyRitual();
         void moveToRitual(int i);
         void moveToDeck(Card* self);
@@ -54,6 +55,7 @@ class Player
 
     private:
         Face myFace;
+        Board& theBoard;
         std::vector<Card*> myDeck;
         std::vector<Card*> myHand;
         std::vector<Card*> myField;

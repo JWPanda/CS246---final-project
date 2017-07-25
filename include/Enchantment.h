@@ -1,6 +1,7 @@
 #ifndef ENCHANTMENT_H
 #define ENCHANTMENT_H
 
+#include "Ability.h"
 #include "Unit.h"
 
 
@@ -52,6 +53,6 @@ struct Silence : public Enchantment {
     Silence(Player* player);
     std::string getEnchantmentName() const override;
     std::string getEnchantmentDescription() const override;
-    bool hasAbility() const override;
+    Ability::AbilityType checkAbility() const override;
 };
 #endif // ENCHANTMENT_H
