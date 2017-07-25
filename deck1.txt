@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Air Elemental
 Giant Strength
 Disenchant
@@ -8,8 +7,6 @@ Troll
 Raise Dead
 Blizzard
 Standstill
-=======
->>>>>>> introduce trigger without smart pointer
 Dark Ritual
 Silence
 Air Elemental
