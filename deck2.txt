@@ -1,8 +1,5 @@
-Fire Elemental
-Dark Ritual
-Potion Seller
 Troll
-Giant Strength
+Troll
 Magic Fatigue
 Silence
 Air Elemental

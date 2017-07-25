@@ -1,15 +1,13 @@
 Unsummon
 Banish
-Recharge
-Disenchant
+Earth Elemental
+Fire Elemental
+Master Summoner
+Air Elemental
 Raise Dead
 Blizzard
 Novice Pyromancer
 Apprentice Summoner
-Air Elemental
-Earth Elemental
-Fire Elemental
-Master Summoner
 Air Elemental
 Air Elemental
 Air Elemental
