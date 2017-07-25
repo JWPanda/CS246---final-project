@@ -1,6 +1,7 @@
-Unsummon
-Banish
-Earth Elemental
+Silence
+Air Elemental
+Troll
+Aura of Power
 Fire Elemental
 Master Summoner
 Air Elemental
