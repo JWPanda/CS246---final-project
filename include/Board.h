@@ -9,7 +9,7 @@ class Board
 {
     public:
         //Ctor & Dtor::
-        Board (std::string name1, std::string name2, std::ifstream &deck1, std::ifstream &deck2);
+        Board (std::string name1, std::string name2, std::ifstream &deck1, std::ifstream &deck2, bool testing);
         ~Board();
 
         //Game Mechanics

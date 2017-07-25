@@ -2,22 +2,27 @@
 #include "Minion.h"
 #include "Board.h"
 #include <string>
+#include <random>
+#include <iostream>
 
 using namespace std;
 
 Factory Player::myFactory;
 
-Player::Player(string Name, ifstream &deck, int playerNum, Board& theBoard) : number{playerNum}, myFace{make_shared<Face>(Name, this)}, theBoard{theBoard} {
+Player::Player(string Name, ifstream &deck, int playerNum, Board& theBoard, bool testing) : number{playerNum}, myFace{make_shared<Face>(Name, this)}, theBoard{theBoard} {
     string s;
 
     while (getline(deck, s)) {
       myDeck.emplace_back(myFactory.makeCard(s, this));
     }
 
+    if (!testing) shuffleDeck();
+
     for (int i = 0; i < 4; ++i)  {
         if(myDeck.size() == 0) break;
         draw();
     }
+
 }
 
 Player::~Player() {}
@@ -36,6 +41,16 @@ void Player::newTurn() {
     if (!(!myDeck.size() == 0 && myHand.size() == 5)) draw();
     myFace->incMana();
     myFace->refillMana();
+}
+
+void Player::shuffleDeck() {
+    default_random_engine generator;
+    uniform_int_distribution<int> distribution(0, myDeck.size()-1);
+    for (unsigned int i = 0; i < myDeck.size() * 10; ++i)
+    {
+      int j = distribution(generator), k = distribution(generator);
+      swap(myDeck[j], myDeck[k]);
+    }
 }
 
 void Player::checkTrigger(Ability::AbilityType trigger, shared_ptr<Unit> target) {

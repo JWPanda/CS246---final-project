@@ -345,7 +345,7 @@ int main(int argc, char* argv[])
 	Card::initializeAbilities();
 	try
 	{
-		Board board{p1Name, p2Name, deckStream1, deckStream2};
+		Board board{p1Name, p2Name, deckStream1, deckStream2, testing};
 		TextDisplay display{&board, lit};
 		if (initStream.is_open())
 		{

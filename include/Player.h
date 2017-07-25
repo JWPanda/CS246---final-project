@@ -18,13 +18,14 @@ class Player
 {
     public:
         // Ctor & Dtor:
-        Player(std::string Name, std::ifstream & deck, int playerNum, Board& theBoard);
+        Player(std::string Name, std::ifstream & deck, int playerNum, Board& theBoard, bool testing);
         ~Player(); // stwill need to destroy deck/hand/etc
         static Factory myFactory;
 
         //Turn logistics methods:
         void draw();
         void newTurn(); // increase mana cap by 1, fill mana
+        void shuffleDeck(); // shuffles your deck
         void checkTrigger(Ability::AbilityType trigger, std::shared_ptr<Unit> target);
 
         // Game commands:
