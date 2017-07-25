@@ -25,6 +25,7 @@ void Enchantment::enchant(shared_ptr<Unit> target) {  //TODO smart pointer here
     Defense = target->getDefense();
     cost = target->getCost();
     ability = target->getAbility();
+    player = target->getPlayer();
     base = target;
 }
 
@@ -82,6 +83,7 @@ void GiantStrength::enchant(shared_ptr<Unit> target) {
     Defense = target->getDefense() + 2;
     cost = target->getCost();
     ability = target->getAbility();
+    player = target->getPlayer();
     base = target;
 }
 

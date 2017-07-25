@@ -135,7 +135,7 @@ void TextDisplay::displayBoard()
 	// Player 1 Deck Player and Graveyard
 	const shared_ptr<Card> grave1 = board->getPlayer(1)->getGraveyard(); // Get grave
 	const shared_ptr<Card> ritual1 = board->getPlayer(1)->getRitual(); // Get ritual
-	Face* face1 = board->getPlayer(1)->getFace(); // Get face
+	shared_ptr<Face> face1 = board->getPlayer(1)->getFace(); // Get face
 	card_template_t grave1_output;
 	if (grave1) grave1_output = getCardTemplate(grave1);
 	card_template_t ritual1_output;
@@ -168,7 +168,7 @@ void TextDisplay::displayBoard()
 	// Player 1 Deck Player and Graveyard
 	const shared_ptr<Card> grave2 = board->getPlayer(2)->getGraveyard(); // Get grave
 	const shared_ptr<Card> ritual2 = board->getPlayer(2)->getRitual(); // Get ritual
-	Face* face2 = board->getPlayer(2)->getFace(); // Get face
+	shared_ptr<Face> face2 = board->getPlayer(2)->getFace(); // Get face
 	card_template_t grave2_output;
 	if (grave2) grave2_output = getCardTemplate(grave2);
 	card_template_t ritual2_output;

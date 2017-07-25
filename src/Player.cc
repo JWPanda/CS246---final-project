@@ -7,7 +7,7 @@ using namespace std;
 
 Factory Player::myFactory;
 
-Player::Player(string Name, ifstream &deck, Board& theBoard) : myFace{Name, this}, theBoard{theBoard} {
+Player::Player(string Name, ifstream &deck, int playerNum, Board& theBoard) : number{playerNum}, myFace{make_shared<Face>(Name, this)}, theBoard{theBoard} {
     string s;
 
     while (getline(deck, s)) {
@@ -34,8 +34,8 @@ void Player::draw() {
 
 void Player::newTurn() {
     if (!(!myDeck.size() == 0 && myHand.size() == 5)) draw();
-    myFace.incMana();
-    myFace.refillMana();
+    myFace->incMana();
+    myFace->refillMana();
 }
 
 void Player::checkTrigger(Ability::AbilityType trigger, shared_ptr<Unit> target) {
@@ -58,23 +58,23 @@ void Player::play (int i, int p, int t ) {
     if (i + 1 > handSize) throw "Error: you only have "s + to_string(handSize) + " cards in your hand"s;
     if (myField.size() == 5) throw "Error: there are already 5 cards on your field"s;
     int cost = myHand[i]->getCost();
-    int curMana = myFace.getCurrentMana();
+    int curMana = myFace->getCurrentMana();
     if (cost > curMana) throw "Error: not enough mana"s;
     else {
         myHand[i]->play(theBoard, i, p, t);
-        myFace.spendMana(cost);
+        myFace->spendMana(cost);
         myHand.erase(myHand.begin()+i);
     }
 }
 
 void Player::use(int i , int p, int t) {
     if (myField[i]->checkAbility() != Ability::NONE) throw "Error: "s + myField[i]->getName() + " has no ability"s;
-    int curMana = myFace.getCurrentMana();
+    int curMana = myFace->getCurrentMana();
     int cost = myField[i]->getAbilityCost();
     if (cost > curMana) throw "Error: not enough mana to use "s + myField[i]->getName() +  "'s ability"s;
     else {
        myField[i]->use(theBoard, p , t);
-       myFace.spendMana(cost);
+       myFace->spendMana(cost);
    }
 }
 
@@ -113,19 +113,19 @@ void Player::moveToRitual(int i) {
 
 void Player::moveToDeck(shared_ptr<Card> self) {
   int index = findSelf(self, myField);
-  if (index < 0) throw "Error: card not found on field";
+  if (index < 0) throw "Error: card not found on field"s;
   myDeck.emplace_back(self);
   myField.erase(myField.begin() + index);
 }
 
 void Player::placeEnchantment(shared_ptr<Card> self) {
-  int handi = findSelf(self, myHand);
-  if (handi < 0) throw "Error: card not found on field";
-  swap(myField[handi], self);
+  int fieldi = findSelf(self, myField);
+  if (fieldi < 0) throw "Error: card not found on field"s;
+  swap(myField[fieldi], self);
 }
 
 void Player::revive() {
-  if (!myGraveyard.size()) throw "Error: graveyard is empty";
+  if (!myGraveyard.size()) throw "Error: graveyard is empty"s;
   moveToBoard (myGraveyard.back());
   myGraveyard.pop_back();
 }
@@ -145,11 +145,15 @@ void Player::discard(int i) {
 
 // Accessors--------------------------------------------------------------------
 int Player::getMana() const{
-  return myFace.getCurrentMana();
+  return myFace->getCurrentMana();
 }
 
-Face* Player::getFace() {
-  return &myFace;
+int Player::getNumber() const {
+  return number;
+}
+
+shared_ptr<Face> Player::getFace() {
+  return myFace;
 }
 
 const shared_ptr<Card> Player::getGraveyard() const{
@@ -175,16 +179,25 @@ const vector<shared_ptr<Card>>& Player::getField() const{
 //Helper Functions--------------------------------------------------------------
 int Player::findSelf(shared_ptr<Card> self, const vector<shared_ptr<Card>> &cvec) {
   for (unsigned int i = 0; i < cvec.size(); ++i) {
+    shared_ptr<Card> selfBase, vecBase;
+    if (self->getBase())
+    {
+      selfBase = self->getBase();
+      while (selfBase->getBase())
+      {
+        selfBase = selfBase->getBase();
+      }
+    }
     if (cvec[i]->getBase())
     {
-      shared_ptr<Card> baseCheck = cvec[i]->getBase();
-      while (baseCheck->getBase())
+      vecBase = cvec[i]->getBase();
+      while (vecBase->getBase())
       {
-        baseCheck = baseCheck->getBase();
+        vecBase = vecBase->getBase();
       }
-      if (baseCheck == self) return i;
     }
-    else if (cvec[i] == self) return i;
+    if ((selfBase && vecBase && selfBase == vecBase) || (selfBase && selfBase == cvec[i]) ||
+      (vecBase && vecBase == self) || (self == cvec[i])) return i;
   }
   return -1;
 }

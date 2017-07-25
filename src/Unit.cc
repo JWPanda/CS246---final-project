@@ -10,6 +10,7 @@ Unit::Unit(int cost, int Attack, int Defense, Player* player)
 Unit::~Unit() {}
 
 void Unit::attack(shared_ptr<Unit> target) {
+    //if (Action == false) throw "Minion has already attacked this turn"s;
     Action = false;
     target->Defense -= Attack;
     Defense -= target->Attack;

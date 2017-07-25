@@ -6,7 +6,7 @@ using namespace std;
 
 
 // Ctor and Dtor----------------------------------------------------------------
-Board::Board(string name1, string name2, ifstream &deck1, ifstream &deck2) : p1{name1, deck1, *this}, p2{name2, deck2, *this}, activePlayer{&p1}, nonActivePlayer{&p2} {}
+Board::Board(string name1, string name2, ifstream &deck1, ifstream &deck2) : p1{name1, deck1, 1, *this}, p2{name2, deck2, 2, *this}, activePlayer{&p1}, nonActivePlayer{&p2} {}
 
 Board::~Board() {}
 
@@ -62,8 +62,7 @@ void Board::attack (int m1, int m2) {
         shared_ptr<Unit> target = getMinion (m2, 0);
         activePlayer->attack(m1, target);
     } else { // attack the enemy face
-        Unit* u = nonActivePlayer->getFace();
-        shared_ptr<Unit> target{u};
+        shared_ptr<Unit> target = nonActivePlayer->getFace();
         activePlayer->attack(m1, target);
     }
 }

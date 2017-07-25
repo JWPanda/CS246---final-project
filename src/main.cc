@@ -115,6 +115,12 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 				cout << e << endl;
 				return 0;
 			}
+			catch (const int w)
+			{
+				cout << "Player " + to_string(w) + "has won!!" << endl;
+				cout << "Game Over." << endl;
+				return true;
+			}
 		}
 		else
 		{
@@ -127,6 +133,12 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 			{
 				cout << e << endl;
 				return 0;
+			}
+			catch (const int w)
+			{
+				cout << "Player " + to_string(w) + "has won!!" << endl;
+				cout << "Game Over." << endl;
+				return true;
 			}
 		}
 	}
@@ -150,6 +162,12 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 			{
 				cout << e << endl;
 			}
+			catch (const int w)
+			{
+				cout << "Player " + to_string(w) + "has won!!" << endl;
+				cout << "Game Over." << endl;
+				return true;
+			}
 		}
 		else
 		{
@@ -163,6 +181,12 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 			catch (const string e)
 			{
 				cout << e << endl;
+			}
+			catch (const int w)
+			{
+				cout << "Player " + to_string(w) + "has won!!" << endl;
+				cout << "Game Over." << endl;
+				return true;
 			}
 		}
 	}
@@ -185,6 +209,12 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 			{
 				cout << e << endl;
 			}
+			catch (const int w)
+			{
+				cout << "Player " + to_string(w) + "has won!!" << endl;
+				cout << "Game Over." << endl;
+				return true;
+			}
 		}
 		else
 		{
@@ -198,6 +228,12 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 			catch (const string e)
 			{
 				cout << e << endl;
+			}
+			catch (const int w)
+			{
+				cout << board.getPlayer(w)->getFace()->getName() + " has won!!" << endl;
+				cout << "Game Over." << endl;
+				return true;
 			}
 		}
 	}

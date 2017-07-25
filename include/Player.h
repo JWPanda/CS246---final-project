@@ -18,7 +18,7 @@ class Player
 {
     public:
         // Ctor & Dtor:
-        Player(std::string Name, std::ifstream & deck, Board& theBoard);
+        Player(std::string Name, std::ifstream & deck, int playerNum, Board& theBoard);
         ~Player(); // stwill need to destroy deck/hand/etc
         static Factory myFactory;
 
@@ -44,7 +44,8 @@ class Player
 
         // Accessors:
         int getMana() const;
-        Face* getFace(); // use for graphics and attack
+        int getNumber() const;
+        std::shared_ptr<Face> getFace(); // use for graphics and attack
         const std::shared_ptr<Card> getGraveyard() const; // use for graphics, top card on graveyard
         const std::shared_ptr<Card> getRitual() const; // use for graphics
         const std::vector<std::shared_ptr<Card>>& getHand() const; // use for graphics
@@ -54,7 +55,8 @@ class Player
         int findSelf(std::shared_ptr<Card> self, const std::vector<std::shared_ptr<Card>> &cvec);
 
     private:
-        Face myFace;
+        int number;
+        std::shared_ptr<Face> myFace;
         Board& theBoard;
         std::vector<std::shared_ptr<Card>> myDeck;
         std::vector<std::shared_ptr<Card>> myHand;
