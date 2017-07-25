@@ -11,10 +11,11 @@ using namespace std;
 class TextDisplay : public Observer
 {
 	Board* board;
+	bool lit;
 	card_template_t getCardTemplate(const Card* c);
 	void printField(vector<Card*> field);
 public:
-	TextDisplay(Board *b);
+	TextDisplay(Board *b, bool lit);
 	void notify();
 	void displayBoard();
 	void displayCard(int i);

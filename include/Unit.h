@@ -23,6 +23,7 @@ class Unit : public Card
         //Accessors:
         int getAttack() const override;
         int getDefense() const override;
+        
 
     protected:
         int Attack, Defense, BaseAttack, BaseDefense;

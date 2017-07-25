@@ -90,6 +90,7 @@ Unit* Card::getBase() {
  // Enchantment Implementation--------------------------------------------------
 string Card::getEnchantmentName() const {return "";}
 string Card::getEnchantmentDescription() const {return "";}
+std::shared_ptr<Ability> Card::getAbility() {return ability;}
 int Card::getEnchantmentCost() const {return -1;}
 int Card::getEnchantmentAttack() const {return -1;}
 int Card::getEnchantmentDefense() const {return -1;};

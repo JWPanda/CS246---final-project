@@ -3,7 +3,7 @@
 #include <iostream>
 #include <sstream>
 
-TextDisplay::TextDisplay(Board *b) : board{b} {}
+TextDisplay::TextDisplay(Board *b, bool lit) : board{b}, lit{lit} {}
 
 void TextDisplay::notify()
 {
@@ -158,7 +158,8 @@ void TextDisplay::displayBoard()
 	vector<Card*> field1 = board->p1.getField(); // Get field
 	printField(field1);
 
-	for (string s : CENTRE_GRAPHIC) cout << s << endl; // Centre Graphic
+	vector<string> centre_graphic = getCentreGraphic(lit);
+	for (string s : centre_graphic) cout << s << endl; // Centre Graphic
 
 	// Player 2 Field
 	vector<Card*> field2 = board->p2.getField(); // Get field

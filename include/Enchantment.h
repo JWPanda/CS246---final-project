@@ -15,7 +15,7 @@ class Enchantment : public Unit
         //Game Mechanics:
         void die() override;
         void play (Board& theBoard, int i, int p, int t) override;
-        // Enchantment * enchant(Unit* target); // enchant target and produce pointer to be placed on the field
+        virtual void enchant(Unit* target); // enchant target and produce pointer to be placed on the field
 
         //Accessors
         CardType getType() const override;
@@ -37,7 +37,7 @@ class Enchantment : public Unit
 struct GiantStrength : public Enchantment {
     GiantStrength(Player* player);
     std::string getEnchantmentName() const override;
-    // Enchantment * enchant(Unit& target) override;
+    void enchant(Unit* target) override;
 };
 
 struct MagicFatigue : public Enchantment {

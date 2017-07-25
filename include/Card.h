@@ -47,6 +47,7 @@ class Card
         virtual std::string getEnchantmentName() const;
         virtual std::string getEnchantmentDescription() const;
         virtual Unit* getBase();
+        virtual std::shared_ptr<Ability> getAbility();
         virtual int getEnchantmentCost() const;
         virtual int getEnchantmentAttack() const;
         virtual int getEnchantmentDefense() const;

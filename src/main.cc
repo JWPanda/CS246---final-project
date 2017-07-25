@@ -28,7 +28,8 @@ void showCommandLineHelp()
 									"\n\t\t-testing -- Enter testing mode" <<
 									"\n\t\t-init <file> -- Enter a series of commands for the beginning of the game" <<
 									"\n\t\t-deck1 <file> -- Specify a deck file for Player 1" <<
-									"\n\t\t-deck2 <file> -- Specify a deck file for Player 2" << endl;
+									"\n\t\t-deck2 <file> -- Specify a deck file for Player 2" <<
+									"\n\t\t-lit -- You're in for a treat" << endl;
 }
 
 bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
@@ -228,7 +229,7 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 
 int main(int argc, char* argv[])
 {
-	bool testing = false;
+	bool testing = false, lit = false;
 	string deck1, deck2;
 	ifstream initStream;
 	for (int i = 1; i < argc; ++i)
@@ -273,6 +274,10 @@ int main(int argc, char* argv[])
 				else throw string(argv[i]);
 				++i;
 			}
+			else if (argv[i] == "-lit"s)
+			{
+				lit = true;
+			}
 			else
 			{
 				cout << "Error: invalid command" << endl;
@@ -305,7 +310,7 @@ int main(int argc, char* argv[])
 	try
 	{
 		Board board{p1Name, p2Name, deckStream1, deckStream2};
-		TextDisplay display{&board};
+		TextDisplay display{&board, lit};
 		if (initStream.is_open())
 		{
 			string input;

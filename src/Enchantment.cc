@@ -1,5 +1,8 @@
 #include "Enchantment.h"
 #include "Player.h"
+#include "Board.h"
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -12,27 +15,29 @@ Enchantment::~Enchantment() {}
 
 //Game Mechanics----------------------------------------------------------------
 void Enchantment::play (Board& theBoard, int i, int p, int t) {
-  player->moveToBoard(this);
+    enchant(&(theBoard.getMinion(t,p)));
+    player->placeEnchantment(this);
 }
 
-// Enchantment * Enchantment::enchant(Unit* target) {  //TODO smart pointer here
-//     Attack = target->getAttack();
-//     Defense = target->getDefense();
-//     cost = target->getCost();
-//     base = target;
-//     return this;
-// }
+void Enchantment::enchant(Unit* target) {  //TODO smart pointer here
+    Attack = target->getAttack();
+    Defense = target->getDefense();
+    cost = target->getCost();
+    ability = target->getAbility();
+    base = target;
+}
 
 void Enchantment::die() {
-    if (getEnchantmentAttack() > 0) base->reduceAttack(getEnchantmentAttack());
-    if (getEnchantmentDefense() > 0) base->getHit(getEnchantmentAttack());
-    // IDK
+    base->die();
 }
 
 
 //Accessors---------------------------------------------------------------------
 
-Card::CardType Enchantment::getType() const { return Card::ENCHANTMENT; }
+Card::CardType Enchantment::getType() const {
+    if (base) return Card::MINION;
+    return Card::ENCHANTMENT;
+}
 
 string Enchantment::getName() const {
   if (base) return base->getName();
@@ -67,12 +72,13 @@ int Enchantment::getEnchantmentDefense() const {
 GiantStrength::GiantStrength(Player* player) :
     Enchantment{1,2,2,player} {}
 string GiantStrength::getEnchantmentName() const {return "Giant Strength";}
-/*Enchantment* GiantStrength::enchant(Unit& target) {
-    Attack = target.getAttack() + 2;
-    Defense = target.getDefense() + 2;
-    base = &target;
-    return this;
-}*/
+void GiantStrength::enchant(Unit* target) {
+    Attack = target->getAttack() + 2;
+    Defense = target->getDefense() + 2;
+    cost = target->getCost();
+    ability = target->getAbility();
+    base = target;
+}
 
 // Magic Fatigue
 MagicFatigue::MagicFatigue(Player* player) : Enchantment{0,-1,-1,player} {}
@@ -92,6 +98,7 @@ string Silence::getEnchantmentDescription() const
 {
     return "Enchanted minion cannot use abilities";
 }
+
 bool Silence::hasAbility() const {
     return false;
 }

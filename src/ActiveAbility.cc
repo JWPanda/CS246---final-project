@@ -3,6 +3,7 @@
 #include "Board.h"
 #include "Minion.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ NovicePyromancer_Ability::NovicePyromancer_Ability() : ActiveAbility{1} {}
 
 
 void NovicePyromancer_Ability::use(Board& theBoard, int p , int t, Player* myPlayer) {
-     theBoard.getMinion(t,p).getHit(1);
+    theBoard.getMinion(t,p).getHit(1);
 }
 
 string NovicePyromancer_Ability::getDescription() {
@@ -79,8 +80,8 @@ void Banish_Ability::use(Board& theBoard, int p , int t, Player* myPlayer){
         //theBoard.getPlayer(p)->destroyRitual();
     }
     else {// target is a minion
-    // if target card is a minion,
-    theBoard.getMinion(t,p).die(); // change if target is a pointer
+        // if target card is a minion,
+        theBoard.getMinion(t,p).die(); // change if target is a pointer
     }
 }
 string Banish_Ability::getDescription() {
@@ -93,7 +94,7 @@ Unsummon_Ability::Unsummon_Ability(): ActiveAbility{0} {}
 
 void Unsummon_Ability::use(Board& theBoard, int p , int t, Player* myPlayer){
     // idea 2:
-  //  theBoard.getMinion(t,p,).unsummon();
+    //     theBoard.getMinion(t,p,).unsummon();
 }
 
 string Unsummon_Ability::getDescription() {

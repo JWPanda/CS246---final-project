@@ -1,4 +1,7 @@
 #include "Board.h"
+#include <iostream>
+#include <string>
+
 using namespace std;
 
 
@@ -65,18 +68,24 @@ void Board::attack (int m1, int m2) {
 
 
 // Accessors--------------------------------------------------------------------
-Unit& Board::getMinion (int i , int player) const {
+Unit& Board::getMinion (int i, int player) const {
     if (player == 1) {
-      Unit& target = dynamic_cast<Unit&>(*(p1.getField()[i]));
-      return target;
+        int field_size = p1.getField().size();
+        if (i >= field_size) throw "Error: there is no minion at "s + to_string(i) + " on your field";
+        Unit& target = dynamic_cast<Unit&>(*(p1.getField()[i]));
+        return target;
     }
     else if (player == 2) {
-      Unit& target = dynamic_cast<Unit&>(*(p2.getField()[i]));
-      return target;
+        int field_size = p2.getField().size();
+        if (i >= field_size) throw "Error: there is no minion at "s + to_string(i) + " on your field";
+        Unit& target = dynamic_cast<Unit&>(*(p2.getField()[i]));
+        return target;
     }
     else {
-      Unit& target = dynamic_cast<Unit&>(*(nonActivePlayer->getField()[i]));
-      return target;
+        int field_size = nonActivePlayer->getField().size();
+        if (i >= field_size) throw "Error: there is no minion at "s + to_string(i) + " on your field";
+        Unit& target = dynamic_cast<Unit&>(*(nonActivePlayer->getField()[i]));
+        return target;
     }
 }
 
