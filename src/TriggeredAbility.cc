@@ -128,6 +128,7 @@ void ElementalParty_Ability::use(Board& theBoard, Card* target, Player* targetPl
             }
         }
     }
+  }
 }
 }
 
