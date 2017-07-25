@@ -15,7 +15,7 @@ TriggeredAbility::~TriggeredAbility() {}
 // Fire Elemental
 FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
 
-void FireElemental_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+void FireElemental_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
     cout << "Fire Elemental" << endl;
 }
 string FireElemental_Ability::getDescription() {
@@ -29,7 +29,7 @@ Ability::AbilityType FireElemental_Ability::checkAbility() {
 // Potion Seller
 PotionSeller_Ability::PotionSeller_Ability() : TriggeredAbility(0) {}
 
-void PotionSeller_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+void PotionSeller_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
     cout << "Potion Seller" << endl;
 }
 
@@ -44,7 +44,7 @@ Ability::AbilityType PotionSeller_Ability::checkAbility() {
 // Troll Ability
 Troll_Ability::Troll_Ability() : TriggeredAbility(0) {}
 
-void Troll_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+void Troll_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
     cout << "Troll" << endl;
 }
 
@@ -63,7 +63,7 @@ Ability::AbilityType Troll_Ability::checkAbility() {
 //Dark Ritual
 DarkRitual_Ability::DarkRitual_Ability() : TriggeredAbility(1) {}
 
-void DarkRitual_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+void DarkRitual_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
     cout << "Dark Ritual" << endl;
 }
 std::string DarkRitual_Ability::getDescription() {
@@ -77,7 +77,7 @@ Ability::AbilityType DarkRitual_Ability::checkAbility() {
 //Aura of Power
 AuraOfPower_Ability::AuraOfPower_Ability() : TriggeredAbility(1) {}
 
-void AuraOfPower_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+void AuraOfPower_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
     cout << "Aura of Power" << endl;
 }
 std::string AuraOfPower_Ability::getDescription() {
@@ -92,7 +92,7 @@ Ability::AbilityType AuraOfPower_Ability::checkAbility() {
 //Standstill
 Standstill_Ability::Standstill_Ability() : TriggeredAbility(2) {}
 
-void Standstill_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+void Standstill_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
     cout << "Standstill" << endl;
 }
 std::string Standstill_Ability::getDescription() {

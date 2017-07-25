@@ -38,7 +38,7 @@ void Player::newTurn() {
     myFace.refillMana();
 }
 
-void Player::checkTrigger(Ability::AbilityType trigger, Unit* target) {
+void Player::checkTrigger(Ability::AbilityType trigger, shared_ptr<Unit> target) {
     for (unsigned int i = 0 ; i < myField.size(); ++i) {
         if (myField[i]->checkAbility() > Ability::ACTIVE) {
           myField[i]->use(theBoard, target);
@@ -78,22 +78,23 @@ void Player::use(int i , int p, int t) {
    }
 }
 
-void Player::attack(int m1, Unit &target) {
-    Unit* attacker = dynamic_cast<Unit*>(myField[m1]);
+void Player::attack(int m1, shared_ptr<Unit>target) {
+    shared_ptr<Unit> attacker = dynamic_pointer_cast<Unit>(myField[m1]);
     attacker->attack(target);
 }
 
 
 
 //Move Methods----------------------------------------------------------------
-void Player::moveToGraveyard (Unit* self) {
+void Player::moveToGraveyard (shared_ptr<Unit> self) {
   int index = findSelf(self, myField);
+  if (index < 0) throw "Error: card not found on field";
   myGraveyard.emplace_back(self);
   myField.erase(myField.begin() + index);
   theBoard.checkTrigger(Ability::DEATH, self);
 }
 
-void Player::moveToBoard(Unit* self) {
+void Player::moveToBoard(shared_ptr<Unit> self) {
   int fieldSize = myField.size();
   if (fieldSize == 5) throw "Error: there are already 5 cards on your field"s;
   myField.emplace_back(self);
@@ -110,14 +111,16 @@ void Player::moveToRitual(int i) {
   myRitual.emplace_back(myHand[i]);
 }
 
-void Player::moveToDeck(Card* self) {
+void Player::moveToDeck(shared_ptr<Card> self) {
   int index = findSelf(self, myField);
+  if (index < 0) throw "Error: card not found on field";
   myDeck.emplace_back(self);
   myField.erase(myField.begin() + index);
 }
 
-void Player::placeEnchantment(Card* self) {
+void Player::placeEnchantment(shared_ptr<Card> self) {
   int handi = findSelf(self, myHand);
+  if (handi < 0) throw "Error: card not found on field";
   swap(myField[handi], self);
 }
 
@@ -127,7 +130,7 @@ void Player::revive() {
   myGraveyard.pop_back();
 }
 /*
-void Player::Disenchant(Card* self) {
+void Player::Disenchant(shared_ptr<Card> self) {
   swap (self,)
 }
 */
@@ -149,38 +152,39 @@ Face* Player::getFace() {
   return &myFace;
 }
 
-const Card* Player::getGraveyard() const{
+const shared_ptr<Card> Player::getGraveyard() const{
   if (myGraveyard.empty()) return nullptr;
   return myGraveyard.back();
 }
 
-const Card* Player::getRitual() const{
+const shared_ptr<Card> Player::getRitual() const{
   if (myRitual.empty()) return nullptr;
   return myRitual.front();
 }
 
-const vector<Card*>& Player::getHand() const{
+const vector<shared_ptr<Card>>& Player::getHand() const{
   return myHand;
 }
 
-const vector<Card*>& Player::getField() const{
+const vector<shared_ptr<Card>>& Player::getField() const{
   return myField;
 }
 
 
 
 //Helper Functions--------------------------------------------------------------
-int Player::findSelf(Card* self, vector<Card*> cvec) {
+int Player::findSelf(shared_ptr<Card> self, const vector<shared_ptr<Card>> &cvec) {
   for (unsigned int i = 0; i < cvec.size(); ++i) {
-    Card* baseCheck = cvec[i]->getBase();
-    if (baseCheck)
+    if (cvec[i]->getBase())
     {
+      shared_ptr<Card> baseCheck = cvec[i]->getBase();
       while (baseCheck->getBase())
       {
         baseCheck = baseCheck->getBase();
       }
+      if (baseCheck == self) return i;
     }
-    if (baseCheck == self) return i;
+    else if (cvec[i] == self) return i;
   }
-    return -1;
+  return -1;
 }

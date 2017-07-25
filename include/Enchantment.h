@@ -16,21 +16,21 @@ class Enchantment : public Unit
         //Game Mechanics:
         void die() override;
         void play (Board& theBoard, int i, int p, int t) override;
-        virtual void enchant(Unit* target); // enchant target and produce pointer to be placed on the field
+        virtual void enchant(std::shared_ptr<Unit> target); // enchant target and produce pointer to be placed on the field
         void unsummon(); // Unsummons the enchantment
 
         //Accessors
         CardType getType() const override;
         std::string getName() const override;
         std::string getDescription() const override;
-        Unit* getBase() override;
+        std::shared_ptr<Unit> getBase() override;
         int getEnchantmentCost() const override;
         int getEnchantmentAttack() const override;
         int getEnchantmentDefense() const override;
 
     protected:
         // TODO make this a smart pointer
-        Unit* base;
+        std::shared_ptr<Unit> base;
         int enchantmentCost;
 };
 
@@ -39,7 +39,7 @@ class Enchantment : public Unit
 struct GiantStrength : public Enchantment {
     GiantStrength(Player* player);
     std::string getEnchantmentName() const override;
-    void enchant(Unit* target) override;
+    void enchant(std::shared_ptr<Unit> target) override;
 };
 
 struct MagicFatigue : public Enchantment {

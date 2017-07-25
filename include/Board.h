@@ -14,7 +14,7 @@ class Board
 
         //Game Mechanics
         void changeTurn();
-        void checkTrigger(Ability::AbilityType trigger, Unit* target = nullptr);
+        void checkTrigger(Ability::AbilityType trigger, std::shared_ptr<Unit> target = nullptr);
 
         //Game Commands:
         void play(int i, int p = -1, char t = 'e');
@@ -22,7 +22,7 @@ class Board
         void attack(int m1, int m2 = -1);
 
         // Accessors:
-        Unit &getMinion (int i, int player = 0) const;
+        std::shared_ptr<Unit> getMinion (int i, int player = 0) const;
         Player* getActivePlayer() const;
         Player* getPlayer(int i);
 

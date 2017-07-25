@@ -15,6 +15,6 @@ void Ability::use(Board& theBoard, int p , int t, Player* myPlayer) {
     throw "Error: can't use pure ability";
 }
 
-void Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly) {
+void Ability::use(Board& theBoard, std::shared_ptr<Unit> target, Player* enemy, Player* friendly) {
     throw "Error: can't use pure ability";
 }

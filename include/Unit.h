@@ -1,10 +1,11 @@
 #ifndef UNIT_H
 #define UNIT_H
 
+#include <memory>
 #include "Card.h"
 
 
-class Unit : public Card
+class Unit : public Card, public std::enable_shared_from_this<Unit>
 {
     public:
         //Ctor & Dtor:
@@ -12,7 +13,7 @@ class Unit : public Card
         virtual ~Unit();
 
         //Attack Mechanics:
-        void attack(Unit& target);
+        void attack(std::shared_ptr<Unit> target);
         void getHit(int attack);
 
         //Death Mechanics:

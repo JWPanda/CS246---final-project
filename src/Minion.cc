@@ -18,7 +18,7 @@ void Minion::die() {
     reset();
 
     // move to next field
-    player->moveToGraveyard(this);
+    player->moveToGraveyard(shared_from_this());
 }
 
 // reset minion's attack and defense to base values
@@ -30,11 +30,11 @@ void Minion::reset() {
 
 // Game Mechanics---------------------------------------------------------------
 void Minion::play (Board& theBoard, int i, int p, int t) {
-  player->moveToBoard(this);
+  player->moveToBoard(shared_from_this());
 }
 
 void Minion::unsummon() {
-  player->moveToDeck(this);
+  player->moveToDeck(shared_from_this());
 }
 
 // Acessors---------------------------------------------------------------------
