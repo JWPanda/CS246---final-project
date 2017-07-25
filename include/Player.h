@@ -1,8 +1,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "Unit.h"
+#include "Factory.h"
+#include "Minion.h"
 #include "Face.h"
 #include <fstream>
+#include <memory>
 #include <utility>
 #include <vector>
 
@@ -13,32 +16,49 @@ class Card;
 class Player
 {
     public:
-        Player(std::string Name, std::ifstream & deck);
+        // Ctor & Dtor:
+        Player( std::string Name, std::ifstream & deck);
         ~Player(); // stwill need to destroy deck/hand/etc
-        // Game commands
+        static Factory myFactory;
+
+        //Turn logistics methods:
         void draw();
-        void attack(int m1, Unit& target);
-        void use(Board &theBoard, int p = -1, int t = -1);
         void newTurn(); // increase mana cap by 1, fill mana
-        void checkTrigger();
-        void play(int i);
-        void play(int i, Unit& target);
-        void die (Unit* unit);
-        // Accessors
-        std::vector<Card*> & getHand(); // use for graphics
-        std::vector<Card*> & getField(); // use for graphics
-        Card& getGraveyard(); // use for graphics, top card on graveyard
-        Card& getRitual(); // use for graphics
-        Face& getFace(); // use for graphics
-        int getMana();
+      //void checkTrigger();
+
+        // Game commands:
+        void play(Board &theBoard, int i, int p, int t);
+        void use(Board &theBoard,int i, int p, int t);
+        void attack(int m1, Unit& target);
+
+        //Move Methods:
+        void moveToGraveyard(Card* self);
+        void moveToBoard(Card* self);
+        void destroyRitual();
+        void moveToRitual(int i);
+        void moveToDeck(Card* self);
+        void placeEnchantment(Card* self);
+        void revive();
+        void discard(int i);
+
+        // Accessors:
+        int getMana() const;
+        Face* getFace(); // use for graphics and attack
+        const Card* getGraveyard() const; // use for graphics, top card on graveyard
+        const Card* getRitual() const; // use for graphics
+        const std::vector<Card*>& getHand() const; // use for graphics
+        const std::vector<Card*>& getField() const; // use for graphics
+
+        //Helper Method:
+        int findSelf(Card* self, std::vector<Card*> cvec);
+
     private:
-        int mana;
-        std::vector<Card*> deck;
-        std::vector<Card*> hand;
-        std::vector<Card*> graveyard;
-        std::vector<Card*> field;
-        std::vector<Card*> ritual;
-        Face player;
+        Face myFace;
+        std::vector<Card*> myDeck;
+        std::vector<Card*> myHand;
+        std::vector<Card*> myField;
+        std::vector<Card*> myRitual;
+        std::vector<Card*> myGraveyard;
 };
 
 #endif // PLAYER_H

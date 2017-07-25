@@ -11,14 +11,14 @@ using namespace std;
 class TextDisplay : public Observer
 {
 	Board* board;
-	enum CardTypes { MINION, SPELL, RITUAL, ENCHANTMENT };
-	card_template_t getCardTemplate(Card* c);
+	bool lit;
+	card_template_t getCardTemplate(const Card* c);
 	void printField(vector<Card*> field);
 public:
-	TextDisplay(Board *b);
+	TextDisplay(Board *b, bool lit);
 	void notify();
 	void displayBoard();
-	void displayCard();
+	void displayCard(int i);
 	void displayHand();
 	// void displayMinionNoAbility(std::string name,int cost,int attack,int defence);
 	// void displayMinionTriggeredAbility(std::string name,int cost,int attack,int defence, std::string trigger_desc);

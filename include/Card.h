@@ -4,51 +4,63 @@
 #include <map>
 #include <string>
 #include <memory>
+#include "Ability.h"
 #include "ActiveAbility.h"
 #include "TriggeredAbility.h"
 #include "Ability.h"
 
 
+//Predefined classes
 class Board;
 class Player;
+class Unit;
 
 class Card
 {
     public:
-        Card(int cost, Player * player);
+        enum CardType { MINION, SPELL, RITUAL, ENCHANTMENT, FACE };
+        //Ctor & Dtor:
+        Card(Player * player, int cost );
         virtual ~Card();
-        void use(Board& theBoard, int p =0, int t = 0);
-        virtual std::string getName()=0; // use for graphics
-        //void notifyBoard();
-        int getCost();
+
+        virtual void play (Board& theBoard, int i, int p, int t)=0;
+        virtual void use(Board& theBoard, int p, int t);
+        virtual std::string getName() const =0; // use for graphics
 
         // Ability Implementation
         static void initializeAbilities();
+        virtual bool hasAbility() const;
+        virtual int getAbilityCost() const;
+        virtual int getCharges() const;
         void addAbility(std::string abilityName); // changes ability of the card
-        virtual bool hasAbility();
-        virtual int getAbilityCost();
-        bool isTriggered();
-        virtual std::string getDescription();
+        virtual void unsummon();
+
+        //Accessors:
+        int getCost() const;
+        int isTriggered() const;
+        virtual CardType getType() const = 0;
+        virtual std::string getDescription() const;
+        virtual int getAttack() const;
+        virtual int getDefense() const;
+
 
         // Enchantment Implementation
-        virtual std::string getEnchantmentDescription();
-        virtual int getEnchantmentAttack();
-        virtual int getEnchantmentDefense();
-
-        virtual void attack(Unit& target);
-        virtual int getAttack()=0;
-        virtual int getDefense()=0;
-        virtual int getType()=0;
+        virtual std::string getEnchantmentName() const;
+        virtual std::string getEnchantmentDescription() const;
+        virtual Unit* getBase();
+        virtual std::shared_ptr<Ability> getAbility();
+        virtual int getEnchantmentCost() const;
+        virtual int getEnchantmentAttack() const;
+        virtual int getEnchantmentDefense() const;
 
     protected:
         std::shared_ptr<Ability> ability;
         Player * player;
+        int cost;
+
     private:
-        Board* theBoard;
         //Ability Implementation
         static std::map<std::string, std::shared_ptr<Ability>> listOfAbilities;
-
-        int cost;
 };
 
 #endif // CARD_H

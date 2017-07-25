@@ -1,62 +1,65 @@
 #ifndef TRIGGEREDABILITY_H
 #define TRIGGEREDABILITY_H
 #include <string>
-#include <Ability.h>
+#include "Ability.h"
 
 
 class TriggeredAbility : public Ability
 {
     public:
+      //Ctor and Dtor
         TriggeredAbility(int cost);
         ~TriggeredAbility();
 
-
-        bool isTriggered() override;
-
-    protected:
-
-    private:
-
+        //Trigger Implementation
+        int isTriggered() override;
 };
 
 // Minion Triggered Abilities
-struct FireElemental_Ability : public TriggeredAbility {
+struct FireElemental_Ability : public TriggeredAbility
+{
     FireElemental_Ability();
     void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
 
-struct PotionSeller_Ability : public TriggeredAbility {
+struct PotionSeller_Ability : public TriggeredAbility
+{
     PotionSeller_Ability();
     void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
 
-struct ManEater_Ability : public TriggeredAbility {
-    ManEater_Ability();
+struct Troll_Ability : public TriggeredAbility
+{
+    Troll_Ability();
     void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
 
+
 // Ritual Triggered Abilities
 
-struct DarkRitual_Ability : public TriggeredAbility {
+struct DarkRitual_Ability : public TriggeredAbility
+{
     DarkRitual_Ability();
     void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
 
-struct AuraOfPower_Ability : public TriggeredAbility {
+struct AuraOfPower_Ability : public TriggeredAbility
+{
     AuraOfPower_Ability();
     void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
 
-struct Standstill_Ability : public TriggeredAbility {
+struct Standstill_Ability : public TriggeredAbility
+{
     Standstill_Ability();
     void use(Board& theBoard, int p, int t) override;
     std::string getDescription() override;
 };
 
-#endif // TRIGGEREDABILITY_H
 
+#endif // TRIGGEREDABILITY_H

@@ -2,20 +2,20 @@
 
 using namespace std;
 
-TriggeredAbility::~TriggeredAbility()
-{
-    //dtor
-}
-
+//Ctor and Dtor-----------------------------------------------------------------
 TriggeredAbility::TriggeredAbility(int cost) : Ability{cost} {}
 
-bool TriggeredAbility::isTriggered() { return true; }
+TriggeredAbility::~TriggeredAbility() {}
 
 
+//Trigger Implementation--------------------------------------------------------
+int TriggeredAbility::isTriggered() { return 4; }
 
-// Triggered Ability Sub classes below
+
+//Minion Triggered Abilities----------------------------------------------------
+
+
 // Fire Elemental
-
 FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
 
 void FireElemental_Ability::use(Board& theBoard, int p, int t) {
@@ -27,8 +27,8 @@ std::string FireElemental_Ability::getDescription() {
     return "Whenever an opponent's minion enters play, deal 1 damage to it";
 }
 
-// Potion Seller
 
+// Potion Seller
 PotionSeller_Ability::PotionSeller_Ability() : TriggeredAbility(0) {}
 
 void PotionSeller_Ability::use(Board& theBoard, int p, int t) {
@@ -41,8 +41,8 @@ string PotionSeller_Ability::getDescription() {
     return "At the end of your turn, all your minions gain +0/+1.";
 }
 
-// Troll Ability
 
+// Troll Ability
 Troll_Ability::Troll_Ability() : TriggeredAbility(0) {}
 
 void Troll_Ability::use(Board& theBoard, int p, int t) {
@@ -52,5 +52,47 @@ void Troll_Ability::use(Board& theBoard, int p, int t) {
 }
 
 string Troll_Ability::getDescription() {
-    return "When a minion dies, all your minions gain +1/+0"
+    return "When a minion dies, all your minions gain +1/+0";
+}
+
+
+//Rituals-----------------------------------------------------------------------
+
+
+//Dark Ritual
+DarkRitual_Ability::DarkRitual_Ability() : TriggeredAbility(1) {}
+
+void DarkRitual_Ability::use(Board& theBoard, int p, int t) {
+    if (p == 69) { // trigger on play minion
+        // go to the most recent minion on enemy field and make it take damage
+    }
+}
+std::string DarkRitual_Ability::getDescription() {
+    return "At the start of your turn, gain 1 magic";
+}
+
+
+//Aura of Power
+AuraOfPower_Ability::AuraOfPower_Ability() : TriggeredAbility(1) {}
+
+void AuraOfPower_Ability::use(Board& theBoard, int p, int t) {
+    if (p == 69) { // trigger on play minion
+        // go to the most recent minion on enemy field and make it take damage
+    }
+}
+std::string AuraOfPower_Ability::getDescription() {
+    return "Whenever a minion enters play under your control, it gains +1/+1";
+}
+
+
+//Standstill
+Standstill_Ability::Standstill_Ability() : TriggeredAbility(2) {}
+
+void Standstill_Ability::use(Board& theBoard, int p, int t) {
+    if (p == 69) { // trigger on play minion
+        // go to the most recent minion on enemy field and make it take damage
+    }
+}
+std::string Standstill_Ability::getDescription() {
+    return "Whenever a minion enters play, destory it";
 }

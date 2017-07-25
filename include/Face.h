@@ -7,21 +7,32 @@
 class Face : public Unit
 {
     public:
+        //Ctor & Dtor:
         Face(std::string name, Player* player);
-        virtual ~Face();
-        void die();
+         ~Face();
+
+        //stuff:
+         void play (Board &theBoard, int i, int p, int t ) override;
+
+        //Mana Mechanics:
         void refillMana();
         void incMana();
-        int getCurrentMana();
+        int getCurrentMana() const;
         void spendMana(int cost);
-        std::string getName() override;
-    protected:
+
+        // End Game:
+        void die();
+
+        // Accessors:
+        CardType getType() const override;
+        std::string getName() const override;
 
     private:
+        Player* player;
         std::string name;
         int mana_cur;
         int mana_cap;
-        Player* player;
+
 };
 
 #endif // FACE_H

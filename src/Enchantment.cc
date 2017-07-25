@@ -1,66 +1,108 @@
 #include "Enchantment.h"
+#include "Player.h"
+#include "Board.h"
+#include <iostream>
+#include <string>
 
 using namespace std;
 
+//Ctor and Dtor-----------------------------------------------------------------
 Enchantment::Enchantment(int cost,int Attack, int Defense, Player* player)
-: Unit{cost, Attack, Defense, player} {};
+: Unit{cost, Attack, Defense, player}, base{nullptr},  enchantmentCost(cost){}
 
-Enchantment::~Enchantment();
+Enchantment::~Enchantment() {}
 
-string Enchantment::getDescription() {
+
+//Game Mechanics----------------------------------------------------------------
+void Enchantment::play (Board& theBoard, int i, int p, int t) {
+    enchant(&(theBoard.getMinion(t,p)));
+    player->placeEnchantment(this);
+}
+
+void Enchantment::enchant(Unit* target) {  //TODO smart pointer here
+    Attack = target->getAttack();
+    Defense = target->getDefense();
+    cost = target->getCost();
+    ability = target->getAbility();
+    base = target;
+}
+
+void Enchantment::die() {
+    base->die();
+}
+
+void Enchantment::unsummon() {
+    base->unsummon();
+}
+
+
+//Accessors---------------------------------------------------------------------
+
+Card::CardType Enchantment::getType() const {
+    if (base) return Card::MINION;
+    return Card::ENCHANTMENT;
+}
+
+string Enchantment::getName() const {
+  if (base) return base->getName();
+  else return getEnchantmentName();
+}
+
+string Enchantment::getDescription() const {
     if (base) return base->getDescription();
     else return getEnchantmentDescription();
 }
 
-int Enchantment::getEnchantmentAttack() {
+Unit* Enchantment::getBase() {
+    return base;
+}
+
+int Enchantment::getEnchantmentCost() const {
+    if (base) return base->getCost();
+    else return getCost();
+}
+int Enchantment::getEnchantmentAttack() const {
     return BaseAttack;
 };
-int getEnchantmentDefense() {
+
+int Enchantment::getEnchantmentDefense() const {
     return BaseDefense;
 };
 
-int Enchantment::getType() { return 4};
 
-Enchantment * Enchantment::enchant(Unit& target) {
-    attack = target.getAttack();
-    defense = target.getDefense();
-    base = &target;
-    return this;
-}
-
-void Enchantment::die() {
-    if (getEnchantmentAttack() > 0) base->reduceAttack(getEnchantmentAttack());
-    if (getEnchantmentDefense() > 0) base->getHit(getEnchantmentAttack());
-    // IDK
-}
-
-// Enchantment Subclasses
+// Enchantment Subclasses-------------------------------------------------------
 
 // Giant Strength
-giantStrength::giantStrength(Player* player) :
+GiantStrength::GiantStrength(Player* player) :
     Enchantment{1,2,2,player} {}
-
-Enchantment* giantStrength::enchant(Unit& target) {
-    attack = target.getAttack() + 2;
-    defense = target.getDefense() +2;
-    base = &target;
-    return this;
+string GiantStrength::getEnchantmentName() const {return "Giant Strength";}
+void GiantStrength::enchant(Unit* target) {
+    Attack = target->getAttack() + 2;
+    Defense = target->getDefense() + 2;
+    cost = target->getCost();
+    ability = target->getAbility();
+    base = target;
 }
 
 // Magic Fatigue
-magicFatigue::magicFatigue(Player* player) : Enchantment{0,-1,-1,player} {}
-string magicFatigue::getEnchantmentDescription() {
-    return "Enchanted minion's activated ability costs 2 more"
+MagicFatigue::MagicFatigue(Player* player) : Enchantment{0,-1,-1,player} {}
+string MagicFatigue::getEnchantmentName() const {return "Magic Fatigue";}
+string MagicFatigue::getEnchantmentDescription() const
+{
+    return "Enchanted minion's activated ability costs 2 more";
 }
-int getAbilityCost() {
+int MagicFatigue::getAbilityCost() const {
     return base->getAbilityCost() + 2;
 }
 
 // Silence
-silence::silence(Player* player) : Enchantment{1,-1,-1,player};
-string silence::getEnchantmentDescription() {
-    return "Enchanted minion cannot use abilities"
+Silence::Silence(Player* player) : Enchantment{1,-1,-1,player} {}
+string Silence::getEnchantmentName() const {return "Silence";}
+string Silence::getEnchantmentDescription() const
+{
+    return "Enchanted minion cannot use abilities";
 }
-bool hasAbility() {
-    return false; // or throw?
+
+bool Silence::hasAbility() const {
+    return false;
 }

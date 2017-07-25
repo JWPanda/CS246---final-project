@@ -7,21 +7,26 @@
 class Unit : public Card
 {
     public:
+        //Ctor & Dtor:
         Unit(int cost,int Attack, int Defense, Player* player);
         virtual ~Unit();
 
-        int getAttack() override;
-        int getDefense() override;
-
+        //Attack Mechanics:
         void attack(Unit& target);
         void getHit(int attack);
+
+        //Death Mechanics:
         void reduceAttack(int i);
         virtual void die()=0;
         void isDead();
+
+        //Accessors:
+        int getAttack() const override;
+        int getDefense() const override;
+        
 
     protected:
         int Attack, Defense, BaseAttack, BaseDefense;
 };
 
 #endif // UNIT_H
-
