@@ -18,7 +18,7 @@ void Board::changeTurn () {
     checkTrigger(Ability::END);
     swap(activePlayer, nonActivePlayer);
     activePlayer->newTurn(); // initiates new turn for active player
-    checkTrigger(Ability::BEGIN);  // check new turn trigddger for active player
+    checkTrigger(Ability::BEGIN);  // check new turn trigger for active player
 }
 
 void Board::checkTrigger(Ability::AbilityType trigger, shared_ptr<Unit> target) {

@@ -18,6 +18,10 @@ void Face::incMana() {
     ++mana_cap;
 }
 
+void Face::gainMana(int m) {
+  mana_cur +=m;
+}
+
 int Face::getCurrentMana() const { return mana_cur;}
 
 void Face::spendMana(int cost) { mana_cur -= cost;}

@@ -18,6 +18,7 @@ class Enchantment : public Unit
         void play (Board& theBoard, int i, int p, int t) override;
         virtual void enchant(std::shared_ptr<Unit> target); // enchant target and produce pointer to be placed on the field
         void unsummon(); // Unsummons the enchantment
+        void disenchant() override;
 
         //Accessors
         CardType getType() const override;

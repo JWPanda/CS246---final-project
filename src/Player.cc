@@ -55,7 +55,7 @@ void Player::shuffleDeck() {
 
 void Player::checkTrigger(Ability::AbilityType trigger, shared_ptr<Unit> target) {
     for (unsigned int i = 0 ; i < myField.size(); ++i) {
-        if (myField[i]->checkAbility() > Ability::ACTIVE) {
+        if (myField[i]->checkAbility() == trigger) {
           myField[i]->use(theBoard, target);
         }
     }
@@ -163,6 +163,10 @@ void Player::discard(int i) {
 
 
 // Accessors--------------------------------------------------------------------
+void Player::gainMana(int m) {
+  myFace.gainMana(m);
+}
+
 int Player::getMana() const{
   return myFace->getCurrentMana();
 }

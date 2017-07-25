@@ -44,6 +44,7 @@ class Player
         void discard(int i);
 
         // Accessors:
+        void gainMana(int m);
         int getMana() const;
         int getNumber() const;
         std::shared_ptr<Face> getFace(); // use for graphics and attack
