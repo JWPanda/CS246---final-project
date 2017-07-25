@@ -5,14 +5,14 @@ using namespace std;
 
 //Ctor and Dtor-----------------------------------------------------------------
 Enchantment::Enchantment(int cost,int Attack, int Defense, Player* player)
-: Unit{cost, Attack, Defense, player}, enchantmentCost(cost) {};
+: Unit{cost, Attack, Defense, player}, base{nullptr},  enchantmentCost(cost){}
 
 Enchantment::~Enchantment() {}
 
 
 //Game Mechanics----------------------------------------------------------------
 void Enchantment::play (Board& theBoard, int i, int p, int t) {
-  player->moveToBoard(i);
+  player->moveToBoard(this);
 }
 
 // Enchantment * Enchantment::enchant(Unit* target) {  //TODO smart pointer here

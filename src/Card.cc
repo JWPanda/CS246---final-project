@@ -82,7 +82,7 @@ int Card::getDefense() const {
   return -1;
 }
 
-Unit* getBase() {
+Unit* Card::getBase() {
     return nullptr;
 }
 
