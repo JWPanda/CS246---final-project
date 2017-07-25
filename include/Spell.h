@@ -1,15 +1,18 @@
 #ifndef SPELL_H
 #define SPELL_H
 
-#include <Card.h>
+#include "Card.h"
 
+class Board;
+class
 
 class Spell : public Card
 {
     public:
-        Spell();
+        Spell(int cost, Player* player);
         virtual ~Spell();
-        play(Board& theBoard, int i, int p, int t) override;
+        void play(Board& theBoard, int i, int p, int t) override;
+        Card::CardType getType() override;
     protected:
 
     private:
