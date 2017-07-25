@@ -30,7 +30,7 @@ void Minion::reset() {
 
 // Game Mechanics---------------------------------------------------------------
 void Minion::play (Board& theBoard, int i, int p, int t) {
-  player->moveToBoard(i);
+  player->moveToBoard(this);
 }
 
 Card::CardType Minion::getType() const {return MINION;}

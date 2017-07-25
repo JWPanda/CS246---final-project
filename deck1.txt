@@ -1,6 +1,5 @@
-Giant Strength
-Magic Fatigue
-Silence
+Novice Pyromancer
+Apprentice Summoner
 Air Elemental
 Earth Elemental
 Fire Elemental

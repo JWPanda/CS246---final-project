@@ -28,16 +28,17 @@ class Player
 
         // Game commands:
         void play(Board &theBoard, int i, int p, int t);
-        //void use(Board &theBoard,int i, int p = -1, int t = -1);
+        void use(Board &theBoard,int i, int p, int t);
         void attack(int m1, Unit& target);
 
-        //Move Functions:
+        //Move Methods:
         void moveToGraveyard(Card* self);
-        void moveToBoard(int i);
+        void moveToBoard(Card* self);
         void destroyRitual();
         void moveToRitual(int i);
         void moveToDeck(Card* self);
         void placeEnchantment(Card* self);
+        void Revive();
         void discard(int i);
 
         // Accessors:

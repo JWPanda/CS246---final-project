@@ -43,21 +43,17 @@ void Player::newTurn() {
 }
 */
 
-/*
-void Player::use(int m1, Board &theBoard) {
-    myHand[m1].use(theBoard);
-}
 
 void Player::use(Board &theBoard, int i , int p, int t) {
-    if (!(field[i].hasAbility()) throw "Error: " field[i]->getName() " has no ability";
+    if (!myField[i]->hasAbility()) throw "Error: "s + myField[i]->getName() + " has no ability"s;
     int curMana = myFace.getCurrentMana();
-    int cost = field[i].getAbilityCost();
-    if (cost > curMana) throw "Error: not enough mana to play " field[i]->getName() "'s ability";
+    int cost = myField[i]->getAbilityCost();
+    if (cost > curMana) throw "Error: not enough mana to use "s + myField[i]->getName() +  "'s ability"s;
     else {
-       field[i].use(theBoard, p , t);
+       myField[i]->use(theBoard, p , t);
        myFace.spendMana(cost);
    }
-}*/
+}
 
 void Player::attack(int m1, Unit &target) {
     Unit* attacker = dynamic_cast<Unit*>(myField[m1]);
@@ -76,22 +72,23 @@ void Player::play (Board &theBoard, int i, int p, int t ) {
     else {
         myHand[i]->play(theBoard, i, p, t);
         myFace.spendMana(cost);
+        myHand.erase(myHand.begin()+i);
     }
 }
 
-//Move Functions----------------------------------------------------------------
+//Move Methods----------------------------------------------------------------
 void Player::moveToGraveyard (Card* self) {
+  //implement trigger check
+  int index = findSelf(self, myField);
   myGraveyard.emplace_back(self);
-  for (unsigned int i = 0; i < myField.size(); ++i) {
-    if (myField[i] == self) myField.erase(myField.begin()+i);
-  }
+  myField.erase(myField.begin() + index);
 }
 
-void Player::moveToBoard(int i) {
+void Player::moveToBoard(Card* self) {
+  //implement trigger check
   int fieldSize = myField.size();
   if (fieldSize == 5) throw "Error: there are already 5 cards on your field"s;
-  myField.emplace_back(myHand[i]);
-  myHand.erase(myHand.begin()+i);
+  myField.emplace_back(self);
 }
 
 void Player::destroyRitual() {
@@ -102,7 +99,6 @@ void Player::destroyRitual() {
 void Player::moveToRitual(int i) {
   if (myRitual.size() > 0) destroyRitual();
   myRitual.emplace_back(myHand[i]);
-  myHand.erase(myHand.begin() + i);
 }
 
 void Player::moveToDeck(Card* self) {
@@ -114,7 +110,12 @@ void Player::moveToDeck(Card* self) {
 void Player::placeEnchantment(Card* self) {
   int handi = findSelf(self, myHand);
   swap(myField[handi], self);
-  myHand.erase(myHand.begin() + handi);
+}
+
+void Player::Revive() {
+  if (!myGraveyard.size()) throw "Error: graveyard is empty";
+  moveToBoard (myGraveyard.back());
+  myGraveyard.pop_back();
 }
 
 void Player::discard(int i) {
