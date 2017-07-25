@@ -11,7 +11,7 @@ class Unit;
 class Ability
 {
     public:
-      enum AbilityType {NONE, ACTIVE, BEGIN, END, ENTER, DEATH};
+      enum AbilityType {NONE, ACTIVE, BEGIN, END, ENTER, DEATH, SILENCE};
 
         //Ctor & Dtor:
         Ability(int cost);

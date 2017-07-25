@@ -13,8 +13,10 @@ Card::~Card() {}
 //Game Mechanics----------------------------------------------------------------
 void Card::use(Board& theBoard, int p, int t) {
     if(!ability) throw "Error: this card does not have an ability"s;
+    if (checkAbility() == Ability::SILENCE) throw "Error: this card is silenced"s;
     if(ability->checkAbility() != Ability::NONE) ability->use(theBoard, p, t, player);
 }
+
 void Card::use(Board& theBoard, shared_ptr<Unit> target) {
   if(!ability) return;
   Player * enemy = nullptr;
@@ -86,6 +88,7 @@ int Card::getCharges() const {
 }
 
 string Card::getDescription() const {
+    if (!ability) return "";
     return ability->getDescription();
 }
 

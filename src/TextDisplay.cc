@@ -70,26 +70,40 @@ void TextDisplay::displayCard(int i)
 	Player *p = board->getActivePlayer();
 	const vector<shared_ptr<Card>> &field = p->getField();
 	shared_ptr<Card> c = field[i];
-	card_template_t minion_output = getCardTemplate(c);
-	for (auto line : minion_output)
-	{
-		cout << line << endl;
-	}
 
 	if (c->getBase())
 	{
 		vector<shared_ptr<Card>> enchantments;
-		enchantments.push_back(c->getBase());
+		enchantments.push_back(c);
 		while (enchantments.back()->getBase())
 		{
 			enchantments.push_back(enchantments.back()->getBase());
 		}
-		enchantments.pop_back();
-		vector<card_template_t> enchantments_output;
 
+		card_template_t minion_output = getCardTemplate(enchantments.back());
+		for (auto line : minion_output)
+		{
+			cout << line << endl;
+		}
+		enchantments.pop_back();
+
+		vector<card_template_t> enchantments_output;
 		for (auto e : enchantments)
 		{
-			enchantments_output.push_back(getCardTemplate(e));
+			card_template_t e_output;
+			if (c->getEnchantmentAttack() < 0)
+			{
+				e_output = display_enchantment(c->getEnchantmentName(), c->getEnchantmentCost(), c->getEnchantmentDescription());
+			}
+			else
+			{
+				stringstream ss1, ss2;
+				ss1 << "+" << c->getEnchantmentAttack();
+				ss2 << "+" << c->getEnchantmentDefense();
+				e_output = display_enchantment_attack_defence(c->getEnchantmentName(), c->getEnchantmentCost(), c->getEnchantmentDescription(), ss1.str(), ss2.str());
+			}
+			
+			enchantments_output.push_back(e_output);
 		}
 
 		for (unsigned int i = 0; i < enchantments_output.size(); i += 5)
@@ -102,6 +116,14 @@ void TextDisplay::displayCard(int i)
 				}
 				cout << endl;
 			}
+		}
+	}
+	else
+	{
+		card_template_t minion_output = getCardTemplate(c);
+		for (auto line : minion_output)
+		{
+			cout << line << endl;
 		}
 	}
 }

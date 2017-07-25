@@ -70,7 +70,11 @@ void Player::checkTrigger(Ability::AbilityType trigger, shared_ptr<Unit> target)
 //Game Commands-----------------------------------------------------------------
 void Player::play (int i, int p, int t ) {
     int handSize = myHand.size();
-    if (i + 1 > handSize) throw "Error: you only have "s + to_string(handSize) + " cards in your hand"s;
+    if (i + 1 > handSize)
+    {
+      if (handSize) throw "Error: you only have "s + to_string(handSize) + " cards in your hand"s;
+      throw "Error: you have no cards in your hand."s;
+    }
     if (myField.size() == 5) throw "Error: there are already 5 cards on your field"s;
     int cost = myHand[i]->getCost();
     int curMana = myFace->getCurrentMana();

@@ -46,6 +46,7 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 	{
 		// Switch player turn
 		board.changeTurn();
+		display.displayBoard();
 	}
 	else if (command == "quit")
 	{
@@ -229,9 +230,9 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 			{
 				cout << e << endl;
 			}
-			catch (const int w)
+			catch (const int pNum)
 			{
-				cout << board.getPlayer(w)->getFace()->getName() + " has won!!" << endl;
+				cout << board.getPlayer(pNum)->getFace()->getName() + " has won!!" << endl;
 				cout << "Game Over." << endl;
 				return true;
 			}
@@ -347,6 +348,7 @@ int main(int argc, char* argv[])
 	{
 		Board board{p1Name, p2Name, deckStream1, deckStream2, testing};
 		TextDisplay display{&board, lit};
+		display.displayBoard();
 		if (initStream.is_open())
 		{
 			string input;

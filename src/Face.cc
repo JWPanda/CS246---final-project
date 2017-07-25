@@ -1,4 +1,5 @@
 #include "Face.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -23,7 +24,7 @@ void Face::spendMana(int cost) { mana_cur -= cost;}
 
 void Face::die() {
     // Let main know that you are dead. game over
-    throw ;
+    throw player->getNumber();
 }
 
 Card::CardType Face::getType() const {return FACE;}
