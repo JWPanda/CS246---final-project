@@ -61,5 +61,11 @@ struct Standstill_Ability : public TriggeredAbility
     std::string getDescription() override;
 };
 
+struct ElementalParty_Ability : public TriggeredAbility
+{
+    ElementalParty_Ability();
+    void use(Board& theBoard, int p, int t) override;
+    std::string getDescription() override;
+};
 
 #endif // TRIGGEREDABILITY_H
