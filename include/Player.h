@@ -43,6 +43,7 @@ class Player
         void discard(int i);
 
         // Accessors:
+        void gainMana(int m);
         int getMana() const;
         Face* getFace(); // use for graphics and attack
         const Card* getGraveyard() const; // use for graphics, top card on graveyard
