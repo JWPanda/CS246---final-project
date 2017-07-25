@@ -5,7 +5,7 @@ using namespace std;
 // ctor does card need a name field?
 Unit::Unit(int cost, int Attack, int Defense, Player* player)
  : Card{player, cost}, Attack{Attack}, Defense{Defense},
-   BaseAttack{Attack}, BaseDefense{Defense}, Action{true}, OnBoard{false} {}
+   BaseAttack{Attack}, BaseDefense{Defense}, Action{true}, onBoard{false} {}
 
 Unit::~Unit() {}
 
@@ -23,13 +23,19 @@ void Unit::getHit(int attack) {
     isDead();
 }
 
-void Unit::reduceAttack(int i) {
-    Attack -= i;
-}
 
 void Unit::isDead() {
     if (Defense <= 0) die();
 };
 
+void Unit::disenchant() {}
+
+void Unit::gainStats(int atk, int def){
+  Attack += atk;
+  Defense += def;
+}
+
+
+bool Unit::OnBoard() const { return onBoard;}
 int Unit::getAttack() const { return Attack; }
 int Unit::getDefense() const { return Defense; }

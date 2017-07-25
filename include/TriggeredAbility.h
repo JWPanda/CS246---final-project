@@ -64,5 +64,12 @@ struct Standstill_Ability : public TriggeredAbility
     Ability::AbilityType checkAbility() override;
 };
 
+struct ElementalParty_Ability : public TriggeredAbility
+{
+    ElementalParty_Ability();
+    void use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly) override;
+    std::string getDescription() override;
+    Ability::AbilityType checkAbility() override;
+};
 
 #endif // TRIGGEREDABILITY_H

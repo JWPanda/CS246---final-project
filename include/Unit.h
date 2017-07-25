@@ -15,20 +15,21 @@ class Unit : public Card, public std::enable_shared_from_this<Unit>
         //Attack Mechanics:
         void attack(std::shared_ptr<Unit> target);
         void getHit(int attack);
+        void gainStats(int atk, int def);
 
         //Death Mechanics:
-        void reduceAttack(int i);
         virtual void die() = 0;
         void isDead();
-
+        virtual void disenchant();
         //Accessors:
+        bool OnBoard() const;
         int getAttack() const override;
         int getDefense() const override;
-        
+
 
     protected:
         int Attack, Defense, BaseAttack, BaseDefense;
-        bool Action, OnBoard;
+        bool Action, onBoard;
 };
 
 #endif // UNIT_H

@@ -20,6 +20,13 @@ void Ritual::play (Board& theBoard, int i, int p, int t) {
   player->moveToRitual(i);
 }
 
+void Ritual::use(Board& theBoard, shared_ptr<Unit> target) {
+  if (charges < getAbilityCost()) return;
+  Player * enemy = nullptr;
+  if (target) enemy = target->getPlayer();
+  ability->use(theBoard,target,enemy,player);
+  charges -= getAbilityCost();
+}
 
 //Accessors
 Card::CardType Ritual::getType() const {return RITUAL;}
