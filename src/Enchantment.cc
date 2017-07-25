@@ -35,6 +35,11 @@ void Enchantment::unsummon() {
     base->unsummon();
 }
 
+void Enchantment::disenchant() {
+  player->disenchant(make_shared_this(),base);
+  if (BaseAttack > 0) base->gainStats(-BaseAttack,0);
+  if (BaseDefense > 0) base->getHit(BaseDefense);
+}
 
 //Accessors---------------------------------------------------------------------
 

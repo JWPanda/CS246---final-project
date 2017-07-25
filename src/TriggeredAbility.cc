@@ -1,5 +1,8 @@
 #include "TriggeredAbility.h"
 #include <iostream>
+#include "Unit.h"
+#include "Board.h"
+#include <sstream>
 
 using namespace std;
 
@@ -15,8 +18,8 @@ TriggeredAbility::~TriggeredAbility() {}
 // Fire Elemental
 FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
 
-void FireElemental_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
-        if(friendly != enemy && target->onBoard()) {
+void FireElemental_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
+        if(friendly != enemy && target->OnBoard()) {
             target->getHit(1);
         }
 }
@@ -31,10 +34,10 @@ Ability::AbilityType FireElemental_Ability::checkAbility() {
 // Potion Seller
 PotionSeller_Ability::PotionSeller_Ability() : TriggeredAbility(0) {}
 
-void PotionSeller_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+void PotionSeller_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
     // go through each minion on YOUR board and give it +0/+1
     for(auto c : friendly->getField()) {
-        dynamic_cast<Unit*>(c)->gainStats(0,1);
+        dynamic_cast<shared_ptr<Unit>>(c)->gainStats(0,1);
     }
 }
 
@@ -49,10 +52,10 @@ Ability::AbilityType PotionSeller_Ability::checkAbility() {
 // Troll Ability
 Troll_Ability::Troll_Ability() : TriggeredAbility(0) {}
 
-void Troll_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+void Troll_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
             // go through each minion on YOUR board and give it +1/+0
     for(auto c : friendly->getField()) {
-        dynamic_cast<Unit*>(c)->gainStats(1,0);
+        dynamic_cast<shared_ptr<Unit>>(c)->gainStats(1,0);
     }
 }
 
@@ -71,8 +74,8 @@ Ability::AbilityType Troll_Ability::checkAbility() {
 //Dark Ritual
 DarkRitual_Ability::DarkRitual_Ability() : TriggeredAbility(1) {}
 
-void DarkRitual_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
-    myPlayer->gainMana()
+void DarkRitual_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
+    friendly->gainMana(1);
 }
 std::string DarkRitual_Ability::getDescription() {
     return "At the start of your turn, gain 1 magic";
@@ -85,8 +88,8 @@ Ability::AbilityType DarkRitual_Ability::checkAbility() {
 //Aura of Power
 AuraOfPower_Ability::AuraOfPower_Ability() : TriggeredAbility(1) {}
 
-void AuraOfPower_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
-    if (enemy == friendly && target->onBoard()){
+void AuraOfPower_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
+    if (enemy == friendly && target->OnBoard()){
         target->gainStats(1,1);
     }
 }
@@ -102,8 +105,8 @@ Ability::AbilityType AuraOfPower_Ability::checkAbility() {
 //Standstill
 Standstill_Ability::Standstill_Ability() : TriggeredAbility(2) {}
 
-void Standstill_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
-    if (target->onBoard()) target->die();
+void Standstill_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
+    if (target->OnBoard()) target->die();
 }
 std::string Standstill_Ability::getDescription() {
     return "Whenever a minion enters play, destory it";
@@ -116,20 +119,21 @@ Ability::AbilityType Standstill_Ability::checkAbility() {
 // Elemental Party
 ElementalParty_Ability::ElementalParty_Ability() : TriggeredAbility{2} {}
 
-void ElementalParty_Ability::use(Board& theBoard, Card* target, Player* targetPlayer, Player* myPlayer) {
-    for (int i = 1, i < 3, ++i) {
+void ElementalParty_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly) {
+    for (int i = 1; i < 3;++i) {
         for(auto c: theBoard.getPlayer(i)->getField()) {
         istringstream ss{c->getName()};
         string s;
         while (ss >> s){
             if (s == "Elemental") {
-                dynamic_cast<Unit*>(c)->gainStats(3,3);
+                dynamic_cast<shared_ptr<Unit>>(c)->gainStats(3,3);
                 break;
             }
         }
     }
   }
 }
+
 string ElementalParty_Ability::getDescription() {
     return "Whenever a minion with the name \"Elemental\" enters play, all Elementals gain +3/+3";
 }

@@ -14,20 +14,21 @@ class Unit : public Card
         //Attack Mechanics:
         void attack(Unit& target);
         void getHit(int attack);
+        void gainStats(int atk, int def);
 
         //Death Mechanics:
-        void reduceAttack(int i);
         virtual void die() = 0;
         void isDead();
-
+        virtual void disenchant();
         //Accessors:
+        bool OnBoard() const;
         int getAttack() const override;
         int getDefense() const override;
-        
+
 
     protected:
         int Attack, Defense, BaseAttack, BaseDefense;
-        bool Action, OnBoard;
+        bool Action, onBoard;
 };
 
 #endif // UNIT_H

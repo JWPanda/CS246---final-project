@@ -14,10 +14,10 @@ Board::~Board() {}
 //Game Mechanics----------------------------------------------------------------
 void Board::changeTurn () {
     // checks end turn trigger for active player which only occurs if it is not the first turn.
-    checkTrigger(Ability::BEGIN);
+    checkTrigger(Ability::END);
     swap(activePlayer, nonActivePlayer);
     activePlayer->newTurn(); // initiates new turn for active player
-    checkTrigger(Ability::END);
+    checkTrigger(Ability::BEGIN);
 }
 
 void Board::checkTrigger(Ability::AbilityType trigger, Unit* target) {

@@ -37,6 +37,7 @@ void Minion::unsummon() {
   player->moveToDeck(this);
 }
 
+
 // Acessors---------------------------------------------------------------------
 Card::CardType Minion::getType() const {return MINION;}
 
