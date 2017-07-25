@@ -2,10 +2,7 @@
 #include "Minion.h"
 #include "Board.h"
 #include <string>
-<<<<<<< HEAD
 #include <random>
-=======
->>>>>>> introduce trigger without smart pointer
 #include <iostream>
 
 using namespace std;
@@ -50,11 +47,12 @@ void Player::newTurn() {
 }
 
 void Player::shuffleDeck() {
-    default_random_engine generator;
+    std::random_device rd;  //Get seed for random number
+    std::mt19937 gen(rd());
     uniform_int_distribution<int> distribution(0, myDeck.size()-1);
     for (unsigned int i = 0; i < myDeck.size() * 10; ++i)
     {
-      int j = distribution(generator), k = distribution(generator);
+      int j = distribution(gen), k = distribution(gen);
       swap(myDeck[j], myDeck[k]);
     }
 }

@@ -13,12 +13,9 @@ Card::~Card() {}
 //Game Mechanics----------------------------------------------------------------
 void Card::use(Board& theBoard, int p, int t) {
     if(!ability) throw "Error: this card does not have an ability"s;
-<<<<<<< HEAD
     if (checkAbility() == Ability::SILENCE) throw "Error: this card is silenced"s;
-    if(ability->checkAbility() != Ability::NONE) ability->use(theBoard, p, t, player);
-=======
     if(ability->checkAbility() != Ability::NONE) ability->use(theBoard, p, t);
->>>>>>> Introduce triggered abilities spells rituals
+
 }
 
 void Card::use(Board& theBoard, shared_ptr<Unit> target) {

@@ -24,14 +24,11 @@ class Player
 
         //Turn logistics methods:
         void draw();
-<<<<<<< HEAD
         void newTurn(); // increase mana cap by 1, fill mana
         void shuffleDeck(); // Shuffles your deck
-=======
-        void newTurn();
+
 
         // Check Triggered Abilities:
->>>>>>> Introduce triggered abilities spells rituals
         void checkTrigger(Ability::AbilityType trigger, std::shared_ptr<Unit> target);
 
         // Game commands:
