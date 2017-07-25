@@ -11,7 +11,7 @@ Ability::~Ability() {}
 // Accessors--------------------------------------------------------------------
 int Ability::getCost () {return cost;}
 
-void Ability::use(Board& theBoard, int p , int t, Player* myPlayer) {
+void Ability::use(Board& theBoard, int p , int t) {
     throw "Error: can't use pure ability";
 }
 

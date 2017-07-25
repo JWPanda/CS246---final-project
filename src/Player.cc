@@ -41,6 +41,9 @@ void Player::newTurn() {
     if (!(!myDeck.size() == 0 && myHand.size() == 5)) draw();
     myFace->incMana();
     myFace->refillMana();
+    for(auto c: myField) {
+      dynamic_pointer_cast<Unit>(c)->grantAction();
+    }
 }
 
 void Player::shuffleDeck() {
@@ -53,6 +56,7 @@ void Player::shuffleDeck() {
     }
 }
 
+// Check Trigger:
 void Player::checkTrigger(Ability::AbilityType trigger, shared_ptr<Unit> target) {
     for (unsigned int i = 0 ; i < myField.size(); ++i) {
         if (myField[i]->checkAbility() == trigger) {
@@ -148,11 +152,13 @@ void Player::revive() {
   moveToBoard (myGraveyard.back());
   myGraveyard.pop_back();
 }
-/*
-void Player::Disenchant(shared_ptr<Card> self) {
-  swap (self,)
+
+void Player::disenchant(shared_ptr<Card> self) {
+  shared_ptr<Unit> base = self->getBase();
+  shared_ptr<Unit> enchanted = dynamic_pointer_cast<Unit>(self);
+  swap (enchanted, base);
 }
-*/
+
 
 void Player::discard(int i) {
   int handSize = myHand.size();
@@ -164,7 +170,7 @@ void Player::discard(int i) {
 
 // Accessors--------------------------------------------------------------------
 void Player::gainMana(int m) {
-  myFace.gainMana(m);
+  myFace->gainMana(m);
 }
 
 int Player::getMana() const{

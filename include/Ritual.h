@@ -1,7 +1,7 @@
 #ifndef RITUAL_H
 #define RITUAL_H
 
-#include <Card.h>
+#include "Card.h"
 
 
 class Ritual : public Card
@@ -13,8 +13,9 @@ class Ritual : public Card
 
         //Game Mechanics:
         void loseCharges(int i);
+        void increaseCharges(int i);
         void play (Board& theBoard, int i, int p, int t) override;
-        void use(Board& theBoard, shared_ptr<Unit> target) override;
+        void use(Board& theBoard, std::shared_ptr<Unit> target) override;
 
         //Accessors:
         int getCharges() const;

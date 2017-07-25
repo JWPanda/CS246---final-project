@@ -1,6 +1,7 @@
 #include "Ritual.h"
 #include "Player.h"
 
+
 using namespace std;
 
 
@@ -16,16 +17,23 @@ void Ritual::loseCharges(int i) {
     if (charges < 0) charges =0;
 }
 
+void Ritual::increaseCharges(int i) {
+  charges +=i;
+}
+
+
 void Ritual::play (Board& theBoard, int i, int p, int t) {
   player->moveToRitual(i);
 }
 
 void Ritual::use(Board& theBoard, shared_ptr<Unit> target) {
   if (charges < getAbilityCost()) return;
-  Player * enemy = nullptr;
-  if (target) enemy = target->getPlayer();
-  ability->use(theBoard,target,enemy,player);
-  charges -= getAbilityCost();
+  try {
+    Card::use(theBoard,target);
+    charges -= getAbilityCost();
+  } catch (const string e) {}
+
+
 }
 
 //Accessors

@@ -24,7 +24,7 @@ Ability::AbilityType ActiveAbility::checkAbility () { return Ability::ACTIVE;}
 NovicePyromancer_Ability::NovicePyromancer_Ability() : ActiveAbility{1} {}
 
 
-void NovicePyromancer_Ability::use(Board& theBoard, int p , int t, Player* myPlayer) {
+void NovicePyromancer_Ability::use(Board& theBoard, int p , int t) {
     theBoard.getMinion(t,p)->getHit(1);
 }
 
@@ -37,7 +37,8 @@ string NovicePyromancer_Ability::getDescription() {
 // Apprentice Summoner
 ApprenticeSummoner_Ability::ApprenticeSummoner_Ability() : ActiveAbility{1} {}
 
-void ApprenticeSummoner_Ability::use(Board& theBoard, int p , int t, Player* myPlayer) {
+void ApprenticeSummoner_Ability::use(Board& theBoard, int p , int t) {
+    Player * myPlayer = theBoard.getActivePlayer();
     int fieldSize = myPlayer->getField().size();
     if (fieldSize == 5) throw "Error: there are already 5 cards on your field"s;
     myPlayer->moveToBoard(make_shared<AirElemental>(myPlayer));
@@ -52,18 +53,16 @@ string ApprenticeSummoner_Ability::getDescription() {
 // Master Summoner
 MasterSummoner_Ability::MasterSummoner_Ability(): ActiveAbility{2} {}
 
-void MasterSummoner_Ability::use(Board& theBoard, int p , int t, Player* myPlayer){
-    cout << "use Apprentice Summoner_Ability" << endl;
-    // check if player field is full, if so throw an exception
-    //if (myPlayer->getField().size() >= 5) { throw;}
+void MasterSummoner_Ability::use(Board& theBoard, int p , int t){
+  Player * myPlayer = theBoard.getActivePlayer();
+  int fieldSize = theBoard.getActivePlayer()->getField().size();
+  if (fieldSize == 5) throw "Error: there are already 5 cards on your field"s;
 
     // loop until board is full or 3 air elementals are summoned
-    //for (int i = 0, i < 3, ++1) {
-    //    if (myPlayer->getField().size() >= 5) break; // someone fix this
-    //shared_ptr<Card> create = make_shared<AirElemental>();
-    // add created airelemental to myPlayer's board
-    // call player's check trigger for minion being summoned on new elemental
-    //}
+    for (int i = 0; i < 3; ++i) {
+        if (myPlayer->getField().size() >= 5) break;
+    myPlayer->moveToBoard(make_shared<AirElemental>(myPlayer));
+    }
 }
 
 string MasterSummoner_Ability::getDescription() {
@@ -76,7 +75,7 @@ string MasterSummoner_Ability::getDescription() {
 // Banish
 Banish_Ability::Banish_Ability() : ActiveAbility{0} {}
 
-void Banish_Ability::use(Board& theBoard, int p , int t, Player* myPlayer){
+void Banish_Ability::use(Board& theBoard, int p , int t){
     // if target is a ritual
     if (t == 6) {
         theBoard.getPlayer(p)->destroyRitual();
@@ -94,7 +93,7 @@ string Banish_Ability::getDescription() {
 // Unsummon
 Unsummon_Ability::Unsummon_Ability(): ActiveAbility{0} {}
 
-void Unsummon_Ability::use(Board& theBoard, int p , int t, Player* myPlayer){
+void Unsummon_Ability::use(Board& theBoard, int p , int t){
     // idea 2:
     theBoard.getMinion(t,p)->unsummon();
 }
@@ -107,8 +106,9 @@ string Unsummon_Ability::getDescription() {
 // Recharge
 Recharge_Ability::Recharge_Ability() : ActiveAbility{0} {}
 
-void Recharge_Ability::use(Board& theBoard, int p , int t, Player* myPlayer){
-    // myPlayer.getRitual()->increaseCharges(3)
+void Recharge_Ability::use(Board& theBoard, int p , int t){
+  Player * myPlayer = theBoard.getActivePlayer();
+  dynamic_pointer_cast<Ritual>(myPlayer->getRitual())->increaseCharges(3);
 }
 string Recharge_Ability::getDescription() {
     return "Your ritual gains 3 charges";
@@ -118,8 +118,8 @@ string Recharge_Ability::getDescription() {
 // Disenchant
 Disenchant_Ability::Disenchant_Ability() : ActiveAbility{0} {}
 
-void Disenchant_Ability::use(Board& theBoard, int p , int t, Player* myPlayer){
-    // target.disenchant();
+void Disenchant_Ability::use(Board& theBoard, int p , int t){
+    theBoard.getMinion(t, p)->disenchant();
 }
 
 string Disenchant_Ability::getDescription() {
@@ -130,8 +130,8 @@ string Disenchant_Ability::getDescription() {
 // Raise Dead
 RaiseDead_Ability::RaiseDead_Ability(): ActiveAbility{0} {};
 
-void RaiseDead_Ability::use(Board& theBoard, int p , int t, Player* myPlayer) {
-    myPlayer->revive();
+void RaiseDead_Ability::use(Board& theBoard, int p , int t) {
+    theBoard.getActivePlayer()->revive();
 }
 string RaiseDead_Ability::getDescription() {
     return "Resurrect the top minion on your graveyard";
@@ -140,15 +140,13 @@ string RaiseDead_Ability::getDescription() {
 // Blizzard
 Blizzard_Ability::Blizzard_Ability() : ActiveAbility{0} {}
 
-void Blizzard_Ability::use(Board& theBoard, int p , int t, Player* myPlayer){
-    // loop through the field of each player on the borad
-    // make each minion receive 2 damage
-    // for (auto c : theBoard.getActivePlayer()->getField())
-    //    c->getHit(2);
-    // }
-    // for (auto c : theBoard.getnonActivePlayer()->getField())
-    //    c->getHit(2);
-    // }
+void Blizzard_Ability::use(Board& theBoard, int p , int t){
+    for (auto c : theBoard.getActivePlayer()->getField()) {
+       dynamic_pointer_cast<Unit>(c)->getHit(2);
+     }
+    for (auto c : theBoard.getNonActivePlayer()->getField()) {
+        dynamic_pointer_cast<Unit>(c)->getHit(2);
+     }
 }
 
 string Blizzard_Ability::getDescription() {

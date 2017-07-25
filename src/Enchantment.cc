@@ -38,8 +38,9 @@ void Enchantment::unsummon() {
 }
 
 void Enchantment::disenchant() {
-  player->disenchant(make_shared_this(),base);
-  if (BaseAttack > 0) base->gainStats(-BaseAttack,0);
+  player->disenchant(shared_from_this());
+  if (BaseAttack > 0) Attack -= BaseAttack;
+  base->setStats(Attack,Defense);
   if (BaseDefense > 0) base->getHit(BaseDefense);
 }
 

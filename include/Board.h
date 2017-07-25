@@ -24,6 +24,7 @@ class Board
         // Accessors:
         std::shared_ptr<Unit> getMinion (int i, int player = 0) const;
         Player* getActivePlayer() const;
+        Player * getNonActivePlayer() const;
         Player* getPlayer(int i);
 
     private:

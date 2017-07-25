@@ -12,10 +12,15 @@ class Unit : public Card, public std::enable_shared_from_this<Unit>
         Unit(int cost,int Attack, int Defense, Player* player);
         virtual ~Unit();
 
-        //Attack Mechanics:
+        // Action Mechanics
+        void use(Board& theBoard, int p, int t) override;
         void attack(std::shared_ptr<Unit> target);
+        void grantAction();
+
+        // Unit Specifics
         void getHit(int attack);
         void gainStats(int atk, int def);
+        void setStats(int atk, int def);
 
         //Death Mechanics:
         virtual void die() = 0;
@@ -23,6 +28,7 @@ class Unit : public Card, public std::enable_shared_from_this<Unit>
         virtual void disenchant();
         //Accessors:
         bool OnBoard() const;
+        bool hasAction() const;
         int getAttack() const override;
         int getDefense() const override;
 

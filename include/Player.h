@@ -24,8 +24,14 @@ class Player
 
         //Turn logistics methods:
         void draw();
+<<<<<<< HEAD
         void newTurn(); // increase mana cap by 1, fill mana
         void shuffleDeck(); // Shuffles your deck
+=======
+        void newTurn();
+
+        // Check Triggered Abilities:
+>>>>>>> Introduce triggered abilities spells rituals
         void checkTrigger(Ability::AbilityType trigger, std::shared_ptr<Unit> target);
 
         // Game commands:
@@ -42,7 +48,7 @@ class Player
         void placeEnchantment(std::shared_ptr<Card> self);
         void revive();
         void discard(int i);
-
+        void disenchant(std::shared_ptr<Card> self);
         // Accessors:
         void gainMana(int m);
         int getMana() const;

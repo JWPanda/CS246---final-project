@@ -25,11 +25,14 @@ void Minion::die() {
 void Minion::reset() {
    Attack = BaseAttack;
    Defense = BaseDefense;
+   Action = true;
+   onBoard = false;
 }
 
 
 // Game Mechanics---------------------------------------------------------------
 void Minion::play (Board& theBoard, int i, int p, int t) {
+  onBoard = true;
   player->moveToBoard(shared_from_this());
 }
 

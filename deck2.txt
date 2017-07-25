@@ -1,5 +1,10 @@
 Troll
 Troll
+Aura of Power
+Recharge
+Blizzard
+Standstill
+Fire Elemental
 Magic Fatigue
 Silence
 Air Elemental

@@ -14,7 +14,7 @@ Board::~Board() {}
 
 //Game Mechanics----------------------------------------------------------------
 void Board::changeTurn () {
-    // checks end turn trigger for active player which only occurs if it is not the first turn.
+    // checks end turn trigger for active player whi ch only occurs if it is not the first turn.
     checkTrigger(Ability::END);
     swap(activePlayer, nonActivePlayer);
     activePlayer->newTurn(); // initiates new turn for active player
@@ -93,6 +93,10 @@ shared_ptr<Unit> Board::getMinion (int i, int player) const {
 
 Player* Board::getActivePlayer() const {
   return activePlayer;
+}
+
+Player * Board::getNonActivePlayer() const {
+  return nonActivePlayer;
 }
 
 Player* Board::getPlayer(int i) {

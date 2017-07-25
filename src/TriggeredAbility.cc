@@ -14,9 +14,13 @@ TriggeredAbility::~TriggeredAbility() {}
 
 //Minion Triggered Abilities----------------------------------------------------
 
+<<<<<<< HEAD
 
 // Fire Elemental
 FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
+=======
+FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
+>>>>>>> Introduce triggered abilities spells rituals
 
 void FireElemental_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
         if(friendly != enemy && target->OnBoard()) {
@@ -37,7 +41,7 @@ PotionSeller_Ability::PotionSeller_Ability() : TriggeredAbility(0) {}
 void PotionSeller_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
     // go through each minion on YOUR board and give it +0/+1
     for(auto c : friendly->getField()) {
-        dynamic_cast<shared_ptr<Unit>>(c)->gainStats(0,1);
+        dynamic_pointer_cast<Unit>(c)->gainStats(0,1);
     }
 }
 
@@ -55,7 +59,7 @@ Troll_Ability::Troll_Ability() : TriggeredAbility(0) {}
 void Troll_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
             // go through each minion on YOUR board and give it +1/+0
     for(auto c : friendly->getField()) {
-        dynamic_cast<shared_ptr<Unit>>(c)->gainStats(1,0);
+        dynamic_pointer_cast<Unit>(c)->gainStats(1,0);
     }
 }
 
@@ -89,7 +93,10 @@ Ability::AbilityType DarkRitual_Ability::checkAbility() {
 AuraOfPower_Ability::AuraOfPower_Ability() : TriggeredAbility(1) {}
 
 void AuraOfPower_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
-    if (enemy == friendly && target->OnBoard()){
+    if (!(enemy == friendly && target->OnBoard())){
+      throw "unable to use ritual"s;
+    }
+    else {
         target->gainStats(1,1);
     }
 }
@@ -106,7 +113,12 @@ Ability::AbilityType AuraOfPower_Ability::checkAbility() {
 Standstill_Ability::Standstill_Ability() : TriggeredAbility(2) {}
 
 void Standstill_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
-    if (target->OnBoard()) target->die();
+  if (!(enemy == friendly && target->OnBoard())){
+    throw "unable to use ritual"s;
+  }
+  else {
+      target->die();
+  }
 }
 std::string Standstill_Ability::getDescription() {
     return "Whenever a minion enters play, destory it";
@@ -120,21 +132,31 @@ Ability::AbilityType Standstill_Ability::checkAbility() {
 ElementalParty_Ability::ElementalParty_Ability() : TriggeredAbility{2} {}
 
 void ElementalParty_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly) {
+    bool elemental = false;
+    istringstream namestream{target->getName()};
+    string name;
+    while (namestream >> name){
+      if (name == "Elemental") elemental = true;
+    }
+    if (!elemental) throw "unable to use ritual"s;
     for (int i = 1; i < 3;++i) {
         for(auto c: theBoard.getPlayer(i)->getField()) {
         istringstream ss{c->getName()};
         string s;
         while (ss >> s){
             if (s == "Elemental") {
-                dynamic_cast<shared_ptr<Unit>>(c)->gainStats(3,3);
+                dynamic_pointer_cast<Unit>(c)->gainStats(3,3);
                 break;
             }
         }
     }
   }
 }
-}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Introduce triggered abilities spells rituals
 string ElementalParty_Ability::getDescription() {
     return "Whenever a minion with the name \"Elemental\" enters play, all Elementals gain +3/+3";
 }

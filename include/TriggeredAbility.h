@@ -4,6 +4,7 @@
 #include "Ability.h"
 
 
+
 class TriggeredAbility : public Ability
 {
     public:
@@ -21,8 +22,7 @@ struct FireElemental_Ability : public TriggeredAbility
     Ability::AbilityType checkAbility() override;
 };
 
-struct PotionSeller_Ability : public TriggeredAbility
-{
+struct PotionSeller_Ability : public TriggeredAbility{
     PotionSeller_Ability();
     void use(Board& theBoard, std::shared_ptr<Unit> target, Player* enemy, Player* friendly) override;
     std::string getDescription() override;
@@ -67,7 +67,7 @@ struct Standstill_Ability : public TriggeredAbility
 struct ElementalParty_Ability : public TriggeredAbility
 {
     ElementalParty_Ability();
-    void use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly) override;
+    void use(Board& theBoard, std::shared_ptr<Unit> target, Player* enemy, Player* friendly) override;
     std::string getDescription() override;
     Ability::AbilityType checkAbility() override;
 };
