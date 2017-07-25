@@ -14,16 +14,20 @@ TriggeredAbility::~TriggeredAbility() {}
 
 //Minion Triggered Abilities----------------------------------------------------
 
-<<<<<<< HEAD
 
+<<<<<<< HEAD
 // Fire Elemental
 FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
-=======
-FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
->>>>>>> Introduce triggered abilities spells rituals
 
 void FireElemental_Ability::use(Board& theBoard, shared_ptr<Unit> target, Player* enemy, Player* friendly)  {
         if(friendly != enemy && target->OnBoard()) {
+=======
+// Fire Elemental
+FireElemental_Ability::FireElemental_Ability() : TriggeredAbility(0) {}
+
+void FireElemental_Ability::use(Board& theBoard, Unit* target, Player* enemy, Player* friendly)  {
+        if(friendly != enemy && target->onBoard()) {
+>>>>>>> include triggered abilities
             target->getHit(1);
         }
 }
@@ -153,10 +157,6 @@ void ElementalParty_Ability::use(Board& theBoard, shared_ptr<Unit> target, Playe
   }
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> Introduce triggered abilities spells rituals
 string ElementalParty_Ability::getDescription() {
     return "Whenever a minion with the name \"Elemental\" enters play, all Elementals gain +3/+3";
 }
