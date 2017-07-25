@@ -4,6 +4,7 @@
 #include "Minion.h"
 #include <iostream>
 #include <string>
+#include <memory>
 
 using namespace std;
 
@@ -24,7 +25,7 @@ NovicePyromancer_Ability::NovicePyromancer_Ability() : ActiveAbility{1} {}
 
 
 void NovicePyromancer_Ability::use(Board& theBoard, int p , int t, Player* myPlayer) {
-    theBoard.getMinion(t,p).getHit(1);
+    theBoard.getMinion(t,p)->getHit(1);
 }
 
 string NovicePyromancer_Ability::getDescription() {
@@ -39,7 +40,7 @@ ApprenticeSummoner_Ability::ApprenticeSummoner_Ability() : ActiveAbility{1} {}
 void ApprenticeSummoner_Ability::use(Board& theBoard, int p , int t, Player* myPlayer) {
     int fieldSize = myPlayer->getField().size();
     if (fieldSize == 5) throw "Error: there are already 5 cards on your field"s;
-    myPlayer->moveToBoard(new AirElemental(myPlayer));
+    myPlayer->moveToBoard(make_shared<AirElemental>(myPlayer));
 }
 
 string ApprenticeSummoner_Ability::getDescription() {
@@ -82,7 +83,7 @@ void Banish_Ability::use(Board& theBoard, int p , int t, Player* myPlayer){
     }
     else {// target is a minion
         // if target card is a minion,
-        theBoard.getMinion(t,p).die(); // change if target is a pointer
+        theBoard.getMinion(t,p)->die(); // change if target is a pointer
     }
 }
 string Banish_Ability::getDescription() {
@@ -95,7 +96,7 @@ Unsummon_Ability::Unsummon_Ability(): ActiveAbility{0} {}
 
 void Unsummon_Ability::use(Board& theBoard, int p , int t, Player* myPlayer){
     // idea 2:
-    theBoard.getMinion(t,p).unsummon();
+    theBoard.getMinion(t,p)->unsummon();
 }
 
 string Unsummon_Ability::getDescription() {

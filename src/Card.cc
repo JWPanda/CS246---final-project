@@ -15,7 +15,7 @@ void Card::use(Board& theBoard, int p, int t) {
     if(!ability) throw "Error: this card does not have an ability"s;
     if(ability->checkAbility() != Ability::NONE) ability->use(theBoard, p, t, player);
 }
-void Card::use(Board& theBoard, Unit* target) {
+void Card::use(Board& theBoard, shared_ptr<Unit> target) {
   if(!ability) return;
   Player * enemy = nullptr;
   if (target) enemy = target->getPlayer();
@@ -97,7 +97,7 @@ int Card::getDefense() const {
   return -1;
 }
 
-Unit* Card::getBase() {
+shared_ptr<Unit> Card::getBase() {
     return nullptr;
 }
 

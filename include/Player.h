@@ -18,49 +18,51 @@ class Player
 {
     public:
         // Ctor & Dtor:
-        Player( std::string Name, std::ifstream & deck, Board& theBoard);
+        Player(std::string Name, std::ifstream & deck, int playerNum, Board& theBoard);
         ~Player(); // stwill need to destroy deck/hand/etc
         static Factory myFactory;
 
         //Turn logistics methods:
         void draw();
         void newTurn(); // increase mana cap by 1, fill mana
-        void checkTrigger(Ability::AbilityType trigger, Unit* target);
+        void checkTrigger(Ability::AbilityType trigger, std::shared_ptr<Unit> target);
 
         // Game commands:
         void play(int i, int p, int t);
         void use(int i, int p, int t);
-        void attack(int m1, Unit& target);
+        void attack(int m1, std::shared_ptr<Unit> target);
 
         //Move Methods:
-        void moveToGraveyard(Unit* self);
-        void moveToBoard(Unit* self);
+        void moveToGraveyard(std::shared_ptr<Unit> self);
+        void moveToBoard(std::shared_ptr<Unit> self);
         void destroyRitual();
         void moveToRitual(int i);
-        void moveToDeck(Card* self);
-        void placeEnchantment(Card* self);
+        void moveToDeck(std::shared_ptr<Card> self);
+        void placeEnchantment(std::shared_ptr<Card> self);
         void revive();
         void discard(int i);
 
         // Accessors:
         int getMana() const;
-        Face* getFace(); // use for graphics and attack
-        const Card* getGraveyard() const; // use for graphics, top card on graveyard
-        const Card* getRitual() const; // use for graphics
-        const std::vector<Card*>& getHand() const; // use for graphics
-        const std::vector<Card*>& getField() const; // use for graphics
+        int getNumber() const;
+        std::shared_ptr<Face> getFace(); // use for graphics and attack
+        const std::shared_ptr<Card> getGraveyard() const; // use for graphics, top card on graveyard
+        const std::shared_ptr<Card> getRitual() const; // use for graphics
+        const std::vector<std::shared_ptr<Card>>& getHand() const; // use for graphics
+        const std::vector<std::shared_ptr<Card>>& getField() const; // use for graphics
 
         //Helper Method:
-        int findSelf(Card* self, std::vector<Card*> cvec);
+        int findSelf(std::shared_ptr<Card> self, const std::vector<std::shared_ptr<Card>> &cvec);
 
     private:
-        Face myFace;
+        int number;
+        std::shared_ptr<Face> myFace;
         Board& theBoard;
-        std::vector<Card*> myDeck;
-        std::vector<Card*> myHand;
-        std::vector<Card*> myField;
-        std::vector<Card*> myRitual;
-        std::vector<Unit*> myGraveyard;
+        std::vector<std::shared_ptr<Card>> myDeck;
+        std::vector<std::shared_ptr<Card>> myHand;
+        std::vector<std::shared_ptr<Card>> myField;
+        std::vector<std::shared_ptr<Card>> myRitual;
+        std::vector<std::shared_ptr<Unit>> myGraveyard;
 };
 
 #endif // PLAYER_H

@@ -10,7 +10,7 @@ void TextDisplay::notify()
 	this->displayBoard();
 }
 
-card_template_t TextDisplay::getCardTemplate(const Card* c)
+card_template_t TextDisplay::getCardTemplate(const shared_ptr<Card> c)
 {
 	if (c->getType() == Card::MINION)
 	{
@@ -38,10 +38,10 @@ card_template_t TextDisplay::getCardTemplate(const Card* c)
 	else throw "Weird card encountered in Text Display that cannot be displayed >_<"s;
 }
 
-void TextDisplay::printField(vector<Card*> field)
+void TextDisplay::printField(vector<shared_ptr<Card>> field)
 {
 	vector<card_template_t> field_output; // Output of each card in field
-	for (Card* c : field) // Make templates for cards
+	for (shared_ptr<Card> c : field) // Make templates for cards
 	{
 		card_template_t card = getCardTemplate(c);
 		field_output.push_back(card);
@@ -68,8 +68,8 @@ void TextDisplay::printField(vector<Card*> field)
 void TextDisplay::displayCard(int i)
 {
 	Player *p = board->getActivePlayer();
-	const vector<Card*> &field = p->getField();
-	Card *c = field[i];
+	const vector<shared_ptr<Card>> &field = p->getField();
+	shared_ptr<Card> c = field[i];
 	card_template_t minion_output = getCardTemplate(c);
 	for (auto line : minion_output)
 	{
@@ -78,7 +78,7 @@ void TextDisplay::displayCard(int i)
 
 	if (c->getBase())
 	{
-		vector<Card*> enchantments;
+		vector<shared_ptr<Card>> enchantments;
 		enchantments.push_back(c->getBase());
 		while (enchantments.back()->getBase())
 		{
@@ -109,7 +109,7 @@ void TextDisplay::displayCard(int i)
 void TextDisplay::displayHand()
 {
 	Player* p = board->getActivePlayer();
-	const vector<Card*> &hand = p->getHand();
+	const vector<shared_ptr<Card>> &hand = p->getHand();
 	vector<card_template_t> hand_output; // Output of each card in hand
 	for (auto c : hand) // Make templates for cards
 	{
@@ -133,9 +133,9 @@ void TextDisplay::displayBoard()
 	cout << endl;
 
 	// Player 1 Deck Player and Graveyard
-	const Card* grave1 = board->getPlayer(1)->getGraveyard(); // Get grave
-	const Card* ritual1 = board->getPlayer(1)->getRitual(); // Get ritual
-	Face* face1 = board->getPlayer(1)->getFace(); // Get face
+	const shared_ptr<Card> grave1 = board->getPlayer(1)->getGraveyard(); // Get grave
+	const shared_ptr<Card> ritual1 = board->getPlayer(1)->getRitual(); // Get ritual
+	shared_ptr<Face> face1 = board->getPlayer(1)->getFace(); // Get face
 	card_template_t grave1_output;
 	if (grave1) grave1_output = getCardTemplate(grave1);
 	card_template_t ritual1_output;
@@ -155,20 +155,20 @@ void TextDisplay::displayBoard()
 			 << endl;
 	}
 
-	vector<Card*> field1 = board->getPlayer(1)->getField(); // Get field
+	vector<shared_ptr<Card>> field1 = board->getPlayer(1)->getField(); // Get field
 	printField(field1);
 
 	vector<string> centre_graphic = getCentreGraphic(lit);
 	for (string s : centre_graphic) cout << s << endl; // Centre Graphic
 
 	// Player 2 Field
-	vector<Card*> field2 = board->getPlayer(2)->getField(); // Get field
+	vector<shared_ptr<Card>> field2 = board->getPlayer(2)->getField(); // Get field
 	printField(field2);
 
 	// Player 1 Deck Player and Graveyard
-	const Card* grave2 = board->getPlayer(2)->getGraveyard(); // Get grave
-	const Card* ritual2 = board->getPlayer(2)->getRitual(); // Get ritual
-	Face* face2 = board->getPlayer(2)->getFace(); // Get face
+	const shared_ptr<Card> grave2 = board->getPlayer(2)->getGraveyard(); // Get grave
+	const shared_ptr<Card> ritual2 = board->getPlayer(2)->getRitual(); // Get ritual
+	shared_ptr<Face> face2 = board->getPlayer(2)->getFace(); // Get face
 	card_template_t grave2_output;
 	if (grave2) grave2_output = getCardTemplate(grave2);
 	card_template_t ritual2_output;

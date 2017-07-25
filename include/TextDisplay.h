@@ -2,6 +2,7 @@
 #define __TEXT_DISPLAY_H__
 #include <vector>
 #include <iostream>
+#include <memory>
 #include "ascii_graphics.h"
 #include "Observer.h"
 #include "Board.h"
@@ -12,8 +13,8 @@ class TextDisplay : public Observer
 {
 	Board* board;
 	bool lit;
-	card_template_t getCardTemplate(const Card* c);
-	void printField(vector<Card*> field);
+	card_template_t getCardTemplate(const shared_ptr<Card> c);
+	void printField(vector<shared_ptr<Card>> field);
 public:
 	TextDisplay(Board *b, bool lit);
 	void notify();

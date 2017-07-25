@@ -25,7 +25,7 @@ class Card
 
         virtual void play (Board& theBoard, int i, int p, int t)=0;
         virtual void use(Board& theBoard, int p, int t);
-        virtual void use(Board& theBoard, Unit* target);
+        virtual void use(Board& theBoard, std::shared_ptr<Unit> target);
         virtual std::string getName() const =0; // use for graphics
 
         // Ability Implementation
@@ -48,7 +48,7 @@ class Card
         // Enchantment Implementation
         virtual std::string getEnchantmentName() const;
         virtual std::string getEnchantmentDescription() const;
-        virtual Unit* getBase();
+        virtual std::shared_ptr<Unit> getBase();
         virtual std::shared_ptr<Ability> getAbility();
         virtual int getEnchantmentCost() const;
         virtual int getEnchantmentAttack() const;

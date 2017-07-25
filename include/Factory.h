@@ -1,5 +1,6 @@
 #ifndef FACTORY_H
 #define FACTORY_H
+#include <memory>
 #include "Minion.h"
 #include "Spell.h"
 #include "Enchantment.h"
@@ -12,7 +13,7 @@ class Factory {
         ~Factory(); 
 
         //Card Creator:
-        Card* makeCard(std::string cardname, Player* owner);
+        std::shared_ptr<Card> makeCard(std::string cardname, Player* owner);
 };
 
 #endif

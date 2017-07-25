@@ -15,15 +15,17 @@ Enchantment::~Enchantment() {}
 
 //Game Mechanics----------------------------------------------------------------
 void Enchantment::play (Board& theBoard, int i, int p, int t) {
-    enchant(&(theBoard.getMinion(t,p)));
-    player->placeEnchantment(this);
+    enchant(theBoard.getMinion(t,p));
+    shared_ptr<Unit> u = shared_from_this();
+    player->placeEnchantment(dynamic_pointer_cast<Card>(u));
 }
 
-void Enchantment::enchant(Unit* target) {  //TODO smart pointer here
+void Enchantment::enchant(shared_ptr<Unit> target) {  //TODO smart pointer here
     Attack = target->getAttack();
     Defense = target->getDefense();
     cost = target->getCost();
     ability = target->getAbility();
+    player = target->getPlayer();
     base = target;
 }
 
@@ -53,7 +55,7 @@ string Enchantment::getDescription() const {
     else return getEnchantmentDescription();
 }
 
-Unit* Enchantment::getBase() {
+shared_ptr<Unit> Enchantment::getBase() {
     return base;
 }
 
@@ -76,11 +78,12 @@ int Enchantment::getEnchantmentDefense() const {
 GiantStrength::GiantStrength(Player* player) :
     Enchantment{1,2,2,player} {}
 string GiantStrength::getEnchantmentName() const {return "Giant Strength";}
-void GiantStrength::enchant(Unit* target) {
+void GiantStrength::enchant(shared_ptr<Unit> target) {
     Attack = target->getAttack() + 2;
     Defense = target->getDefense() + 2;
     cost = target->getCost();
     ability = target->getAbility();
+    player = target->getPlayer();
     base = target;
 }
 
