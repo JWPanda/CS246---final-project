@@ -177,7 +177,7 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 		{
 			try
 			{
-				//board.use(i-1);
+				board.use(i-1);
 				display.displayBoard();
 			}
 			catch (const string e)
@@ -191,7 +191,7 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 			if (ss.fail()) throw command;
 			try
 			{
-				//board.use(i-1, p, t-1);
+				board.use(i-1, p, t-1);
 				display.displayBoard();
 			}
 			catch (const string e)
