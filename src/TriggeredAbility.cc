@@ -149,7 +149,7 @@ void ElementalParty_Ability::use(Board& theBoard, shared_ptr<Unit> target, Playe
 
 
 string ElementalParty_Ability::getDescription() {
-    return "Whenever a minion with the name \"Elemental\" enters play, all Elementals gain +3/+3";
+    return "Whenever an Elemental enters play, all Elementals gain +3/+3";
 }
 
 Ability::AbilityType ElementalParty_Ability::checkAbility() {

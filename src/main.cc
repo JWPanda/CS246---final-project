@@ -114,11 +114,11 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 			catch (const string e)
 			{
 				cout << e << endl;
-				return 0;
+				return false;
 			}
 			catch (const int w)
 			{
-				cout << "Player " + to_string(w) + "has won!!" << endl;
+				cout << "Player " + to_string(w) + " has won!!" << endl;
 				cout << "Game Over." << endl;
 				return true;
 			}
@@ -133,11 +133,11 @@ bool parseCommand(TextDisplay display, Board &board, string input, bool testing)
 			catch (const string e)
 			{
 				cout << e << endl;
-				return 0;
+				return false;
 			}
 			catch (const int w)
 			{
-				cout << "Player " + to_string(w) + "has won!!" << endl;
+				cout << "Player " + to_string(w) + " has won!!" << endl;
 				cout << "Game Over." << endl;
 				return true;
 			}
@@ -339,10 +339,20 @@ int main(int argc, char* argv[])
 	if (!deckStream2.is_open()) cout << "Error opening file: " << deck2.empty() ? "default.deck" : deck2;
 
 	string p1Name, p2Name;
-	cout << "Please enter the name of Player 1: ";
-	getline(cin, p1Name);
-	cout << "Please enter the name of Player 2: ";
-	getline(cin, p2Name);
+	if (initStream.is_open()) getline(initStream, p1Name);
+	else
+	{
+		cout << "Please enter the name of Player 1: ";
+		getline(cin, p1Name);
+	}
+
+	if (initStream.is_open()) getline(initStream, p2Name);
+	else
+	{
+		cout << "Please enter the name of Player 2: ";
+		getline(cin, p2Name);
+	}
+
 	Card::initializeAbilities();
 	try
 	{

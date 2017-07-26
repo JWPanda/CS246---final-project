@@ -21,6 +21,7 @@ class Unit : public Card, public std::enable_shared_from_this<Unit>
         void getHit(int attack);
         void gainStats(int atk, int def);
         void setStats(int atk, int def);
+        void gotMoved();
 
         //Death Mechanics:
         virtual void die() = 0;

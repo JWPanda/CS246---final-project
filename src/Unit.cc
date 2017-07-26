@@ -36,6 +36,10 @@ void Unit::setStats(int atk, int def) {
   Defense = def;
 }
 
+void Unit::gotMoved() {
+  onBoard = true;
+}
+
 void Unit::isDead() {
     if (Defense <= 0) die();
 };

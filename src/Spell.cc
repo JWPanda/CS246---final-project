@@ -51,3 +51,10 @@ Blizzard::Blizzard(Player* player) : Spell{3,player} {
     addAbility("Blizzard_Ability");
 }
 string Blizzard::getName() const { return "Blizzard";}
+
+// Barrier
+Barrier::Barrier(Player* player) : Spell{4, player} {
+	addAbility("Barrier_Ability");
+}
+string Barrier::getName() const { return "Barrier";}
+

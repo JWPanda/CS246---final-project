@@ -1,6 +1,10 @@
+Aura
 Air Elemental
-Giant Strength
+Air Elemental
 Disenchant
+Giant Strength
+Giant Strength
+Raise Dead
 Fire Elemental
 Potion Seller
 Troll
@@ -8,6 +12,7 @@ Raise Dead
 Blizzard
 Standstill
 Dark Ritual
+Elemental Party
 Silence
 Air Elemental
 Troll

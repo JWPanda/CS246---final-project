@@ -51,4 +51,9 @@ struct Blizzard : public Spell {
     std::string getName() const override;
 };
 
+struct Barrier : public Spell {
+    Barrier(Player* player);
+    std::string getName() const override;
+};
+
 #endif // SPELL_H

@@ -73,5 +73,17 @@ struct Blizzard_Ability : public ActiveAbility {
   std::string getDescription() override;
 };
 
+struct Barrier_Ability : public ActiveAbility {
+  Barrier_Ability();
+  void use(Board& theBoard, int p, int t) override;
+  std::string getDescription() override;
+};
+
+struct Aura_Ability : public ActiveAbility {
+  Aura_Ability();
+  void use(Board& theBoard, int p, int t) override;
+  std::string getDescription() override;
+};
+
 
 #endif // ACTIVEABILITY_H

@@ -62,3 +62,9 @@ Standstill::Standstill(Player* player) : Ritual{3,player, 4} {
     addAbility("Standstill_Ability");
 }
 string Standstill::getName() const { return "Standstill";}
+
+//Elemental Party:
+ElementalParty::ElementalParty(Player* player) : Ritual{4,player, 3} {
+    addAbility("ElementalParty_Ability");
+}
+string ElementalParty::getName() const { return "Elemental Party";}

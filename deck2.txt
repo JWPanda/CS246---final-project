@@ -1,4 +1,16 @@
+Magic Fatigue
+Master Summoner
+Apprentice Summoner
+Fire Elemental
+Blizzard
+Air Elemental
+Air Elemental
+Air Elemental
+Air Elemental
+Air Elemental
 Troll
+Magic Fatigue
+Giant Strength
 Troll
 Aura of Power
 Recharge
@@ -27,3 +39,4 @@ Air Elemental
 Air Elemental
 Air Elemental
 Air Elemental
+Magic Fatigue

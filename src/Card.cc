@@ -35,6 +35,7 @@ void Card::initializeAbilities() {
     listOfAbilities["NovicePyromancer_Ability"] = make_shared<NovicePyromancer_Ability>();
     listOfAbilities["ApprenticeSummoner_Ability"] = make_shared<ApprenticeSummoner_Ability>();
     listOfAbilities["MasterSummoner_Ability"] = make_shared<MasterSummoner_Ability>();
+    listOfAbilities["Aura_Ability"] = make_shared<Aura_Ability>();
 
     // Triggered Minion Abilities
     listOfAbilities["FireElemental_Ability"] = make_shared<FireElemental_Ability>();
@@ -48,11 +49,13 @@ void Card::initializeAbilities() {
     listOfAbilities["Disenchant_Ability"] = make_shared<Disenchant_Ability>();
     listOfAbilities["RaiseDead_Ability"] = make_shared<RaiseDead_Ability>();
     listOfAbilities["Blizzard_Ability"] = make_shared<Blizzard_Ability>();
+    listOfAbilities["Barrier_Ability"] = make_shared<Barrier_Ability>();
 
     // Ritual Abilities
     listOfAbilities["DarkRitual_Ability"] = make_shared<DarkRitual_Ability>();
     listOfAbilities["AuraOfPower_Ability"] = make_shared<AuraOfPower_Ability>();
     listOfAbilities["Standstill_Ability"] = make_shared<Standstill_Ability>();
+    listOfAbilities["ElementalParty_Ability"] = make_shared<ElementalParty_Ability>();
 }
 
 Ability::AbilityType Card::checkAbility() const {

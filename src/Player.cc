@@ -80,7 +80,6 @@ void Player::play (int i, int p, int t ) {
       if (handSize) throw "Error: you only have "s + to_string(handSize) + " cards in your hand"s;
       throw "Error: you have no cards in your hand."s;
     }
-    if (myField.size() == 5) throw "Error: there are already 5 cards on your field"s;
     int cost = myHand[i]->getCost();
     int curMana = myFace->getCurrentMana();
     if (cost > curMana) throw "Error: not enough mana"s;
@@ -92,7 +91,12 @@ void Player::play (int i, int p, int t ) {
 }
 
 void Player::use(int i , int p, int t) {
-    if (myField[i]->checkAbility() != Ability::NONE) throw "Error: "s + myField[i]->getName() + " has no ability"s;
+    if (myField[i]->checkAbility() == Ability::NONE) throw "Error: "s + myField[i]->getName() + " has no ability"s;
+    if (i > (int)myField.size())
+    {
+      if (!myField.size()) throw "Error: your field is empty"s;
+      throw "Error: there are only "s + to_string(myField.size()) + " cards on the field"s;
+    }
     int curMana = myFace->getCurrentMana();
     int cost = myField[i]->getAbilityCost();
     if (cost > curMana) throw "Error: not enough mana to use "s + myField[i]->getName() +  "'s ability"s;
@@ -103,6 +107,11 @@ void Player::use(int i , int p, int t) {
 }
 
 void Player::attack(int m1, shared_ptr<Unit>target) {
+    if (m1 > (int)myField.size())
+    {
+      if (!myField.size()) throw "Error: there are no cards on the field"s;
+      throw "Error: there are only "s + to_string(myField.size()) + " cards on the field"s;
+    }
     shared_ptr<Unit> attacker = dynamic_pointer_cast<Unit>(myField[m1]);
     attacker->attack(target);
 }
@@ -122,6 +131,7 @@ void Player::moveToBoard(shared_ptr<Unit> self) {
   int fieldSize = myField.size();
   if (fieldSize == 5) throw "Error: there are already 5 cards on your field"s;
   myField.emplace_back(self);
+  self->gotMoved();
   theBoard.checkTrigger(Ability::ENTER, self);
 }
 

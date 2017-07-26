@@ -32,7 +32,6 @@ void Minion::reset() {
 
 // Game Mechanics---------------------------------------------------------------
 void Minion::play (Board& theBoard, int i, int p, int t) {
-  onBoard = true;
   player->moveToBoard(shared_from_this());
 }
 

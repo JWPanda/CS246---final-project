@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include "Enchantment.h"
 
 using namespace std;
 
@@ -141,14 +142,52 @@ string RaiseDead_Ability::getDescription() {
 Blizzard_Ability::Blizzard_Ability() : ActiveAbility{0} {}
 
 void Blizzard_Ability::use(Board& theBoard, int p , int t){
+    vector<shared_ptr<Unit>> field;
     for (auto c : theBoard.getActivePlayer()->getField()) {
-       dynamic_pointer_cast<Unit>(c)->getHit(2);
-     }
+       field.emplace_back(dynamic_pointer_cast<Unit>(c));
+    }
     for (auto c : theBoard.getNonActivePlayer()->getField()) {
-        dynamic_pointer_cast<Unit>(c)->getHit(2);
-     }
+        field.emplace_back(dynamic_pointer_cast<Unit>(c));
+    }
+    for (auto c : field)
+    {
+        c->getHit(2);
+    }
 }
 
 string Blizzard_Ability::getDescription() {
     return "Deal 2 damage to all minions";
+}
+
+// Barrier
+Barrier_Ability::Barrier_Ability() : ActiveAbility{0} {}
+
+void Barrier_Ability::use(Board& theBoard, int p, int t){
+    if (p < 0)
+    {
+        shared_ptr<Unit> face = dynamic_pointer_cast<Unit>(theBoard.getActivePlayer()->getFace());
+        face->gainStats(0, 10);
+    }
+    else
+    {
+        theBoard.getMinion(t,p)->gainStats(0, 10);
+    }
+}
+
+string Barrier_Ability::getDescription() {
+    return "Adds 10 defense to target";
+}
+
+// Aura
+Aura_Ability::Aura_Ability() : ActiveAbility{0} {}
+
+void Aura_Ability::use(Board& theBoard, int p, int t){
+    shared_ptr<Unit> target = theBoard.getMinion(t,p);
+    shared_ptr<Card> enchanted = make_shared<GiantStrength>(theBoard.getPlayer(p));
+    dynamic_pointer_cast<Enchantment>(enchanted)->enchant(target);
+    theBoard.getPlayer(p)->placeEnchantment(enchanted);
+}
+
+string Aura_Ability::getDescription() {
+    return "Enchant target minion with Giant Strength +2/+2";
 }

@@ -24,13 +24,16 @@ shared_ptr<Card> Factory::makeCard(string cardname, Player* owner) {
   else if (cardname == "Disenchant") return (make_shared<Disenchant>(owner));
   else if (cardname == "Raise Dead") return (make_shared<RaiseDead>(owner));
   else if (cardname == "Blizzard") return (make_shared<Blizzard>(owner));
+  else if (cardname == "Barrier") return (make_shared<Barrier>(owner));
   //Enchantment:
   else if (cardname == "Giant Strength") return (make_shared<GiantStrength>(owner));
   else if (cardname == "Magic Fatigue") return (make_shared<MagicFatigue>(owner));
   else if (cardname == "Silence") return (make_shared<Silence>(owner));
+  else if (cardname == "Aura") return (make_shared<Aura>(owner));
   //Rituals:
   else if (cardname == "Dark Ritual") return (make_shared<DarkRitual>(owner));
   else if (cardname == "Aura of Power") return (make_shared<AuraOfPower>(owner));
   else if (cardname == "Standstill") return (make_shared<Standstill>(owner));
+  else if (cardname == "Elemental Party") return (make_shared<ElementalParty>(owner));
   else throw "Invalid card '"s + cardname + "' found in deck! Exiting..."s;
 }

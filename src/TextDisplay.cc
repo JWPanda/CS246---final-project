@@ -71,6 +71,12 @@ void TextDisplay::displayCard(int i)
 	const vector<shared_ptr<Card>> &field = p->getField();
 	shared_ptr<Card> c = field[i];
 
+	card_template_t minion_output = getCardTemplate(c);
+	for (auto line : minion_output)
+	{
+		cout << line << endl;
+	}
+
 	if (c->getBase())
 	{
 		vector<shared_ptr<Card>> enchantments;
@@ -79,28 +85,22 @@ void TextDisplay::displayCard(int i)
 		{
 			enchantments.push_back(enchantments.back()->getBase());
 		}
-
-		card_template_t minion_output = getCardTemplate(enchantments.back());
-		for (auto line : minion_output)
-		{
-			cout << line << endl;
-		}
 		enchantments.pop_back();
 
 		vector<card_template_t> enchantments_output;
 		for (auto e : enchantments)
 		{
 			card_template_t e_output;
-			if (c->getEnchantmentAttack() < 0)
+			if (e->getEnchantmentAttack() < 0)
 			{
-				e_output = display_enchantment(c->getEnchantmentName(), c->getEnchantmentCost(), c->getEnchantmentDescription());
+				e_output = display_enchantment(e->getEnchantmentName(), e->getEnchantmentCost(), e->getEnchantmentDescription());
 			}
 			else
 			{
 				stringstream ss1, ss2;
-				ss1 << "+" << c->getEnchantmentAttack();
-				ss2 << "+" << c->getEnchantmentDefense();
-				e_output = display_enchantment_attack_defence(c->getEnchantmentName(), c->getEnchantmentCost(), c->getEnchantmentDescription(), ss1.str(), ss2.str());
+				ss1 << "+" << e->getEnchantmentAttack();
+				ss2 << "+" << e->getEnchantmentDefense();
+				e_output = display_enchantment_attack_defence(e->getEnchantmentName(), e->getEnchantmentCost(), e->getEnchantmentDescription(), ss1.str(), ss2.str());
 			}
 			
 			enchantments_output.push_back(e_output);
@@ -118,20 +118,17 @@ void TextDisplay::displayCard(int i)
 			}
 		}
 	}
-	else
-	{
-		card_template_t minion_output = getCardTemplate(c);
-		for (auto line : minion_output)
-		{
-			cout << line << endl;
-		}
-	}
 }
 
 void TextDisplay::displayHand()
 {
 	Player* p = board->getActivePlayer();
 	const vector<shared_ptr<Card>> &hand = p->getHand();
+	if (!hand.size())
+	{
+		cout << "Your hand is currently empty." << endl;
+		return;
+	}
 	vector<card_template_t> hand_output; // Output of each card in hand
 	for (auto c : hand) // Make templates for cards
 	{

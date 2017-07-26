@@ -56,4 +56,13 @@ struct Silence : public Enchantment {
     std::string getEnchantmentDescription() const override;
     Ability::AbilityType checkAbility() const override;
 };
+
+struct Aura : public Enchantment {
+    Aura(Player* player);
+    std::string getEnchantmentName() const override;
+    std::string getEnchantmentDescription() const override;
+    void enchant(std::shared_ptr<Unit> target) override;
+    std::string getDescription() const override;
+};
+
 #endif // ENCHANTMENT_H

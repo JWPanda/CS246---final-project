@@ -42,4 +42,9 @@ struct Standstill : public Ritual {
     std::string getName() const override;
 };
 
+struct ElementalParty : public Ritual {
+    ElementalParty(Player* player);
+    std::string getName() const override;
+};
+
 #endif // RITUAL_H

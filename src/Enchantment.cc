@@ -26,6 +26,8 @@ void Enchantment::enchant(shared_ptr<Unit> target) {  //TODO smart pointer here
     cost = target->getCost();
     ability = target->getAbility();
     player = target->getPlayer();
+    Action = target->hasAction();
+    onBoard = target->OnBoard();
     base = target;
 }
 
@@ -41,6 +43,7 @@ void Enchantment::disenchant() {
   player->disenchant(shared_from_this());
   if (BaseAttack > 0) Attack -= BaseAttack;
   base->setStats(Attack,Defense);
+  player->placeEnchantment(base);
   if (BaseDefense > 0) base->getHit(BaseDefense);
 }
 
@@ -90,6 +93,8 @@ void GiantStrength::enchant(shared_ptr<Unit> target) {
     cost = target->getCost();
     ability = target->getAbility();
     player = target->getPlayer();
+    Action = target->hasAction();
+    onBoard = target->OnBoard();
     base = target;
 }
 
@@ -113,4 +118,28 @@ string Silence::getEnchantmentDescription() const
 }
 Ability::AbilityType Silence::checkAbility() const {
     return Ability::SILENCE;
+}
+
+// Aura
+Aura::Aura(Player* player) : Enchantment{2,-1,-1,player} {
+    addAbility("Aura_Ability");
+}
+string Aura::getEnchantmentName() const {return "Aura";}
+string Aura::getEnchantmentDescription() const
+{
+    return "Give target minion the Aura Ability";
+}
+
+void Aura::enchant(shared_ptr<Unit> target) {
+    Attack = target->getAttack();
+    Defense = target->getDefense();
+    cost = target->getCost();
+    player = target->getPlayer();
+    Action = target->hasAction();
+    onBoard = target->OnBoard();
+    base = target;
+}
+
+string Aura::getDescription() const {
+    return ability->getDescription();
 }

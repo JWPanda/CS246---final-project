@@ -30,7 +30,6 @@ class Face : public Unit
         std::string getName() const override;
 
     private:
-        Player* player;
         std::string name;
         int mana_cur;
         int mana_cap;
