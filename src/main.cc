@@ -330,11 +330,11 @@ int main(int argc, char* argv[])
 
 	ifstream deckStream1, deckStream2;
 
-	if (deck1.empty()) deckStream1.open("deck1.txt");
+	if (deck1.empty()) deckStream1.open("default.deck");
 	else deckStream1.open(deck1);
 	if (!deckStream1.is_open()) cout << "Error opening file: " << deck1.empty() ? "default.deck" : deck1;
 
-	if (deck2.empty()) deckStream2.open("deck2.txt");
+	if (deck2.empty()) deckStream2.open("default.deck");
 	else deckStream2.open(deck2);
 	if (!deckStream2.is_open()) cout << "Error opening file: " << deck2.empty() ? "default.deck" : deck2;
 
